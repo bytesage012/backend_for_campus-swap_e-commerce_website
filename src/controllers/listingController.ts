@@ -1,0 +1,273 @@
+import type { Request, Response } from 'express';
+import prisma from '../prisma.js';
+import { createListingSchema, updateListingSchema, purchaseSchema, updateStatusSchema } from '../validations/marketplaceValidation.js';
+import { ZodError } from 'zod';
+import { Prisma } from '@prisma/client';
+import logger from '../utils/logger.js';
+
+const handleControllerError = (res: Response, error: any, context: string) => {
+    logger.error(`${context} Controller Error`, error);
+    if (error instanceof ZodError) {
+        return res.status(400).json({
+            message: error.issues[0]?.message || 'Validation failed',
+            errors: error.issues
+        });
+    }
+    res.status(500).json({ message: 'Server error', error: error.message || error });
+};
+
+export const createListing = async (req: any, res: Response) => {
+    try {
+        const validatedData = createListingSchema.parse(req.body);
+        const { title, description, price, category, condition, faculty, department } = validatedData;
+        const sellerId = req.user.id as string;
+        const files = req.files as Express.Multer.File[];
+
+        logger.info('Creating Listing', { sellerId, title });
+
+        const listing = await prisma.listing.create({
+            data: {
+                title,
+                description,
+                price: new Prisma.Decimal(price),
+                category,
+                condition,
+                faculty: faculty || null,
+                department: department || null,
+                sellerId,
+                images: {
+                    create: files?.map((file) => ({
+                        url: `/uploads/listings/${file.filename}`,
+                    })) || [],
+                },
+            },
+            include: { images: true },
+        });
+
+        logger.info('Listing Created Successfully', { listingId: listing.id });
+        res.status(201).json(listing);
+    } catch (error: any) {
+        return handleControllerError(res, error, 'CreateListing');
+    }
+};
+
+export const getListings = async (req: Request, res: Response) => {
+    const { faculty, category, search } = req.query;
+
+    try {
+        const where: any = { status: 'ACTIVE' };
+        if (faculty) where.faculty = faculty as string;
+        if (category) where.category = category as string;
+        if (search) {
+            where.OR = [
+                { title: { contains: search as string, mode: 'insensitive' } },
+                { description: { contains: search as string, mode: 'insensitive' } },
+            ];
+        }
+
+        const listings = await prisma.listing.findMany({
+            where,
+            include: { images: true, seller: { select: { fullName: true, faculty: true } } },
+            orderBy: { createdAt: 'desc' },
+        });
+        res.json(listings);
+    } catch (error) {
+        return handleControllerError(res, error, 'GetListings');
+    }
+};
+
+export const getListingById = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const listing = await prisma.listing.findUnique({
+            where: { id: id as string },
+            include: { images: true, seller: { select: { fullName: true, faculty: true } } },
+        });
+        if (!listing) return res.status(404).json({ message: 'Listing not found' });
+        res.json(listing);
+    } catch (error) {
+        return handleControllerError(res, error, 'GetListingById');
+    }
+};
+
+export const updateListing = async (req: any, res: Response) => {
+    const { id } = req.params;
+    try {
+        const validatedData = updateListingSchema.parse(req.body);
+        const listing = await prisma.listing.findUnique({ where: { id: id as string } });
+
+        if (!listing) return res.status(404).json({ message: 'Listing not found' });
+        if (listing.sellerId !== req.user.id) {
+            logger.warn('Unauthorized update attempt', { listingId: id, userId: req.user.id });
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        const updateData: any = { ...validatedData };
+        if (validatedData.price) updateData.price = new Prisma.Decimal(validatedData.price);
+
+        const updated = await prisma.listing.update({
+            where: { id: id as string },
+            data: updateData,
+            include: { images: true },
+        });
+
+        logger.info('Listing Updated Successfully', { listingId: id });
+        res.json(updated);
+    } catch (error) {
+        return handleControllerError(res, error, 'UpdateListing');
+    }
+};
+
+export const deleteListing = async (req: any, res: Response) => {
+    const { id } = req.params;
+    try {
+        const listing = await prisma.listing.findUnique({ where: { id: id as string } });
+
+        if (!listing) return res.status(404).json({ message: 'Listing not found' });
+        if (listing.sellerId !== req.user.id) {
+            logger.warn('Unauthorized delete attempt', { listingId: id, userId: req.user.id });
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        await prisma.$transaction([
+            prisma.listingImage.deleteMany({ where: { listingId: id as string } }),
+            prisma.listing.delete({ where: { id: id as string } }),
+        ]);
+
+        logger.info('Listing Deleted Successfully', { listingId: id });
+        res.json({ message: 'Listing deleted successfully' });
+    } catch (error) {
+        return handleControllerError(res, error, 'DeleteListing');
+    }
+};
+
+export const purchaseListing = async (req: any, res: Response) => {
+    const { id } = req.params;
+    const buyerId = req.user.id;
+
+    try {
+        const validatedData = purchaseSchema.parse(req.body);
+        const { paymentMethod, useEscrow } = validatedData;
+
+        const listing = await prisma.listing.findUnique({
+            where: { id },
+            include: { seller: true },
+        });
+
+        if (!listing) return res.status(404).json({ message: 'Listing not found' });
+        if (listing.status !== 'ACTIVE') return res.status(400).json({ message: 'Item is no longer available' });
+        if (listing.sellerId === buyerId) return res.status(400).json({ message: 'You cannot buy your own item' });
+
+        if (paymentMethod === 'WALLET') {
+            const buyerWallet = await prisma.wallet.findUnique({ where: { userId: buyerId } });
+            if (!buyerWallet || buyerWallet.balance.lt(listing.price)) {
+                return res.status(400).json({ message: 'Insufficient balance' });
+            }
+
+            const transaction = await prisma.$transaction(async (tx) => {
+                // 1. Deduct from buyer
+                const updatedBuyerWallet = await tx.wallet.update({
+                    where: { userId: buyerId },
+                    data: { balance: { decrement: listing.price } },
+                });
+
+                // 2. Create transaction record for buyer
+                const buyerTx = await tx.transaction.create({
+                    data: {
+                        walletId: updatedBuyerWallet.id,
+                        amount: listing.price,
+                        type: 'PURCHASE',
+                        status: 'SUCCESS',
+                        description: `Purchase of ${listing.title}`,
+                    },
+                });
+
+                // 3. Mark listing as SOLD (or RESERVED if using escrow, but for now SOLD)
+                await tx.listing.update({
+                    where: { id },
+                    data: { status: 'SOLD' },
+                });
+
+                // 4. If not using escrow, credit seller immediately
+                // (Escrow logic: funds would stay in a platform account until confirmed)
+                // For basic implementation, we'll credit seller but ideally we hold it
+                if (!useEscrow) {
+                    const sellerWallet = await tx.wallet.update({
+                        where: { userId: listing.sellerId },
+                        data: { balance: { increment: listing.price } },
+                    });
+                    await tx.transaction.create({
+                        data: {
+                            walletId: sellerWallet.id,
+                            amount: listing.price,
+                            type: 'SALE',
+                            status: 'SUCCESS',
+                            description: `Sale of ${listing.title}`,
+                        },
+                    });
+                }
+
+                return buyerTx;
+            });
+
+            logger.info('Purchase Successful', { listingId: id, buyerId });
+            return res.json({
+                message: 'Purchase successful',
+                transactionId: transaction.id,
+                escrowEnabled: useEscrow,
+            });
+        }
+
+        res.status(400).json({ message: 'Payment method not yet supported' });
+    } catch (error) {
+        return handleControllerError(res, error, 'PurchaseListing');
+    }
+};
+
+export const updateStatus = async (req: any, res: Response) => {
+    const { id } = req.params;
+    try {
+        const validatedData = updateStatusSchema.parse(req.body);
+        const { status } = validatedData;
+
+        const listing = await prisma.listing.findUnique({ where: { id } });
+        if (!listing) return res.status(404).json({ message: 'Listing not found' });
+
+        if (listing.sellerId !== req.user.id) {
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        const updated = await prisma.listing.update({
+            where: { id },
+            data: { status },
+        });
+
+        logger.info('Listing Status Updated', { listingId: id, status });
+        res.json({ message: `Listing status updated to ${status}`, listing: updated });
+    } catch (error) {
+        return handleControllerError(res, error, 'UpdateStatus');
+    }
+};
+
+export const reserveListing = async (req: any, res: Response) => {
+    // Basic reservation logic
+    const { id } = req.params;
+    try {
+        const listing = await prisma.listing.findUnique({ where: { id } });
+        if (!listing) return res.status(404).json({ message: 'Listing not found' });
+
+        if (listing.status !== 'ACTIVE') {
+            return res.status(400).json({ message: 'Item already reserved or sold' });
+        }
+
+        await prisma.listing.update({
+            where: { id },
+            data: { status: 'RESERVED' },
+        });
+
+        logger.info('Listing Reserved', { listingId: id, reservedBy: req.user.id });
+        res.json({ message: 'Listing reserved successfully' });
+    } catch (error) {
+        return handleControllerError(res, error, 'ReserveListing');
+    }
+};

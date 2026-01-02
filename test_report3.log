@@ -1,0 +1,201 @@
+
+> backend@1.0.0 test
+> NODE_OPTIONS=--experimental-vm-modules jest --runInBand tests/analytics.test.ts
+
+  console.log
+    [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+  console.log
+    [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+(node:21239) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+  console.error
+    [ERROR] [2026-01-02T23:19:02.609Z] CreateReport Controller Error [
+      {
+        "code": "invalid_value",
+        "values": [
+          "PROHIBITED_ITEM",
+          "MISLEADING",
+          "SCAM",
+          "HARASSMENT",
+          "INAPPROPRIATE_BEHAVIOR"
+        ],
+        "path": [
+          "reason"
+        ],
+        "message": "Invalid option: expected one of \"PROHIBITED_ITEM\"|\"MISLEADING\"|\"SCAM\"|\"HARASSMENT\"|\"INAPPROPRIATE_BEHAVIOR\""
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 10,
+        "inclusive": true,
+        "path": [
+          "description"
+        ],
+        "message": "Too small: expected string to have >=10 characters"
+      }
+    ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  console.error
+    ZodError: [
+      {
+        "code": "invalid_value",
+        "values": [
+          "PROHIBITED_ITEM",
+          "MISLEADING",
+          "SCAM",
+          "HARASSMENT",
+          "INAPPROPRIATE_BEHAVIOR"
+        ],
+        "path": [
+          "reason"
+        ],
+        "message": "Invalid option: expected one of \"PROHIBITED_ITEM\"|\"MISLEADING\"|\"SCAM\"|\"HARASSMENT\"|\"INAPPROPRIATE_BEHAVIOR\""
+      },
+      {
+        "origin": "string",
+        "code": "too_small",
+        "minimum": 10,
+        "inclusive": true,
+        "path": [
+          "description"
+        ],
+        "message": "Too small: expected string to have >=10 characters"
+      }
+    ]
+        at createReport (/home/bytesage/campus-swap/backend/src/controllers/reportController.ts:12:50)
+        at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+        at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+        at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+        at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+        at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+        at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+        at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
+        at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
+        at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
+        at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+        at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+        at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+        at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+        at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+        at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+        at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+        at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+        at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+        at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+        at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+        at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+        at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+        at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+        at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+        at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+        at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+        at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+        at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+        at IncomingMessage.emit (node:events:519:28)
+        at endReadableNT (node:internal/streams/readable:1698:12)
+        at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/analytics.test.ts
+  Analytics & Reporting Endpoints
+    GET /api/analytics/listings/:id
+      ✓ should return analytics for own listing (85 ms)
+      ✓ should return 404 for non-existent listing (18 ms)
+    GET /api/analytics/seller
+      ✓ should return seller dashboard analytics (29 ms)
+    POST /api/reports/listing/:id
+      ✓ should create a report for a listing (74 ms)
+      ✓ should validate report input (58 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        3.731 s
+Ran all test suites matching tests/analytics.test.ts.
+Jest did not exit one second after the test run has completed.
+
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.

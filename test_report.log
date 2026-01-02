@@ -1,0 +1,1796 @@
+
+> backend@1.0.0 test
+> NODE_OPTIONS=--experimental-vm-modules jest --runInBand
+
+(node:19762) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/wallet.test.ts (7.087 s)
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:43.819Z] Initializing Deposit {
+        "userId": "d3adaba7-9d9a-44a6-a3a0-106ab4cca76a",
+        "amount": 5000
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:47.990Z] Paystack Webhook Received {
+        "event": "charge.success",
+        "reference": "test-ref-1767395747986"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:48.106Z] Deposit Successful via Webhook {
+        "userId": "d3adaba7-9d9a-44a6-a3a0-106ab4cca76a",
+        "amount": 5000,
+        "reference": "test-ref-1767395747986"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-02T23:15:48.123Z] Invalid Paystack Signature {
+        "received": "invalid-hash"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at paystackWebhook (src/controllers/paymentController.ts:57:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/marketplace.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:49.070Z] Creating Listing {
+        "sellerId": "865ff604-2eb4-40f1-8984-c27a89905028",
+        "title": "Test Textbook"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:49.150Z] Listing Created Successfully {
+        "listingId": "8d0ff3bb-39d3-4dd1-b09a-2896812f10ba"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-02T23:15:49.185Z] CreateListing Controller Error [
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 3,
+          "inclusive": true,
+          "path": [
+            "title"
+          ],
+          "message": "Too small: expected string to have >=3 characters"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "description"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "price"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "category"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "code": "invalid_value",
+          "values": [
+            "NEW",
+            "USED",
+            "FAIR"
+          ],
+          "path": [
+            "condition"
+          ],
+          "message": "Invalid option: expected one of \"NEW\"|\"USED\"|\"FAIR\""
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/listingController.ts:9:12)
+      at createListing (src/controllers/listingController.ts:50:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at multerMiddleware (node_modules/multer/lib/make-middleware.js:19:41)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/listingRoutes.ts:29:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 3,
+          "inclusive": true,
+          "path": [
+            "title"
+          ],
+          "message": "Too small: expected string to have >=3 characters"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "description"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "price"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "category"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "code": "invalid_value",
+          "values": [
+            "NEW",
+            "USED",
+            "FAIR"
+          ],
+          "path": [
+            "condition"
+          ],
+          "message": "Invalid option: expected one of \"NEW\"|\"USED\"|\"FAIR\""
+        }
+      ]
+          at createListing (/home/bytesage/campus-swap/backend/src/controllers/listingController.ts:21:51)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at multerMiddleware (/home/bytesage/campus-swap/backend/node_modules/multer/lib/make-middleware.js:19:41)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/listingRoutes.ts:29:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/listingController.ts:9:12)
+      at createListing (src/controllers/listingController.ts:50:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at multerMiddleware (node_modules/multer/lib/make-middleware.js:19:41)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/listingRoutes.ts:29:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.log
+      [INFO] [2026-01-02T23:15:49.370Z] Listing Updated Successfully {
+        "listingId": "8d0ff3bb-39d3-4dd1-b09a-2896812f10ba"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-02T23:15:49.392Z] Unauthorized update attempt {
+        "listingId": "8d0ff3bb-39d3-4dd1-b09a-2896812f10ba",
+        "userId": "other-id"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at updateListing (src/controllers/listingController.ts:101:20)
+
+    console.log
+      [INFO] [2026-01-02T23:15:49.447Z] Listing Deleted Successfully {
+        "listingId": "8d0ff3bb-39d3-4dd1-b09a-2896812f10ba"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/auth.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.386Z] User Registration Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.606Z] User Registered Successfully {
+        "userId": "42227c96-e036-43d9-9363-845bf6f32a20"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-02T23:15:50.619Z] Register Controller Error [
+        {
+          "origin": "string",
+          "code": "invalid_format",
+          "format": "email",
+          "pattern": "/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/",
+          "path": [
+            "email"
+          ],
+          "message": "Invalid email format"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at register (src/controllers/authController.ts:63:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "string",
+          "code": "invalid_format",
+          "format": "email",
+          "pattern": "/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/",
+          "path": [
+            "email"
+          ],
+          "message": "Invalid email format"
+        }
+      ]
+          at register (/home/bytesage/campus-swap/backend/src/controllers/authController.ts:24:46)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at register (src/controllers/authController.ts:63:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.633Z] User Registration Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-02T23:15:50.638Z] Registration Failed: User exists {
+        "email": "test@unn.edu.ng"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at register (src/controllers/authController.ts:31:20)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.643Z] User Login Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.794Z] User Logged In Successfully {
+        "userId": "42227c96-e036-43d9-9363-845bf6f32a20"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.803Z] User Login Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-02T23:15:50.991Z] Login Failed: Invalid password {
+        "email": "test@unn.edu.ng"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at login (src/controllers/authController.ts:82:20)
+
+    console.log
+      [INFO] [2026-01-02T23:15:50.999Z] User Login Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:51.147Z] User Logged In Successfully {
+        "userId": "42227c96-e036-43d9-9363-845bf6f32a20"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:51.186Z] Profile Updated {
+        "userId": "42227c96-e036-43d9-9363-845bf6f32a20"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+FAIL tests/analytics.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.error
+      [ERROR] [2026-01-02T23:15:52.203Z] CreateReport Controller Error [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "reportedUserId"
+          ],
+          "message": "Invalid input: expected string, received null"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "reportedUserId"
+          ],
+          "message": "Invalid input: expected string, received null"
+        }
+      ]
+          at createReport (/home/bytesage/campus-swap/backend/src/controllers/reportController.ts:12:50)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      [ERROR] [2026-01-02T23:15:52.248Z] CreateReport Controller Error [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "reportedUserId"
+          ],
+          "message": "Invalid input: expected string, received null"
+        },
+        {
+          "code": "invalid_value",
+          "values": [
+            "PROHIBITED_ITEM",
+            "MISLEADING",
+            "SCAM",
+            "HARASSMENT",
+            "INAPPROPRIATE_BEHAVIOR"
+          ],
+          "path": [
+            "reason"
+          ],
+          "message": "Invalid option: expected one of \"PROHIBITED_ITEM\"|\"MISLEADING\"|\"SCAM\"|\"HARASSMENT\"|\"INAPPROPRIATE_BEHAVIOR\""
+        },
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 10,
+          "inclusive": true,
+          "path": [
+            "description"
+          ],
+          "message": "Too small: expected string to have >=10 characters"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "reportedUserId"
+          ],
+          "message": "Invalid input: expected string, received null"
+        },
+        {
+          "code": "invalid_value",
+          "values": [
+            "PROHIBITED_ITEM",
+            "MISLEADING",
+            "SCAM",
+            "HARASSMENT",
+            "INAPPROPRIATE_BEHAVIOR"
+          ],
+          "path": [
+            "reason"
+          ],
+          "message": "Invalid option: expected one of \"PROHIBITED_ITEM\"|\"MISLEADING\"|\"SCAM\"|\"HARASSMENT\"|\"INAPPROPRIATE_BEHAVIOR\""
+        },
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 10,
+          "inclusive": true,
+          "path": [
+            "description"
+          ],
+          "message": "Too small: expected string to have >=10 characters"
+        }
+      ]
+          at createReport (/home/bytesage/campus-swap/backend/src/controllers/reportController.ts:12:50)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+  ● Analytics & Reporting Endpoints › POST /api/reports/listing/:id › should create a report for a listing
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 201
+    Received: 400
+
+      116 |                 });
+      117 |
+    > 118 |             expect(res.status).toBe(201);
+          |                                ^
+      119 |             expect(res.body.message).toBe('Report submitted successfully');
+      120 |             expect(res.body).toHaveProperty('reportId');
+      121 |         });
+
+      at Object.<anonymous> (tests/analytics.test.ts:118:32)
+
+PASS tests/marketplace_interaction.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:53.668Z] Purchase Successful {
+        "listingId": "81c96258-7003-4acb-84f4-945570bc5558",
+        "buyerId": "cd3bed23-ea15-4dea-8035-2ff296eb4b19"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:53.817Z] Listing Status Updated {
+        "listingId": "babf0755-0f3e-49d4-a0d7-0214bbc49d03",
+        "status": "RESERVED"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:15:53.883Z] Listing Reserved {
+        "listingId": "3bfa2d91-201e-45cf-b8a8-5659313b7c1f",
+        "reservedBy": "cd3bed23-ea15-4dea-8035-2ff296eb4b19"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/review.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:54.995Z] Review Submitted {
+        "reviewerId": "85604b91-a977-4063-931c-191087d6e448",
+        "targetId": "76d0785c-86d1-44a1-8e8d-a57be479a0d2",
+        "rating": 5
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-02T23:15:55.044Z] SubmitReview Controller Error [
+        {
+          "origin": "number",
+          "code": "too_big",
+          "maximum": 5,
+          "inclusive": true,
+          "path": [
+            "rating"
+          ],
+          "message": "Too big: expected number to be <=5"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/reviewController.ts:8:12)
+      at submitReview (src/controllers/reviewController.ts:46:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/reviewRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/router/index.js:688:15
+      at next (node_modules/router/index.js:276:14)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "number",
+          "code": "too_big",
+          "maximum": 5,
+          "inclusive": true,
+          "path": [
+            "rating"
+          ],
+          "message": "Too big: expected number to be <=5"
+        }
+      ]
+          at submitReview (/home/bytesage/campus-swap/backend/src/controllers/reviewController.ts:23:50)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/reviewRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:688:15
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:276:14)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/reviewController.ts:8:12)
+      at submitReview (src/controllers/reviewController.ts:46:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/reviewRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/router/index.js:688:15
+      at next (node_modules/router/index.js:276:14)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/conversations.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:56.360Z] New Conversation Started {
+        "conversationId": "217dd1b0-1ffb-4b7c-9943-6a4c88458e33",
+        "buyerId": "d3d993c2-409e-4deb-b853-b000219d0d6d",
+        "listingId": "dad9017e-5752-4c3a-946b-1ce0669f6e00"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-02T23:15:56.381Z] StartConversation Controller Error [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "listingId"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at startConversation (src/controllers/conversationController.ts:43:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "listingId"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        }
+      ]
+          at startConversation (/home/bytesage/campus-swap/backend/src/controllers/conversationController.ts:9:55)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at startConversation (src/controllers/conversationController.ts:43:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.log
+      [INFO] [2026-01-02T23:15:56.482Z] Message Sent {
+        "conversationId": "217dd1b0-1ffb-4b7c-9943-6a4c88458e33",
+        "senderId": "d3d993c2-409e-4deb-b853-b000219d0d6d",
+        "messageId": "83a58a14-fd97-45cd-9b2d-de9dd84ea66d"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/admin_users.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/verification.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:15:59.155Z] ID Documents Uploaded {
+        "userId": "c5e9c143-1630-4fd4-86e1-200890bdec1a",
+        "verificationId": "90ce3e19-8bf0-43a8-8497-999ccefbfbe0"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/saved_items.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:16:00.157Z] Listing Saved {
+        "userId": "ec405d0e-4f39-49fa-af59-8ddaed43e737",
+        "listingId": "dbe6544f-6894-4835-886e-cb2058324326"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:00.267Z] Listing Unsaved {
+        "userId": "ec405d0e-4f39-49fa-af59-8ddaed43e737",
+        "listingId": "dbe6544f-6894-4835-886e-cb2058324326"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/admin.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.538Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.538Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.673Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_7_days",
+        "timestamp": "2026-01-02T23:16:01.673Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.725Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.725Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.726Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.734Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.734Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.735Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.806Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.806Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.807Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.810Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.810Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.811Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.814Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.814Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.815Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.818Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.818Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.819Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.822Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.822Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.823Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.826Z] Admin Dashboard Access {
+        "adminId": "494e9dbc-ff19-4a6b-80c1-ff1405cac50f",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-02T23:16:01.826Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:01.827Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/moderation.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/notifications.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/uploads.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:16:04.876Z] Creating Listing {
+        "sellerId": "3edf3548-ed98-4e01-9937-48c67d3422cd",
+        "title": "Textbook with Real Image"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:04.901Z] Listing Created Successfully {
+        "listingId": "9518a108-b29a-434b-a2fe-1970c0208919"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:04.934Z] ID Documents Uploaded {
+        "userId": "3edf3548-ed98-4e01-9937-48c67d3422cd",
+        "verificationId": "1cbbbd68-d9f3-4488-b369-1f9cd9c6d82d"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/preferences.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-02T23:16:06.090Z] Theme Preferences Updated {
+        "userId": "1fb15825-d551-46d1-b689-07abdd44ab64",
+        "themeMode": "DARK"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-02T23:16:06.156Z] Theme Preferences Updated {
+        "userId": "1fb15825-d551-46d1-b689-07abdd44ab64",
+        "themeMode": "DARK"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-02T23:16:06.176Z] UpdateTheme Controller Error [
+        {
+          "origin": "string",
+          "code": "invalid_format",
+          "format": "regex",
+          "pattern": "/^#[0-9A-F]{6}$/i",
+          "path": [
+            "accentColor"
+          ],
+          "message": "Invalid hex color"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at updateTheme (src/controllers/preferenceController.ts:56:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "string",
+          "code": "invalid_format",
+          "format": "regex",
+          "pattern": "/^#[0-9A-F]{6}$/i",
+          "path": [
+            "accentColor"
+          ],
+          "message": "Invalid hex color"
+        }
+      ]
+          at updateTheme (/home/bytesage/campus-swap/backend/src/controllers/preferenceController.ts:42:49)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/authController.ts:12:12)
+      at updateTheme (src/controllers/preferenceController.ts:56:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+
+Test Suites: 1 failed, 14 passed, 15 total
+Tests:       1 failed, 81 passed, 82 total
+Snapshots:   0 total
+Time:        25.71 s, estimated 31 s
+Ran all test suites.
+Jest did not exit one second after the test run has completed.
+
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.
