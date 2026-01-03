@@ -22,6 +22,10 @@ describe('Conversations & Messaging Endpoints', () => {
         await (prisma.message as any).deleteMany();
         await (prisma.conversation as any).deleteMany();
         await (prisma as any).review.deleteMany();
+        await (prisma as any).contractAudit.deleteMany();
+        await (prisma as any).contractEvidence.deleteMany();
+        await (prisma as any).smartContract.deleteMany();
+        await (prisma as any).withdrawal.deleteMany();
         await (prisma as any).verification.deleteMany();
         await prisma.transaction.deleteMany();
         await prisma.listingImage.deleteMany();

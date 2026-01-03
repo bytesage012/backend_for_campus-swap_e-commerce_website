@@ -50,6 +50,12 @@ model User {
   performedActions AdminLog[] @relation("Actor")
   assignedModerations ListingModeration[] @relation("AssignedModerator")
   moderationLogs  ModerationLog[]
+
+  // Smart Contracts
+  buyerContracts   SmartContract[] @relation("ContractBuyer")
+  sellerContracts  SmartContract[] @relation("ContractSeller")
+  contractAudits   ContractAudit[]
+  contractEvidence ContractEvidence[]
 }
 
 model Wallet {
@@ -75,7 +81,19 @@ model Transaction {
   status      String          @default("PENDING") // PENDING, SUCCESS, FAILED
   reference   String?          @unique
   description String?
+  
+  // Escrow Fields
+  listingId         String?
+  listing           Listing?        @relation(fields: [listingId], references: [id])
+  escrowStatus      EscrowStatus    @default(PENDING)
+  escrowReleaseDate DateTime?
+  disputeLikelihood Float           @default(0.0)
+  metadata          Json?           // For flexible risk flags/details
+
   createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  smartContract SmartContract?
 }
 
 enum TransactionType {
@@ -107,6 +125,17 @@ model Listing {
   reports       Report[]
   moderation      ListingModeration?
   moderationLogs  ModerationLog[]
+  transactions    Transaction[]
+  smartContracts  SmartContract[]
+}
+
+enum EscrowStatus {
+  PENDING
+  HELD
+  RELEASE_SCHEDULED
+  RELEASED
+  DISPUTED
+  REFUNDED
 }
 
 model ListingImage {
@@ -385,4 +414,68 @@ enum ModerationAction {
   REJECT
   FLAG
   REQUEST_CHANGES
+}
+
+model SmartContract {
+  id          String           @id @default(uuid())
+  buyerId     String
+  buyer       User             @relation("ContractBuyer", fields: [buyerId], references: [id])
+  sellerId    String
+  seller      User             @relation("ContractSeller", fields: [sellerId], references: [id])
+  listingId   String
+  listing     Listing          @relation(fields: [listingId], references: [id])
+  transactionId String?        @unique
+  transaction Transaction?     @relation(fields: [transactionId], references: [id])
+  
+  terms       Json             // Price, escrowFee, releaseConditions, disputeResolution
+  state       Json             // Current variable state: { buyer_signed: boolean, seller_signed: boolean, locked_funds: boolean }
+  status      SmartContractStatus @default(CREATED)
+  version     Int              @default(1)
+  
+  audits      ContractAudit[]
+  evidence    ContractEvidence[]
+  
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+enum SmartContractStatus {
+  CREATED
+  SIGNED
+  FUNDED
+  ACTIVE
+  COMPLETED
+  DISPUTED
+  CANCELLED
+}
+
+model ContractAudit {
+  id          String   @id @default(uuid())
+  contractId  String
+  contract    SmartContract @relation(fields: [contractId], references: [id])
+  action      String   // CREATED, SIGNED, RELEASE_REQUESTED
+  actorId     String
+  actor       User     @relation(fields: [actorId], references: [id])
+  payload     Json?
+  hash        String   // Cryptographic hash for immutability check
+  timestamp   DateTime @default(now())
+}
+
+model ContractEvidence {
+  id          String   @id @default(uuid())
+  contractId  String
+  contract    SmartContract @relation(fields: [contractId], references: [id])
+  uploaderId  String
+  uploader    User     @relation(fields: [uploaderId], references: [id])
+  type        EvidenceType
+  url         String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+}
+
+enum EvidenceType {
+  PHOTO
+  DOCUMENT
+  GPS
+  DELIVERY_PROOF
 }

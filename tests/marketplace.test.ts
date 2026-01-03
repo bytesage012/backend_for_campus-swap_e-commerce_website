@@ -34,6 +34,10 @@ describe('Marketplace Endpoints', () => {
         await (prisma as any).listingAnalytics.deleteMany();
         await (prisma as any).moderationLog.deleteMany();
         await (prisma as any).listingModeration.deleteMany();
+        await (prisma as any).contractAudit.deleteMany();
+        await (prisma as any).contractEvidence.deleteMany();
+        await (prisma as any).smartContract.deleteMany();
+        await (prisma as any).withdrawal.deleteMany();
         await prisma.listing.deleteMany();
         await prisma.listing.deleteMany();
         await prisma.wallet.deleteMany();

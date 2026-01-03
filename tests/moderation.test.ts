@@ -28,6 +28,10 @@ describe('Listing Moderation System', () => {
         await prisma.listingImage.deleteMany();
         await (prisma as any).report.deleteMany();
         await (prisma as any).listingAnalytics.deleteMany();
+        await (prisma as any).contractAudit.deleteMany();
+        await (prisma as any).contractEvidence.deleteMany();
+        await (prisma as any).smartContract.deleteMany();
+        await (prisma as any).withdrawal.deleteMany();
         await prisma.listing.deleteMany();
         await prisma.wallet.deleteMany();
         await (prisma as any).preference.deleteMany();
