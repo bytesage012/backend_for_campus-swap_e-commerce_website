@@ -56,6 +56,15 @@ model User {
   sellerContracts  SmartContract[] @relation("ContractSeller")
   contractAudits   ContractAudit[]
   contractEvidence ContractEvidence[]
+
+  // Referrals
+  referredBy       User?   @relation("UserReferrals", fields: [referredById], references: [id])
+  referredById     String?
+  referrals        User[]  @relation("UserReferrals")
+
+  // Growth Analytics
+  marketOffers     MarketOffer[]
+  npsSurveys       NPSSurvey[]
 }
 
 model Wallet {
@@ -129,6 +138,7 @@ model Listing {
   moderationLogs  ModerationLog[]
   transactions    Transaction[]
   smartContracts  SmartContract[]
+  marketOffers    MarketOffer[]
 }
 
 enum EscrowStatus {
@@ -480,4 +490,41 @@ enum EvidenceType {
   DOCUMENT
   GPS
   DELIVERY_PROOF
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(uuid())
+  userId    String?
+  sessionId String?
+  eventType String   // VISIT, SIGNUP_START, VIEW_LISTING, PURCHASE, etc.
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+model MarketOffer {
+  id        String          @id @default(uuid())
+  listingId String
+  listing   Listing         @relation(fields: [listingId], references: [id])
+  bidderId  String
+  bidder    User            @relation(fields: [bidderId], references: [id])
+  amount    Decimal         @db.Decimal(12, 2)
+  status    OfferStatus     @default(PENDING)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+enum OfferStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+model NPSSurvey {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  score     Int      // 0-10
+  feedback  String?
+  createdAt DateTime @default(now())
 }

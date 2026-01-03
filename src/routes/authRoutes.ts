@@ -20,6 +20,30 @@ export const protect = (req: any, res: any, next: any) => {
     }
 };
 
+export const optionalProtect = (req: any, res: any, next: any) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) {
+        return next();
+    }
+    try {
+        const decoded: any = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+    } catch (error) {
+        // Invalid token, continue as guest
+    }
+    next();
+};
+
+export const restrictTo = (...roles: string[]) => {
+    return (req: any, res: any, next: any) => {
+        // req.user is set by protect middleware
+        if (!roles.includes(req.user?.role)) {
+            return res.status(403).json({ message: 'You do not have permission to perform this action' });
+        }
+        next();
+    };
+};
+
 router.post('/register', register);
 router.post('/login', login);
 router.get('/profile', protect, getProfile);

@@ -1,14 +1,23 @@
 import { Router } from 'express';
-import { protect } from './authRoutes.js';
+import { protect, restrictTo, optionalProtect } from './authRoutes.js';
 import { getListingAnalytics, getSellerAnalytics } from '../controllers/analyticsController.js';
 import { getSellerProfileAnalytics } from '../controllers/sellerAnalyticsController.js';
+import { getPlatformGrowthMetrics, recordAnalyticsEvent } from '../controllers/platformAnalyticsController.js';
 
 const router = Router();
 
-router.use(protect);
+// Seller Analytics (Protected)
+router.get('/seller/:userId', protect, getSellerProfileAnalytics);
 
+// Platform Growth Analytics (Admin Only)
+router.get('/platform/growth', protect, restrictTo('ADMIN'), getPlatformGrowthMetrics);
+
+// Public Event Tracking (Optional Auth)
+router.post('/platform/events', optionalProtect, recordAnalyticsEvent);
+
+// Legacy/Other Analytics (Protected)
+router.use(protect);
 router.get('/listings/:id', getListingAnalytics);
-router.get('/seller', getSellerAnalytics); // Logged in user dashboard
-router.get('/seller/:userId', getSellerProfileAnalytics); // Specific seller profile analysis
+router.get('/seller', getSellerAnalytics);
 
 export default router;
