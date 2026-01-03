@@ -2,13 +2,13 @@
 > backend@1.0.0 test
 > NODE_OPTIONS=--experimental-vm-modules jest --runInBand
 
-(node:36364) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(node:43070) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
 (Use `node --trace-warnings ...` to show where the warning was created)
 PASS tests/wallet.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
@@ -18,37 +18,37 @@ PASS tests/wallet.test.ts
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [INFO] [2026-01-03T10:37:22.789Z] Initializing Deposit {
-        "userId": "96ffac74-b179-4cce-86c6-1e21d82feb7c",
+      [INFO] [2026-01-03T11:03:30.297Z] Initializing Deposit {
+        "userId": "08ce52b1-298f-491b-9d4a-af56bad33e19",
         "amount": 5000
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:24.220Z] Paystack Webhook Received {
+      [INFO] [2026-01-03T11:03:31.308Z] Paystack Webhook Received {
         "event": "charge.success",
-        "reference": "test-ref-1767436644211"
+        "reference": "test-ref-1767438211300"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:24.323Z] Deposit Successful via Webhook {
-        "userId": "96ffac74-b179-4cce-86c6-1e21d82feb7c",
+      [INFO] [2026-01-03T11:03:31.399Z] Deposit Successful via Webhook {
+        "userId": "08ce52b1-298f-491b-9d4a-af56bad33e19",
         "amount": 5000,
-        "reference": "test-ref-1767436644211"
+        "reference": "test-ref-1767438211300"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.warn
-      [WARN] [2026-01-03T10:37:24.342Z] Invalid Paystack Signature {
+      [WARN] [2026-01-03T11:03:31.414Z] Invalid Paystack Signature {
         "received": "invalid-hash"
       }
 
@@ -82,40 +82,443 @@ PASS tests/wallet.test.ts
       at done (node_modules/raw-body/index.js:227:7)
       at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
 
+PASS tests/admin_users.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/notifications.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/admin.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-03T11:03:36.647Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:36.647Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:36.928Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_7_days",
+        "timestamp": "2026-01-03T11:03:36.928Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.008Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.008Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.009Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.022Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.022Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.024Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.098Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.098Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.099Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.102Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.102Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.103Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.112Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.112Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.113Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.118Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.118Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.119Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.122Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.122Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.123Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.126Z] Admin Dashboard Access {
+        "adminId": "70e998df-fad7-46ab-8def-de0f95471519",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-03T11:03:37.126Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:37.128Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/review.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-03T11:03:38.753Z] Review Submitted {
+        "reviewerId": "a2e1925b-9e13-4440-8bc3-726fea5ef63b",
+        "targetId": "4d018556-42ee-4e05-bcea-75ddbddfde40",
+        "rating": 5
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-03T11:03:38.781Z] SubmitReview Controller Error [
+        {
+          "origin": "number",
+          "code": "too_big",
+          "maximum": 5,
+          "inclusive": true,
+          "path": [
+            "rating"
+          ],
+          "message": "Too big: expected number to be <=5"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/reviewController.ts:8:12)
+      at submitReview (src/controllers/reviewController.ts:46:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/reviewRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/router/index.js:688:15
+      at next (node_modules/router/index.js:276:14)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "number",
+          "code": "too_big",
+          "maximum": 5,
+          "inclusive": true,
+          "path": [
+            "rating"
+          ],
+          "message": "Too big: expected number to be <=5"
+        }
+      ]
+          at submitReview (/home/bytesage/campus-swap/backend/src/controllers/reviewController.ts:23:50)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/reviewRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:688:15
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:276:14)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/reviewController.ts:8:12)
+      at submitReview (src/controllers/reviewController.ts:46:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/reviewRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/router/index.js:688:15
+      at next (node_modules/router/index.js:276:14)
+      at protect (src/routes/authRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/features.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
 PASS tests/auth.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [INFO] [2026-01-03T10:37:25.547Z] User Registration Attempt {
+      [INFO] [2026-01-03T11:03:42.422Z] User Registration Attempt {
         "email": "test@unn.edu.ng"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:25.823Z] User Registered Successfully {
-        "userId": "439a653a-0b19-4164-bcc0-519b73aba165"
+      [INFO] [2026-01-03T11:03:42.606Z] User Registered Successfully {
+        "userId": "1b122af9-609a-4474-b145-732045256a13"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.error
-      [ERROR] [2026-01-03T10:37:25.836Z] Register Controller Error [
+      [ERROR] [2026-01-03T11:03:42.624Z] Register Controller Error [
         {
           "origin": "string",
           "code": "invalid_format",
@@ -229,14 +632,14 @@ PASS tests/auth.test.ts
       at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
 
     console.log
-      [INFO] [2026-01-03T10:37:25.852Z] User Registration Attempt {
+      [INFO] [2026-01-03T11:03:42.642Z] User Registration Attempt {
         "email": "test@unn.edu.ng"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.warn
-      [WARN] [2026-01-03T10:37:25.857Z] Registration Failed: User exists {
+      [WARN] [2026-01-03T11:03:42.649Z] Registration Failed: User exists {
         "email": "test@unn.edu.ng"
       }
 
@@ -252,28 +655,28 @@ PASS tests/auth.test.ts
       at register (src/controllers/authController.ts:31:20)
 
     console.log
-      [INFO] [2026-01-03T10:37:25.862Z] User Login Attempt {
+      [INFO] [2026-01-03T11:03:42.657Z] User Login Attempt {
         "email": "test@unn.edu.ng"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:25.977Z] User Logged In Successfully {
-        "userId": "439a653a-0b19-4164-bcc0-519b73aba165"
+      [INFO] [2026-01-03T11:03:42.827Z] User Logged In Successfully {
+        "userId": "1b122af9-609a-4474-b145-732045256a13"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:25.984Z] User Login Attempt {
+      [INFO] [2026-01-03T11:03:42.837Z] User Login Attempt {
         "email": "test@unn.edu.ng"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.warn
-      [WARN] [2026-01-03T10:37:26.146Z] Login Failed: Invalid password {
+      [WARN] [2026-01-03T11:03:42.975Z] Login Failed: Invalid password {
         "email": "test@unn.edu.ng"
       }
 
@@ -289,22 +692,196 @@ PASS tests/auth.test.ts
       at login (src/controllers/authController.ts:82:20)
 
     console.log
-      [INFO] [2026-01-03T10:37:26.151Z] User Login Attempt {
+      [INFO] [2026-01-03T11:03:42.980Z] User Login Attempt {
         "email": "test@unn.edu.ng"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:26.379Z] User Logged In Successfully {
-        "userId": "439a653a-0b19-4164-bcc0-519b73aba165"
+      [INFO] [2026-01-03T11:03:43.178Z] User Logged In Successfully {
+        "userId": "1b122af9-609a-4474-b145-732045256a13"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:26.558Z] Profile Updated {
-        "userId": "439a653a-0b19-4164-bcc0-519b73aba165"
+      [INFO] [2026-01-03T11:03:43.431Z] Profile Updated {
+        "userId": "1b122af9-609a-4474-b145-732045256a13"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/marketplace_interaction.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-03T11:03:45.278Z] Purchase Successful {
+        "listingId": "675de499-a0d9-4612-b722-ee20aabcd08a",
+        "buyerId": "289029bb-eeeb-4d53-8535-52bb05a69f49"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:45.400Z] Listing Status Updated {
+        "listingId": "43cc4f15-a598-45f4-aa03-b282764cf59c",
+        "status": "RESERVED"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:45.466Z] Listing Reserved {
+        "listingId": "68f52522-145d-4aaa-b5e2-eefd7a0fe7ab",
+        "reservedBy": "289029bb-eeeb-4d53-8535-52bb05a69f49"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/moderation.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/verification.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-03T11:03:49.088Z] ID Documents Uploaded {
+        "userId": "5fa29951-a808-4d11-8394-418ded58c9fb",
+        "verificationId": "b59a2380-6f2f-4504-9336-8cb1c51f1f6f"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/uploads.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-03T11:03:50.776Z] Creating Listing {
+        "sellerId": "03c8c720-851e-4709-accf-de97176d9bad",
+        "title": "Textbook with Real Image"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:50.826Z] Listing Created Successfully {
+        "listingId": "ff0de076-f1ca-4faa-ad1d-c7b9c4ea0ec0"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:50.871Z] ID Documents Uploaded {
+        "userId": "03c8c720-851e-4709-accf-de97176d9bad",
+        "verificationId": "76795027-c292-4a21-8983-f6fe183cde4d"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/escrow.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/saved_items.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-03T11:03:55.130Z] Listing Saved {
+        "userId": "a0dd5e46-c994-4ca5-8ae9-24c04d00cd7b",
+        "listingId": "1e987120-e534-408e-8b46-7b795d9cd559"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-03T11:03:55.218Z] Listing Unsaved {
+        "userId": "a0dd5e46-c994-4ca5-8ae9-24c04d00cd7b",
+        "listingId": "1e987120-e534-408e-8b46-7b795d9cd559"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
@@ -313,37 +890,37 @@ PASS tests/marketplace.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [INFO] [2026-01-03T10:37:27.956Z] Creating Listing {
-        "sellerId": "46c1f030-a431-4a16-b104-c59f4c2e5033",
+      [INFO] [2026-01-03T11:03:56.923Z] Creating Listing {
+        "sellerId": "9ff2461d-225a-4c76-a738-7d253d75b922",
         "title": "Test Textbook"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:27.979Z] Listing Created Successfully {
-        "listingId": "134f5f4d-fd4e-4162-b21b-eae9a3849a7a"
+      [INFO] [2026-01-03T11:03:56.957Z] Listing Created Successfully {
+        "listingId": "79ffcbe8-2250-4a0d-aa6e-af0f0b4e2ce3"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.error
-      [ERROR] [2026-01-03T10:37:28.027Z] CreateListing Controller Error [
+      [ERROR] [2026-01-03T11:03:56.984Z] CreateListing Controller Error [
         {
           "origin": "string",
           "code": "too_small",
@@ -547,15 +1124,15 @@ PASS tests/marketplace.test.ts
       at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
 
     console.log
-      [INFO] [2026-01-03T10:37:28.266Z] Listing Updated Successfully {
-        "listingId": "134f5f4d-fd4e-4162-b21b-eae9a3849a7a"
+      [INFO] [2026-01-03T11:03:57.156Z] Listing Updated Successfully {
+        "listingId": "79ffcbe8-2250-4a0d-aa6e-af0f0b4e2ce3"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.warn
-      [WARN] [2026-01-03T10:37:28.292Z] Unauthorized update attempt {
-        "listingId": "134f5f4d-fd4e-4162-b21b-eae9a3849a7a",
+      [WARN] [2026-01-03T11:03:57.198Z] Unauthorized update attempt {
+        "listingId": "79ffcbe8-2250-4a0d-aa6e-af0f0b4e2ce3",
         "userId": "other-id"
       }
 
@@ -571,162 +1148,9 @@ PASS tests/marketplace.test.ts
       at updateListing (src/controllers/listingController.ts:101:20)
 
     console.log
-      [INFO] [2026-01-03T10:37:28.365Z] Listing Deleted Successfully {
-        "listingId": "134f5f4d-fd4e-4162-b21b-eae9a3849a7a"
+      [INFO] [2026-01-03T11:03:57.244Z] Listing Deleted Successfully {
+        "listingId": "79ffcbe8-2250-4a0d-aa6e-af0f0b4e2ce3"
       }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-PASS tests/admin.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [INFO] [2026-01-03T10:37:29.883Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:29.883Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.040Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_7_days",
-        "timestamp": "2026-01-03T10:37:30.040Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.109Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.109Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.110Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.120Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.120Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.122Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.177Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.177Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.177Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.179Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.179Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.179Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.181Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.181Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.182Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.183Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.183Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.184Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.186Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.186Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.186Z] Admin Dashboard - Serving from cache
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.188Z] Admin Dashboard Access {
-        "adminId": "02fbac5a-ebee-45e4-83e5-ae569b5e5175",
-        "adminEmail": "admin@unn.edu.ng",
-        "period": "last_30_days",
-        "timestamp": "2026-01-03T10:37:30.188Z"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:30.188Z] Admin Dashboard - Serving from cache
 
       at Object.info (src/utils/logger.ts:3:17)
 
@@ -734,38 +1158,38 @@ PASS tests/preferences.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [INFO] [2026-01-03T10:37:31.372Z] Theme Preferences Updated {
-        "userId": "51100f29-6eca-4b7d-a690-bd58d1cc2fb6",
+      [INFO] [2026-01-03T11:03:59.775Z] Theme Preferences Updated {
+        "userId": "8765007d-07db-438b-bee7-eb8b2e347335",
         "themeMode": "DARK"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.log
-      [INFO] [2026-01-03T10:37:31.394Z] Theme Preferences Updated {
-        "userId": "51100f29-6eca-4b7d-a690-bd58d1cc2fb6",
+      [INFO] [2026-01-03T11:03:59.841Z] Theme Preferences Updated {
+        "userId": "8765007d-07db-438b-bee7-eb8b2e347335",
         "themeMode": "DARK"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.error
-      [ERROR] [2026-01-03T10:37:31.412Z] UpdateTheme Controller Error [
+      [ERROR] [2026-01-03T11:03:59.883Z] UpdateTheme Controller Error [
         {
           "origin": "string",
           "code": "invalid_format",
@@ -887,37 +1311,11 @@ PASS tests/preferences.test.ts
       at done (node_modules/raw-body/index.js:227:7)
       at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
 
-PASS tests/admin_users.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-PASS tests/moderation.test.ts
+PASS tests/analytics.test.ts
   ● Console
 
     console.log
       [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  override existing env vars with { override: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-PASS tests/marketplace_interaction.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
@@ -926,102 +1324,8 @@ PASS tests/marketplace_interaction.test.ts
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [INFO] [2026-01-03T10:37:35.932Z] Purchase Successful {
-        "listingId": "fa9e6750-864b-4543-9acb-b6ab8a78ba14",
-        "buyerId": "8377d759-aa26-4f6a-8e98-dde828451c81"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:36.031Z] Listing Status Updated {
-        "listingId": "d60a16c8-e230-4301-b379-6a65bdfb603b",
-        "status": "RESERVED"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:36.097Z] Listing Reserved {
-        "listingId": "c7fc96c6-6707-43d7-8404-6006e83d3ffc",
-        "reservedBy": "8377d759-aa26-4f6a-8e98-dde828451c81"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-PASS tests/saved_items.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [INFO] [2026-01-03T10:37:37.320Z] Listing Saved {
-        "userId": "7ebc9ffe-f4a9-491a-84a2-59b5b3959439",
-        "listingId": "e46d2c27-1f11-457c-a1dc-d8ad8ed680d5"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:37.386Z] Listing Unsaved {
-        "userId": "7ebc9ffe-f4a9-491a-84a2-59b5b3959439",
-        "listingId": "e46d2c27-1f11-457c-a1dc-d8ad8ed680d5"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-PASS tests/notifications.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  override existing env vars with { override: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-PASS tests/analytics.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
     console.error
-      [ERROR] [2026-01-03T10:37:40.245Z] CreateReport Controller Error [
+      [ERROR] [2026-01-03T11:04:01.712Z] CreateReport Controller Error [
         {
           "code": "invalid_value",
           "values": [
@@ -1190,31 +1494,31 @@ PASS tests/conversations.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
     console.log
-      [INFO] [2026-01-03T10:37:41.604Z] New Conversation Started {
-        "conversationId": "16854451-d9c8-4e74-ba92-05e23f0dda91",
-        "buyerId": "01c28ab3-0c64-4cc4-a093-7fe06850e5e6",
-        "listingId": "03795e10-9268-4408-9304-d60ea6ea98e6"
+      [INFO] [2026-01-03T11:04:03.506Z] New Conversation Started {
+        "conversationId": "eadf3437-70b8-402e-9440-6eff7d094723",
+        "buyerId": "83931593-2792-46a4-a947-c94422ed2cac",
+        "listingId": "16a3b8d2-a7a4-4211-abe3-1ccac9f495d9"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
 
     console.error
-      [ERROR] [2026-01-03T10:37:41.623Z] StartConversation Controller Error [
+      [ERROR] [2026-01-03T11:04:03.523Z] StartConversation Controller Error [
         {
           "expected": "string",
           "code": "invalid_type",
@@ -1342,302 +1646,19 @@ PASS tests/conversations.test.ts
       at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
 
     console.log
-      [INFO] [2026-01-03T10:37:41.714Z] Message Sent {
-        "conversationId": "16854451-d9c8-4e74-ba92-05e23f0dda91",
-        "senderId": "01c28ab3-0c64-4cc4-a093-7fe06850e5e6",
-        "messageId": "509d7444-72b8-4e3b-afcc-a8f7a6f4e49d"
+      [INFO] [2026-01-03T11:04:03.626Z] Message Sent {
+        "conversationId": "eadf3437-70b8-402e-9440-6eff7d094723",
+        "senderId": "83931593-2792-46a4-a947-c94422ed2cac",
+        "messageId": "c2b942d1-856c-4d4a-bf9b-3320b9bb9529"
       }
 
       at Object.info (src/utils/logger.ts:3:17)
-
-PASS tests/escrow.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
 
 PASS tests/release.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-PASS tests/review.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  enable debug logging with { debug: true }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [INFO] [2026-01-03T10:37:46.197Z] Review Submitted {
-        "reviewerId": "f4e16228-12ec-4367-bc84-573af97db784",
-        "targetId": "9b6e37d7-d2b7-4681-83fa-c69ccfaac6dc",
-        "rating": 5
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.error
-      [ERROR] [2026-01-03T10:37:46.210Z] SubmitReview Controller Error [
-        {
-          "origin": "number",
-          "code": "too_big",
-          "maximum": 5,
-          "inclusive": true,
-          "path": [
-            "rating"
-          ],
-          "message": "Too big: expected number to be <=5"
-        }
-      ]
-
-      4 |     },
-      5 |     error: (message: string, error?: any) => {
-    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
-        |                 ^
-      7 |         if (error?.stack) console.error(error.stack);
-      8 |     },
-      9 |     warn: (message: string, context?: any) => {
-
-      at Object.error (src/utils/logger.ts:6:17)
-      at handleControllerError (src/controllers/reviewController.ts:8:12)
-      at submitReview (src/controllers/reviewController.ts:46:16)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at next (node_modules/router/lib/route.js:157:13)
-      at protect (src/routes/reviewRoutes.ts:17:9)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at next (node_modules/router/lib/route.js:157:13)
-      at Route.dispatch (node_modules/router/lib/route.js:117:3)
-      at handle (node_modules/router/index.js:435:11)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at node_modules/router/index.js:295:15
-      at param (node_modules/router/index.js:600:14)
-      at param (node_modules/router/index.js:610:14)
-      at processParams (node_modules/router/index.js:664:3)
-      at next (node_modules/router/index.js:291:5)
-      at Function.handle (node_modules/router/index.js:186:3)
-      at router (node_modules/router/index.js:60:12)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at trimPrefix (node_modules/router/index.js:342:13)
-      at node_modules/router/index.js:297:9
-      at processParams (node_modules/router/index.js:582:12)
-      at next (node_modules/router/index.js:291:5)
-      at node_modules/router/index.js:688:15
-      at next (node_modules/router/index.js:276:14)
-      at protect (src/routes/authRoutes.ts:17:9)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at trimPrefix (node_modules/router/index.js:342:13)
-      at node_modules/router/index.js:297:9
-      at processParams (node_modules/router/index.js:582:12)
-      at next (node_modules/router/index.js:291:5)
-      at Function.handle (node_modules/router/index.js:186:3)
-      at router (node_modules/router/index.js:60:12)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at trimPrefix (node_modules/router/index.js:342:13)
-      at node_modules/router/index.js:297:9
-      at processParams (node_modules/router/index.js:582:12)
-      at next (node_modules/router/index.js:291:5)
-      at node_modules/body-parser/lib/read.js:172:5
-      at invokeCallback (node_modules/raw-body/index.js:238:16)
-      at done (node_modules/raw-body/index.js:227:7)
-      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
-
-    console.error
-      ZodError: [
-        {
-          "origin": "number",
-          "code": "too_big",
-          "maximum": 5,
-          "inclusive": true,
-          "path": [
-            "rating"
-          ],
-          "message": "Too big: expected number to be <=5"
-        }
-      ]
-          at submitReview (/home/bytesage/campus-swap/backend/src/controllers/reviewController.ts:23:50)
-          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
-          at protect (/home/bytesage/campus-swap/backend/src/routes/reviewRoutes.ts:17:9)
-          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
-          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
-          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
-          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
-          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
-          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
-          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
-          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
-          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
-          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
-          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
-          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
-          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
-          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
-          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:688:15
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:276:14)
-          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:17:9)
-          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
-          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
-          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
-          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
-          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
-          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
-          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
-          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
-          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
-          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
-          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
-          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
-          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
-          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
-          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
-          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
-          at IncomingMessage.emit (node:events:519:28)
-          at endReadableNT (node:internal/streams/readable:1698:12)
-          at processTicksAndRejections (node:internal/process/task_queues:90:21)
-
-       5 |     error: (message: string, error?: any) => {
-       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
-    >  7 |         if (error?.stack) console.error(error.stack);
-         |                                   ^
-       8 |     },
-       9 |     warn: (message: string, context?: any) => {
-      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
-
-      at Object.error (src/utils/logger.ts:7:35)
-      at handleControllerError (src/controllers/reviewController.ts:8:12)
-      at submitReview (src/controllers/reviewController.ts:46:16)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at next (node_modules/router/lib/route.js:157:13)
-      at protect (src/routes/reviewRoutes.ts:17:9)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at next (node_modules/router/lib/route.js:157:13)
-      at Route.dispatch (node_modules/router/lib/route.js:117:3)
-      at handle (node_modules/router/index.js:435:11)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at node_modules/router/index.js:295:15
-      at param (node_modules/router/index.js:600:14)
-      at param (node_modules/router/index.js:610:14)
-      at processParams (node_modules/router/index.js:664:3)
-      at next (node_modules/router/index.js:291:5)
-      at Function.handle (node_modules/router/index.js:186:3)
-      at router (node_modules/router/index.js:60:12)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at trimPrefix (node_modules/router/index.js:342:13)
-      at node_modules/router/index.js:297:9
-      at processParams (node_modules/router/index.js:582:12)
-      at next (node_modules/router/index.js:291:5)
-      at node_modules/router/index.js:688:15
-      at next (node_modules/router/index.js:276:14)
-      at protect (src/routes/authRoutes.ts:17:9)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at trimPrefix (node_modules/router/index.js:342:13)
-      at node_modules/router/index.js:297:9
-      at processParams (node_modules/router/index.js:582:12)
-      at next (node_modules/router/index.js:291:5)
-      at Function.handle (node_modules/router/index.js:186:3)
-      at router (node_modules/router/index.js:60:12)
-      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
-      at trimPrefix (node_modules/router/index.js:342:13)
-      at node_modules/router/index.js:297:9
-      at processParams (node_modules/router/index.js:582:12)
-      at next (node_modules/router/index.js:291:5)
-      at node_modules/body-parser/lib/read.js:172:5
-      at invokeCallback (node_modules/raw-body/index.js:238:16)
-      at done (node_modules/raw-body/index.js:227:7)
-      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
-
-PASS tests/uploads.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [INFO] [2026-01-03T10:37:47.994Z] Creating Listing {
-        "sellerId": "b369fdb1-09a4-424e-be6f-af91cf058f5a",
-        "title": "Textbook with Real Image"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:48.024Z] Listing Created Successfully {
-        "listingId": "30b540ef-ac13-4c55-b180-bb47547924d2"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-    console.log
-      [INFO] [2026-01-03T10:37:48.135Z] ID Documents Uploaded {
-        "userId": "b369fdb1-09a4-424e-be6f-af91cf058f5a",
-        "verificationId": "4779e2dc-aa9d-4f43-bd25-ee75b36d64a6"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-PASS tests/features.test.ts
-  ● Console
-
-    console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
-
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
@@ -1646,11 +1667,21 @@ PASS tests/features.test.ts
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
-PASS tests/verification.test.ts
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/analytics_enhanced.test.ts
   ● Console
 
     console.log
-      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
@@ -1659,22 +1690,12 @@ PASS tests/verification.test.ts
 
       at _log (node_modules/dotenv/lib/main.js:142:11)
 
-    console.log
-      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 
-      at _log (node_modules/dotenv/lib/main.js:142:11)
-
-    console.log
-      [INFO] [2026-01-03T10:37:50.558Z] ID Documents Uploaded {
-        "userId": "9f0b7952-e47d-4597-b4cc-4d749f7ed58f",
-        "verificationId": "1316c097-8359-4576-9446-ed51655dda7c"
-      }
-
-      at Object.info (src/utils/logger.ts:3:17)
-
-
-Test Suites: 18 passed, 18 total
-Tests:       91 passed, 91 total
+Test Suites: 19 passed, 19 total
+Tests:       92 passed, 92 total
 Snapshots:   0 total
-Time:        30.085 s
+Time:        40.536 s, estimated 44 s
 Ran all test suites.
+Jest did not exit one second after the test run has completed.
+
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.

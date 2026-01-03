@@ -146,8 +146,8 @@ describe('Smart Contracts & Seller Analytics', () => {
                 .set('Authorization', `Bearer ${buyerToken}`); // Publicly viewable by others? or just protected
 
             expect(res.status).toBe(200);
-            expect(res.body).toHaveProperty('scorecard');
-            expect(res.body.scorecard.activeListings).toBe(1);
+            expect(res.body).toHaveProperty('inventory');
+            expect(res.body.inventory.activeListings).toBe(1);
         });
     });
 });

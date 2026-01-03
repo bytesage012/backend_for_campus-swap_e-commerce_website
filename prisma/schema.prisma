@@ -82,6 +82,8 @@ model Transaction {
   reference   String?          @unique
   description String?
   
+  platformFee Decimal         @default(0) @db.Decimal(12, 2)
+
   // Escrow Fields
   listingId         String?
   listing           Listing?        @relation(fields: [listingId], references: [id])
