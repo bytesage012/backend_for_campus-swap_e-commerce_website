@@ -3,6 +3,7 @@ import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
 import { getIO } from '../socket.js';
 import { Parser } from 'json2csv';
+import { createNotification } from '../services/notificationService.js';
 
 export const getUsers = async (req: any, res: Response) => {
     try {
@@ -97,6 +98,19 @@ export const bulkUserAction = async (req: any, res: Response) => {
                 break;
             default:
                 return res.status(400).json({ message: 'Invalid action' });
+        }
+
+        // Notify affected users if status was updated
+        if (action === 'UPDATE_STATUS') {
+            await Promise.all(userIds.map((userId: string) =>
+                createNotification({
+                    userId,
+                    type: 'SYSTEM',
+                    title: 'Verification Status Updated',
+                    body: `Your verification status has been updated to ${data.status} by an administrator.`,
+                    metadata: { action, newStatus: data.status }
+                })
+            ));
         }
 
         // Log action

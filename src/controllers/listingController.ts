@@ -4,6 +4,7 @@ import { createListingSchema, updateListingSchema, purchaseSchema, updateStatusS
 import { ZodError } from 'zod';
 import { Prisma } from '@prisma/client';
 import logger from '../utils/logger.js';
+import { createNotification } from '../services/notificationService.js';
 
 const handleControllerError = (res: Response, error: any, context: string) => {
     logger.error(`${context} Controller Error`, error);
@@ -103,13 +104,33 @@ export const updateListing = async (req: any, res: Response) => {
         }
 
         const updateData: any = { ...validatedData };
-        if (validatedData.price) updateData.price = new Prisma.Decimal(validatedData.price);
+        const oldPrice = listing.price;
+        const newPrice = validatedData.price ? new Prisma.Decimal(validatedData.price) : oldPrice;
+        if (validatedData.price) updateData.price = newPrice;
 
         const updated = await prisma.listing.update({
             where: { id: id as string },
             data: updateData,
             include: { images: true },
         });
+
+        // Price Drop Notification
+        if (newPrice.lt(oldPrice)) {
+            const savers = await prisma.savedItem.findMany({
+                where: { listingId: id as string },
+                select: { userId: true }
+            });
+
+            for (const saver of savers) {
+                await createNotification({
+                    userId: saver.userId,
+                    type: 'PRICE_ALERT',
+                    title: 'Price Drop Alert!',
+                    body: `The price for "${updated.title}" has dropped to ${newPrice}! Check it out now.`,
+                    metadata: { listingId: id, oldPrice: oldPrice.toString(), newPrice: newPrice.toString() }
+                });
+            }
+        }
 
         logger.info('Listing Updated Successfully', { listingId: id });
         res.json(updated);
@@ -208,6 +229,23 @@ export const purchaseListing = async (req: any, res: Response) => {
                 }
 
                 return buyerTx;
+            });
+
+            // 5. Notify parties
+            await createNotification({
+                userId: listing.sellerId,
+                type: 'TRANSACTION',
+                title: 'Item Sold!',
+                body: `Your item "${listing.title}" has been purchased by ${req.user.fullName || 'a student'}.`,
+                metadata: { listingId: id, transactionId: transaction.id }
+            });
+
+            await createNotification({
+                userId: buyerId,
+                type: 'TRANSACTION',
+                title: 'Purchase Successful',
+                body: `You have successfully purchased "${listing.title}".`,
+                metadata: { listingId: id, transactionId: transaction.id }
             });
 
             logger.info('Purchase Successful', { listingId: id, buyerId });

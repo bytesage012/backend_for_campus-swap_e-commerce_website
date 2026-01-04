@@ -84,4 +84,5 @@ if (process.env.NODE_ENV !== 'test') {
   });
 }
 
+export { app, httpServer, io };
 export default app;

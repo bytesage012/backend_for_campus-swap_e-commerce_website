@@ -3,6 +3,7 @@ import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
 import { startConversationSchema, sendMessageSchema } from '../validations/conversationValidation.js';
 import logger from '../utils/logger.js';
+import { getIO } from '../socket.js';
 
 export const startConversation = async (req: any, res: Response) => {
     try {
@@ -111,8 +112,22 @@ export const sendMessage = async (req: any, res: Response) => {
             data: { updatedAt: new Date() },
         });
 
+        // Determine recipient
+        const recipientId = conversation.buyerId === senderId ? conversation.listing.sellerId : conversation.buyerId;
+
+        // Emit to the conversation room (for those actively in the chat)
+        getIO().to(`conversation_${conversationId}`).emit('new_message', message);
+
+        // Emit a general notification to the specific user (for the drawer/badge)
+        getIO().to(`user_${recipientId}`).emit('message_notification', {
+            conversationId,
+            senderId,
+            content: content.substring(0, 50),
+            title: conversation.listing.title
+        });
+
         logger.info('Message Sent', { conversationId, senderId, messageId: message.id });
-        res.status(201).json({ messageId: message.id });
+        res.status(201).json({ messageId: message.id, message });
     } catch (error) {
         return handleControllerError(res, error, 'SendMessage');
     }

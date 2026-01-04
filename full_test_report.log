@@ -1,0 +1,2007 @@
+
+> backend@1.0.0 test
+> NODE_OPTIONS=--experimental-vm-modules jest --runInBand
+
+(node:21603) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS tests/wallet.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:53:39.762Z] Initializing Deposit {
+        "userId": "39cadbcb-b71e-4f56-90ca-0e10891d7958",
+        "amount": 5000
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:40.661Z] Paystack Webhook Received {
+        "event": "charge.success",
+        "reference": "test-ref-1767488020655"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:40.830Z] Deposit Successful via Webhook {
+        "userId": "39cadbcb-b71e-4f56-90ca-0e10891d7958",
+        "amount": 5000,
+        "reference": "test-ref-1767488020655"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:40.848Z] Invalid Paystack Signature {
+        "received": "invalid-hash"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at paystackWebhook (src/controllers/paymentController.ts:57:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/websocket.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      User connected: ZShufBD58I3RijRLAAAB (User ID: 364449dc-7118-4ba7-a05a-87d9c414e35e)
+
+      at Namespace.<anonymous> (src/socket.ts:34:21)
+
+    console.log
+      User disconnected: ZShufBD58I3RijRLAAAB
+
+      at Socket.<anonymous> (src/socket.ts:52:21)
+
+    console.log
+      User connected: UDSWaSwXTtK9nt0fAAAG (User ID: a653809f-eb53-491c-b217-9b7cb2a4b8c8)
+
+      at Namespace.<anonymous> (src/socket.ts:34:21)
+
+    console.log
+      User connected: MaDeQjP9eYhpoKNrAAAH (User ID: 364449dc-7118-4ba7-a05a-87d9c414e35e)
+
+      at Namespace.<anonymous> (src/socket.ts:34:21)
+
+    console.log
+      [INFO] [2026-01-04T00:53:42.976Z] New Conversation Started {
+        "conversationId": "693ff1be-39a8-4d56-b759-84406fa51707",
+        "buyerId": "364449dc-7118-4ba7-a05a-87d9c414e35e",
+        "listingId": "f0238387-526b-4485-b0d9-e98fc2f6c3d9"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:43.035Z] Message Sent {
+        "conversationId": "693ff1be-39a8-4d56-b759-84406fa51707",
+        "senderId": "364449dc-7118-4ba7-a05a-87d9c414e35e",
+        "messageId": "b4333475-cb2b-457e-9355-35b92c95f469"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      User disconnected: UDSWaSwXTtK9nt0fAAAG
+
+      at Socket.<anonymous> (src/socket.ts:52:21)
+
+    console.log
+      User disconnected: MaDeQjP9eYhpoKNrAAAH
+
+      at Socket.<anonymous> (src/socket.ts:52:21)
+
+    console.log
+      User connected: f-crSV3HN2fVBzKsAAAJ (User ID: a653809f-eb53-491c-b217-9b7cb2a4b8c8)
+
+      at Namespace.<anonymous> (src/socket.ts:34:21)
+
+    console.log
+      [INFO] [2026-01-04T00:53:43.175Z] Purchase Successful {
+        "listingId": "996b5f70-c740-4e90-a2b9-a7ca9d49e8ba",
+        "buyerId": "364449dc-7118-4ba7-a05a-87d9c414e35e"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      User disconnected: f-crSV3HN2fVBzKsAAAJ
+
+      at Socket.<anonymous> (src/socket.ts:52:21)
+
+    console.log
+      User connected: H3QiNBljoZXTAlUCAAAL (User ID: 364449dc-7118-4ba7-a05a-87d9c414e35e)
+
+      at Namespace.<anonymous> (src/socket.ts:34:21)
+
+    console.log
+      User connected: XZA4DnntThR3dZMXAAAN (User ID: a653809f-eb53-491c-b217-9b7cb2a4b8c8)
+
+      at Namespace.<anonymous> (src/socket.ts:34:21)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "User disconnected: H3QiNBljoZXTAlUCAAAL".
+
+      50 |
+      51 |         socket.on('disconnect', () => {
+    > 52 |             console.log('User disconnected:', socket.id);
+         |                     ^
+      53 |         });
+      54 |     });
+      55 |
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Socket.<anonymous> (src/socket.ts:52:21)
+      at Socket.emitReserved (node_modules/socket.io/dist/typed-events.js:56:22)
+      at Socket._onclose (node_modules/socket.io/dist/socket.js:554:14)
+      at Socket.ondisconnect (node_modules/socket.io/dist/socket.js:513:14)
+      at Socket._onpacket (node_modules/socket.io/dist/socket.js:442:22)
+      at node_modules/socket.io/dist/client.js:207:24
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "User disconnected: XZA4DnntThR3dZMXAAAN".
+
+      50 |
+      51 |         socket.on('disconnect', () => {
+    > 52 |             console.log('User disconnected:', socket.id);
+         |                     ^
+      53 |         });
+      54 |     });
+      55 |
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Socket.<anonymous> (src/socket.ts:52:21)
+      at Socket.emitReserved (node_modules/socket.io/dist/typed-events.js:56:22)
+      at Socket._onclose (node_modules/socket.io/dist/socket.js:554:14)
+      at Socket.ondisconnect (node_modules/socket.io/dist/socket.js:513:14)
+      at Socket._onpacket (node_modules/socket.io/dist/socket.js:442:22)
+      at node_modules/socket.io/dist/client.js:207:24
+
+PASS tests/admin.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.357Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.357Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.527Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_7_days",
+        "timestamp": "2026-01-04T00:53:45.527Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.595Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.595Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.596Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.605Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.605Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.606Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.674Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.674Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.675Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.678Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.678Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.679Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.681Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.681Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.682Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.685Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.685Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.686Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.689Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.689Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.689Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.692Z] Admin Dashboard Access {
+        "adminId": "e5bf0c52-e6c0-4644-9cfe-341ea312ea30",
+        "adminEmail": "admin@unn.edu.ng",
+        "period": "last_30_days",
+        "timestamp": "2026-01-04T00:53:45.692Z"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:45.693Z] Admin Dashboard - Serving from cache
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+FAIL tests/auth.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:53:47.466Z] User Registration Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:47.744Z] User Registered Successfully {
+        "userId": "ef4b59e5-639c-40f3-ae16-2074e8fc4298"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:47.756Z] Register Validation Error [
+        {
+          "origin": "string",
+          "code": "invalid_format",
+          "format": "email",
+          "pattern": "/^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$/",
+          "path": [
+            "email"
+          ],
+          "message": "Invalid email format"
+        }
+      ]
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at handleControllerError (src/controllers/authController.ts:13:16)
+      at register (src/controllers/authController.ts:64:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.log
+      [INFO] [2026-01-04T00:53:47.762Z] User Registration Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:47.766Z] Registration Failed: User exists {
+        "email": "test@unn.edu.ng"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at register (src/controllers/authController.ts:32:20)
+
+    console.log
+      [INFO] [2026-01-04T00:53:47.774Z] User Login Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:47.902Z] User Logged In Successfully {
+        "userId": "ef4b59e5-639c-40f3-ae16-2074e8fc4298"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:47.915Z] User Login Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:48.076Z] Login Failed: Invalid password {
+        "email": "test@unn.edu.ng"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at login (src/controllers/authController.ts:83:20)
+
+    console.log
+      [INFO] [2026-01-04T00:53:48.084Z] User Login Attempt {
+        "email": "test@unn.edu.ng"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:48.091Z] Login Failed: Invalid email {
+        "email": "test@unn.edu.ng"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at login (src/controllers/authController.ts:77:20)
+
+  ● Auth Endpoints › Profile Endpoints › should get user profile
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+      130 |                 .set('Authorization', `Bearer ${token}`);
+      131 |
+    > 132 |             expect(res.status).toBe(200);
+          |                                ^
+      133 |             expect(res.body.email).toBe(testUser.email);
+      134 |             expect(res.body).toHaveProperty('wallet');
+      135 |         });
+
+      at Object.<anonymous> (tests/auth.test.ts:132:32)
+
+  ● Auth Endpoints › Profile Endpoints › should update user profile
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+      141 |                 .send({ fullName: 'Updated Name' });
+      142 |
+    > 143 |             expect(res.status).toBe(200);
+          |                                ^
+      144 |             expect(res.body.user.fullName).toBe('Updated Name');
+      145 |         });
+      146 |
+
+      at Object.<anonymous> (tests/auth.test.ts:143:32)
+
+  ● Auth Endpoints › Profile Endpoints › should upload profile picture
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+      151 |                 .attach('avatar', 'tests/mock-avatar.png');
+      152 |
+    > 153 |             expect(res.status).toBe(200);
+          |                                ^
+      154 |             expect(res.body.user).toHaveProperty('avatarUrl');
+      155 |             expect(res.body.user.avatarUrl).toContain('avatar-');
+      156 |         });
+
+      at Object.<anonymous> (tests/auth.test.ts:153:32)
+
+PASS tests/analytics.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:50.065Z] CreateReport Validation Error [
+        {
+          "code": "invalid_value",
+          "values": [
+            "PROHIBITED_ITEM",
+            "MISLEADING",
+            "SCAM",
+            "HARASSMENT",
+            "INAPPROPRIATE_BEHAVIOR"
+          ],
+          "path": [
+            "reason"
+          ],
+          "message": "Invalid option: expected one of \"PROHIBITED_ITEM\"|\"MISLEADING\"|\"SCAM\"|\"HARASSMENT\"|\"INAPPROPRIATE_BEHAVIOR\""
+        },
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 10,
+          "inclusive": true,
+          "path": [
+            "description"
+          ],
+          "message": "Too small: expected string to have >=10 characters"
+        }
+      ]
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at handleControllerError (src/controllers/authController.ts:13:16)
+      at createReport (src/controllers/reportController.ts:39:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:49:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/moderation.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/notifications.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[INFO] [2026-01-04T00:53:53.884Z] Processing Bulk Operation ffed1423-17e0-4678-86c5-99a0c26a8004 of type BULK_CREATE ".
+
+      1 | const logger = {
+      2 |     info: (message: string, context?: any) => {
+    > 3 |         console.log(`[INFO] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+        |                 ^
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+      6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Object.info (src/utils/logger.ts:3:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:32:12)
+      at Worker.callProcessJob (node_modules/bullmq/src/classes/worker.ts:433:17)
+      at node_modules/bullmq/src/classes/worker.ts:990:37
+      at trace (node_modules/bullmq/src/utils/index.ts:345:12)
+      at Worker.trace (node_modules/bullmq/src/classes/queue-base.ts:204:17)
+      at Worker.processJob (node_modules/bullmq/src/classes/worker.ts:943:17)
+      at Worker.mainLoop (node_modules/bullmq/src/classes/worker.ts:640:16)
+      at Worker.run (node_modules/bullmq/src/classes/worker.ts:551:7)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:53.910Z] Bulk Operation ffed1423-17e0-4678-86c5-99a0c26a8004 FAILED Cannot use a pool after calling end on the pool".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:83:16)
+      at node_modules/bullmq/src/classes/worker.ts:990:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:53.923Z] Job 159 failed with Cannot use a pool after calling end on the pool ".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.<anonymous> (src/services/queueService.ts:101:12)
+      at Worker.emit (node_modules/bullmq/src/classes/queue-base.ts:123:20)
+      at Worker.emit (node_modules/bullmq/src/classes/worker.ts:401:18)
+      at Worker.handleFailed (node_modules/bullmq/src/classes/worker.ts:1125:12)
+      at Worker.retryIfFailed (node_modules/bullmq/src/classes/worker.ts:1360:16)
+      at node_modules/bullmq/src/classes/worker.ts:1015:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[INFO] [2026-01-04T00:53:53.955Z] Processing Bulk Operation 4c0da105-bbbb-42ef-93f7-0442d24c0f76 of type BULK_RENEW ".
+
+      1 | const logger = {
+      2 |     info: (message: string, context?: any) => {
+    > 3 |         console.log(`[INFO] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+        |                 ^
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+      6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Object.info (src/utils/logger.ts:3:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:32:12)
+      at Worker.callProcessJob (node_modules/bullmq/src/classes/worker.ts:433:17)
+      at node_modules/bullmq/src/classes/worker.ts:990:37
+      at trace (node_modules/bullmq/src/utils/index.ts:345:12)
+      at Worker.trace (node_modules/bullmq/src/classes/queue-base.ts:204:17)
+      at Worker.processJob (node_modules/bullmq/src/classes/worker.ts:943:17)
+      at Worker.mainLoop (node_modules/bullmq/src/classes/worker.ts:640:16)
+      at Worker.run (node_modules/bullmq/src/classes/worker.ts:551:7)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:53.967Z] Bulk Operation 4c0da105-bbbb-42ef-93f7-0442d24c0f76 FAILED Cannot use a pool after calling end on the pool".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:83:16)
+      at node_modules/bullmq/src/classes/worker.ts:990:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:53.976Z] Job 160 failed with Cannot use a pool after calling end on the pool ".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.<anonymous> (src/services/queueService.ts:101:12)
+      at Worker.emit (node_modules/bullmq/src/classes/queue-base.ts:123:20)
+      at Worker.emit (node_modules/bullmq/src/classes/worker.ts:401:18)
+      at Worker.handleFailed (node_modules/bullmq/src/classes/worker.ts:1125:12)
+      at Worker.retryIfFailed (node_modules/bullmq/src/classes/worker.ts:1360:16)
+      at node_modules/bullmq/src/classes/worker.ts:1015:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[INFO] [2026-01-04T00:53:54.033Z] Processing Bulk Operation b188ecca-c816-4b22-aa83-584aa20e973b of type PRICE_OPTIMIZE ".
+
+      1 | const logger = {
+      2 |     info: (message: string, context?: any) => {
+    > 3 |         console.log(`[INFO] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+        |                 ^
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+      6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Object.info (src/utils/logger.ts:3:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:32:12)
+      at Worker.callProcessJob (node_modules/bullmq/src/classes/worker.ts:433:17)
+      at node_modules/bullmq/src/classes/worker.ts:990:37
+      at trace (node_modules/bullmq/src/utils/index.ts:345:12)
+      at Worker.trace (node_modules/bullmq/src/classes/queue-base.ts:204:17)
+      at Worker.processJob (node_modules/bullmq/src/classes/worker.ts:943:17)
+      at Worker.mainLoop (node_modules/bullmq/src/classes/worker.ts:640:16)
+      at Worker.run (node_modules/bullmq/src/classes/worker.ts:551:7)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:54.046Z] Bulk Operation b188ecca-c816-4b22-aa83-584aa20e973b FAILED Cannot use a pool after calling end on the pool".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:83:16)
+      at node_modules/bullmq/src/classes/worker.ts:990:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:54.055Z] Job 161 failed with Cannot use a pool after calling end on the pool ".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.<anonymous> (src/services/queueService.ts:101:12)
+      at Worker.emit (node_modules/bullmq/src/classes/queue-base.ts:123:20)
+      at Worker.emit (node_modules/bullmq/src/classes/worker.ts:401:18)
+      at Worker.handleFailed (node_modules/bullmq/src/classes/worker.ts:1125:12)
+      at Worker.retryIfFailed (node_modules/bullmq/src/classes/worker.ts:1360:16)
+      at node_modules/bullmq/src/classes/worker.ts:1015:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[INFO] [2026-01-04T00:53:54.109Z] Processing Bulk Operation 3fb60c01-e677-43d8-9b0c-3a23237c2572 of type EXPORT ".
+
+      1 | const logger = {
+      2 |     info: (message: string, context?: any) => {
+    > 3 |         console.log(`[INFO] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+        |                 ^
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+      6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Object.info (src/utils/logger.ts:3:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:32:12)
+      at Worker.callProcessJob (node_modules/bullmq/src/classes/worker.ts:433:17)
+      at node_modules/bullmq/src/classes/worker.ts:990:37
+      at trace (node_modules/bullmq/src/utils/index.ts:345:12)
+      at Worker.trace (node_modules/bullmq/src/classes/queue-base.ts:204:17)
+      at Worker.processJob (node_modules/bullmq/src/classes/worker.ts:943:17)
+      at Worker.mainLoop (node_modules/bullmq/src/classes/worker.ts:640:16)
+      at Worker.run (node_modules/bullmq/src/classes/worker.ts:551:7)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:54.114Z] Bulk Operation 3fb60c01-e677-43d8-9b0c-3a23237c2572 FAILED Cannot use a pool after calling end on the pool".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:83:16)
+      at node_modules/bullmq/src/classes/worker.ts:990:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:53:54.125Z] Job 163 failed with Cannot use a pool after calling end on the pool ".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.<anonymous> (src/services/queueService.ts:101:12)
+      at Worker.emit (node_modules/bullmq/src/classes/queue-base.ts:123:20)
+      at Worker.emit (node_modules/bullmq/src/classes/worker.ts:401:18)
+      at Worker.handleFailed (node_modules/bullmq/src/classes/worker.ts:1125:12)
+      at Worker.retryIfFailed (node_modules/bullmq/src/classes/worker.ts:1360:16)
+      at node_modules/bullmq/src/classes/worker.ts:1015:26
+
+PASS tests/bulk_operations.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/escrow.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/release.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/analytics_enhanced.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/marketplace.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:53:59.620Z] Creating Listing {
+        "sellerId": "8e2d475a-31a8-443f-b654-b1faceccfc8c",
+        "title": "Test Textbook"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:53:59.641Z] Listing Created Successfully {
+        "listingId": "8e9f3a6a-45d9-4649-a145-1267a608e3f9"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-04T00:53:59.669Z] CreateListing Controller Error [
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 3,
+          "inclusive": true,
+          "path": [
+            "title"
+          ],
+          "message": "Too small: expected string to have >=3 characters"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "description"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "price"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "category"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "code": "invalid_value",
+          "values": [
+            "NEW",
+            "USED",
+            "FAIR"
+          ],
+          "path": [
+            "condition"
+          ],
+          "message": "Invalid option: expected one of \"NEW\"|\"USED\"|\"FAIR\""
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/listingController.ts:10:12)
+      at createListing (src/controllers/listingController.ts:51:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at multerMiddleware (node_modules/multer/lib/make-middleware.js:19:41)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/listingRoutes.ts:29:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "string",
+          "code": "too_small",
+          "minimum": 3,
+          "inclusive": true,
+          "path": [
+            "title"
+          ],
+          "message": "Too small: expected string to have >=3 characters"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "description"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "price"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "category"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        },
+        {
+          "code": "invalid_value",
+          "values": [
+            "NEW",
+            "USED",
+            "FAIR"
+          ],
+          "path": [
+            "condition"
+          ],
+          "message": "Invalid option: expected one of \"NEW\"|\"USED\"|\"FAIR\""
+        }
+      ]
+          at createListing (/home/bytesage/campus-swap/backend/src/controllers/listingController.ts:22:51)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at multerMiddleware (/home/bytesage/campus-swap/backend/node_modules/multer/lib/make-middleware.js:19:41)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/listingRoutes.ts:29:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/listingController.ts:10:12)
+      at createListing (src/controllers/listingController.ts:51:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at multerMiddleware (node_modules/multer/lib/make-middleware.js:19:41)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/listingRoutes.ts:29:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.log
+      [INFO] [2026-01-04T00:53:59.795Z] Listing Updated Successfully {
+        "listingId": "8e9f3a6a-45d9-4649-a145-1267a608e3f9"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:53:59.812Z] Unauthorized update attempt {
+        "listingId": "8e9f3a6a-45d9-4649-a145-1267a608e3f9",
+        "userId": "other-id"
+      }
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at updateListing (src/controllers/listingController.ts:102:20)
+
+    console.log
+      [INFO] [2026-01-04T00:53:59.850Z] Listing Deleted Successfully {
+        "listingId": "8e9f3a6a-45d9-4649-a145-1267a608e3f9"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/marketplace_interaction.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:01.501Z] Purchase Successful {
+        "listingId": "cfe5af4d-0136-4acb-92fa-73dfa4e34b99",
+        "buyerId": "06f10638-d146-4799-81d4-93bc89a3e611"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:54:01.600Z] Listing Status Updated {
+        "listingId": "22141102-38ee-4027-a351-10b0a4e03a8a",
+        "status": "RESERVED"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:54:01.710Z] Listing Reserved {
+        "listingId": "42f42be2-d932-4a7c-ae80-146c439b7f28",
+        "reservedBy": "06f10638-d146-4799-81d4-93bc89a3e611"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/features.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/uploads.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:04.568Z] Creating Listing {
+        "sellerId": "007cc08c-d913-4818-a429-a4e9fa7a99a4",
+        "title": "Textbook with Real Image"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:54:04.594Z] Listing Created Successfully {
+        "listingId": "7985f18d-456b-471b-9906-2dc31284eebd"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:54:04.649Z] ID Documents Uploaded {
+        "userId": "007cc08c-d913-4818-a429-a4e9fa7a99a4",
+        "verificationId": "8a69c626-1b7f-47de-8bc1-da78266bdac4"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/admin_users.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+PASS tests/review.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:07.303Z] Review Submitted {
+        "reviewerId": "6f5ba51c-1a86-4124-b78a-d466b9f1e9e2",
+        "targetId": "56d954aa-ccf8-4328-9253-85606dbf835a",
+        "rating": 5
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.error
+      [ERROR] [2026-01-04T00:54:07.317Z] SubmitReview Controller Error [
+        {
+          "origin": "number",
+          "code": "too_big",
+          "maximum": 5,
+          "inclusive": true,
+          "path": [
+            "rating"
+          ],
+          "message": "Too big: expected number to be <=5"
+        }
+      ]
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at Object.error (src/utils/logger.ts:6:17)
+      at handleControllerError (src/controllers/reviewController.ts:8:12)
+      at submitReview (src/controllers/reviewController.ts:46:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/reviewRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/router/index.js:688:15
+      at next (node_modules/router/index.js:276:14)
+      at protect (src/routes/authRoutes.ts:49:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.error
+      ZodError: [
+        {
+          "origin": "number",
+          "code": "too_big",
+          "maximum": 5,
+          "inclusive": true,
+          "path": [
+            "rating"
+          ],
+          "message": "Too big: expected number to be <=5"
+        }
+      ]
+          at submitReview (/home/bytesage/campus-swap/backend/src/controllers/reviewController.ts:23:50)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/reviewRoutes.ts:17:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:157:13)
+          at Route.dispatch (/home/bytesage/campus-swap/backend/node_modules/router/lib/route.js:117:3)
+          at handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:435:11)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:295:15
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:600:14)
+          at param (/home/bytesage/campus-swap/backend/node_modules/router/index.js:610:14)
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:664:3)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:688:15
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:276:14)
+          at protect (/home/bytesage/campus-swap/backend/src/routes/authRoutes.ts:49:9)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at Function.handle (/home/bytesage/campus-swap/backend/node_modules/router/index.js:186:3)
+          at router (/home/bytesage/campus-swap/backend/node_modules/router/index.js:60:12)
+          at Layer.handleRequest (/home/bytesage/campus-swap/backend/node_modules/router/lib/layer.js:152:17)
+          at trimPrefix (/home/bytesage/campus-swap/backend/node_modules/router/index.js:342:13)
+          at /home/bytesage/campus-swap/backend/node_modules/router/index.js:297:9
+          at processParams (/home/bytesage/campus-swap/backend/node_modules/router/index.js:582:12)
+          at next (/home/bytesage/campus-swap/backend/node_modules/router/index.js:291:5)
+          at /home/bytesage/campus-swap/backend/node_modules/body-parser/lib/read.js:172:5
+          at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+          at invokeCallback (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:238:16)
+          at done (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:227:7)
+          at IncomingMessage.onEnd (/home/bytesage/campus-swap/backend/node_modules/raw-body/index.js:287:7)
+          at IncomingMessage.emit (node:events:519:28)
+          at endReadableNT (node:internal/streams/readable:1698:12)
+          at processTicksAndRejections (node:internal/process/task_queues:90:21)
+
+       5 |     error: (message: string, error?: any) => {
+       6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+    >  7 |         if (error?.stack) console.error(error.stack);
+         |                                   ^
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+      10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+
+      at Object.error (src/utils/logger.ts:7:35)
+      at handleControllerError (src/controllers/reviewController.ts:8:12)
+      at submitReview (src/controllers/reviewController.ts:46:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/reviewRoutes.ts:17:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at param (node_modules/router/index.js:600:14)
+      at param (node_modules/router/index.js:610:14)
+      at processParams (node_modules/router/index.js:664:3)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/router/index.js:688:15
+      at next (node_modules/router/index.js:276:14)
+      at protect (src/routes/authRoutes.ts:49:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/verification.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:08.601Z] ID Documents Uploaded {
+        "userId": "13f07026-fe89-4313-9967-3351f42d33b3",
+        "verificationId": "33e8c4af-34cb-4d31-8b57-84eb017a2205"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/conversations.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:09.812Z] New Conversation Started {
+        "conversationId": "7f304f0f-9920-4c82-a229-ab8467ab8cb3",
+        "buyerId": "87b8c63c-d2f4-430a-a55d-58870015af77",
+        "listingId": "7e38c686-4b33-4047-a47d-b9bae576da3b"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:54:09.827Z] StartConversation Validation Error [
+        {
+          "expected": "string",
+          "code": "invalid_type",
+          "path": [
+            "listingId"
+          ],
+          "message": "Invalid input: expected string, received undefined"
+        }
+      ]
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at handleControllerError (src/controllers/authController.ts:13:16)
+      at startConversation (src/controllers/conversationController.ts:44:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at protect (src/routes/authRoutes.ts:49:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+    console.log
+      [INFO] [2026-01-04T00:54:09.912Z] Message Sent {
+        "conversationId": "7f304f0f-9920-4c82-a229-ab8467ab8cb3",
+        "senderId": "87b8c63c-d2f4-430a-a55d-58870015af77",
+        "messageId": "8e9648ae-30b5-42dd-a552-b2ff9da44ae8"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/saved_items.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:11.100Z] Listing Saved {
+        "userId": "25c50328-c48d-480d-ba07-20a3d9097d6d",
+        "listingId": "050cc0a5-9689-4072-934a-35f1ec268795"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:54:11.165Z] Listing Unsaved {
+        "userId": "25c50328-c48d-480d-ba07-20a3d9097d6d",
+        "listingId": "050cc0a5-9689-4072-934a-35f1ec268795"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+PASS tests/preferences.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: ⚙️  override existing env vars with { override: true }
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [INFO] [2026-01-04T00:54:12.322Z] Theme Preferences Updated {
+        "userId": "90c40d85-b5e1-4d5a-a335-af715454cd00",
+        "themeMode": "DARK"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.log
+      [INFO] [2026-01-04T00:54:12.354Z] Theme Preferences Updated {
+        "userId": "90c40d85-b5e1-4d5a-a335-af715454cd00",
+        "themeMode": "DARK"
+      }
+
+      at Object.info (src/utils/logger.ts:3:17)
+
+    console.warn
+      [WARN] [2026-01-04T00:54:12.370Z] UpdateTheme Validation Error [
+        {
+          "origin": "string",
+          "code": "invalid_format",
+          "format": "regex",
+          "pattern": "/^#[0-9A-F]{6}$/i",
+          "path": [
+            "accentColor"
+          ],
+          "message": "Invalid hex color"
+        }
+      ]
+
+       8 |     },
+       9 |     warn: (message: string, context?: any) => {
+    > 10 |         console.warn(`[WARN] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+         |                 ^
+      11 |     }
+      12 | };
+      13 |
+
+      at Object.warn (src/utils/logger.ts:10:17)
+      at handleControllerError (src/controllers/authController.ts:13:16)
+      at updateTheme (src/controllers/preferenceController.ts:56:16)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at protect (src/routes/authRoutes.ts:49:9)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at next (node_modules/router/lib/route.js:157:13)
+      at Route.dispatch (node_modules/router/lib/route.js:117:3)
+      at handle (node_modules/router/index.js:435:11)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at node_modules/router/index.js:295:15
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at Function.handle (node_modules/router/index.js:186:3)
+      at router (node_modules/router/index.js:60:12)
+      at Layer.handleRequest (node_modules/router/lib/layer.js:152:17)
+      at trimPrefix (node_modules/router/index.js:342:13)
+      at node_modules/router/index.js:297:9
+      at processParams (node_modules/router/index.js:582:12)
+      at next (node_modules/router/index.js:291:5)
+      at node_modules/body-parser/lib/read.js:172:5
+      at invokeCallback (node_modules/raw-body/index.js:238:16)
+      at done (node_modules/raw-body/index.js:227:7)
+      at IncomingMessage.onEnd (node_modules/raw-body/index.js:287:7)
+
+PASS tests/platform_analytics.test.ts
+  ● Console
+
+    console.log
+      [dotenv@17.2.3] injecting env (6) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+    console.log
+      [dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+      at _log (node_modules/dotenv/lib/main.js:142:11)
+
+
+Summary of all failing tests
+FAIL tests/auth.test.ts
+  ● Auth Endpoints › Profile Endpoints › should get user profile
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+      130 |                 .set('Authorization', `Bearer ${token}`);
+      131 |
+    > 132 |             expect(res.status).toBe(200);
+          |                                ^
+      133 |             expect(res.body.email).toBe(testUser.email);
+      134 |             expect(res.body).toHaveProperty('wallet');
+      135 |         });
+
+      at Object.<anonymous> (tests/auth.test.ts:132:32)
+
+  ● Auth Endpoints › Profile Endpoints › should update user profile
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+      141 |                 .send({ fullName: 'Updated Name' });
+      142 |
+    > 143 |             expect(res.status).toBe(200);
+          |                                ^
+      144 |             expect(res.body.user.fullName).toBe('Updated Name');
+      145 |         });
+      146 |
+
+      at Object.<anonymous> (tests/auth.test.ts:143:32)
+
+  ● Auth Endpoints › Profile Endpoints › should upload profile picture
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 401
+
+      151 |                 .attach('avatar', 'tests/mock-avatar.png');
+      152 |
+    > 153 |             expect(res.status).toBe(200);
+          |                                ^
+      154 |             expect(res.body.user).toHaveProperty('avatarUrl');
+      155 |             expect(res.body.user.avatarUrl).toContain('avatar-');
+      156 |         });
+
+      at Object.<anonymous> (tests/auth.test.ts:153:32)
+
+
+Test Suites: 1 failed, 21 passed, 22 total
+Tests:       3 failed, 105 passed, 108 total
+Snapshots:   0 total
+Time:        36.488 s, estimated 41 s
+Ran all test suites.
+Jest did not exit one second after the test run has completed.
+
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[INFO] [2026-01-04T00:56:47.811Z] Processing Bulk Operation f32e22e6-23b6-416d-8b9b-0e431c43ab5b of type BULK_RENEW ".
+
+      1 | const logger = {
+      2 |     info: (message: string, context?: any) => {
+    > 3 |         console.log(`[INFO] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+        |                 ^
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+      6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Object.info (src/utils/logger.ts:3:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:32:12)
+      at Worker.callProcessJob (node_modules/bullmq/src/classes/worker.ts:433:17)
+      at node_modules/bullmq/src/classes/worker.ts:990:37
+      at trace (node_modules/bullmq/src/utils/index.ts:345:12)
+      at Worker.trace (node_modules/bullmq/src/classes/queue-base.ts:204:17)
+      at Worker.processJob (node_modules/bullmq/src/classes/worker.ts:943:17)
+      at Worker.mainLoop (node_modules/bullmq/src/classes/worker.ts:640:16)
+      at Worker.run (node_modules/bullmq/src/classes/worker.ts:551:7)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:56:47.842Z] Bulk Operation f32e22e6-23b6-416d-8b9b-0e431c43ab5b FAILED Cannot use a pool after calling end on the pool".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:83:16)
+      at node_modules/bullmq/src/classes/worker.ts:990:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:56:47.854Z] Job 165 failed with Cannot use a pool after calling end on the pool ".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.<anonymous> (src/services/queueService.ts:101:12)
+      at Worker.emit (node_modules/bullmq/src/classes/queue-base.ts:123:20)
+      at Worker.emit (node_modules/bullmq/src/classes/worker.ts:401:18)
+      at Worker.handleFailed (node_modules/bullmq/src/classes/worker.ts:1125:12)
+      at Worker.retryIfFailed (node_modules/bullmq/src/classes/worker.ts:1360:16)
+      at node_modules/bullmq/src/classes/worker.ts:1015:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[INFO] [2026-01-04T00:56:48.000Z] Processing Bulk Operation db0b9b22-1baf-4208-a4ec-765f34fb4052 of type EXPORT ".
+
+      1 | const logger = {
+      2 |     info: (message: string, context?: any) => {
+    > 3 |         console.log(`[INFO] [${new Date().toISOString()}] ${message}`, context ? JSON.stringify(context, null, 2) : '');
+        |                 ^
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+      6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+
+      at console.log (node_modules/@jest/console/build/index.js:147:10)
+      at Object.info (src/utils/logger.ts:3:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:32:12)
+      at Worker.callProcessJob (node_modules/bullmq/src/classes/worker.ts:433:17)
+      at node_modules/bullmq/src/classes/worker.ts:990:37
+      at trace (node_modules/bullmq/src/utils/index.ts:345:12)
+      at Worker.trace (node_modules/bullmq/src/classes/queue-base.ts:204:17)
+      at Worker.processJob (node_modules/bullmq/src/classes/worker.ts:943:17)
+      at Worker.mainLoop (node_modules/bullmq/src/classes/worker.ts:640:16)
+      at Worker.run (node_modules/bullmq/src/classes/worker.ts:551:7)
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:56:48.028Z] Bulk Operation db0b9b22-1baf-4208-a4ec-765f34fb4052 FAILED Cannot use a pool after calling end on the pool".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.connection [as processFn] (src/services/queueService.ts:83:16)
+      at node_modules/bullmq/src/classes/worker.ts:990:26
+
+
+  ●  Cannot log after tests are done. Did you forget to wait for something async in your test?
+    Attempted to log "[ERROR] [2026-01-04T00:56:48.042Z] Job 168 failed with Cannot use a pool after calling end on the pool ".
+
+      4 |     },
+      5 |     error: (message: string, error?: any) => {
+    > 6 |         console.error(`[ERROR] [${new Date().toISOString()}] ${message}`, error?.message || error || '');
+        |                 ^
+      7 |         if (error?.stack) console.error(error.stack);
+      8 |     },
+      9 |     warn: (message: string, context?: any) => {
+
+      at console.error (node_modules/@jest/console/build/index.js:124:10)
+      at Object.error (src/utils/logger.ts:6:17)
+      at Worker.<anonymous> (src/services/queueService.ts:101:12)
+      at Worker.emit (node_modules/bullmq/src/classes/queue-base.ts:123:20)
+      at Worker.emit (node_modules/bullmq/src/classes/worker.ts:401:18)
+      at Worker.handleFailed (node_modules/bullmq/src/classes/worker.ts:1125:12)
+      at Worker.retryIfFailed (node_modules/bullmq/src/classes/worker.ts:1360:16)
+      at node_modules/bullmq/src/classes/worker.ts:1015:26
+

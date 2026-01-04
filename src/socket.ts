@@ -18,7 +18,8 @@ export const initializeSocket = (httpServer: HttpServer) => {
         const token = socket.handshake.auth.token;
         if (!token) return next(new Error('Authentication error'));
         try {
-            jwt.verify(token, JWT_SECRET);
+            const decoded = jwt.verify(token, JWT_SECRET) as any;
+            (socket as any).user = decoded;
             next();
         } catch (e) {
             next(new Error('Authentication error'));
@@ -26,11 +27,25 @@ export const initializeSocket = (httpServer: HttpServer) => {
     });
 
     io.on('connection', (socket) => {
-        console.log('User connected:', socket.id);
+        const user = (socket as any).user;
 
-        socket.on('join_admin', () => {
-            // Basic check - in real app, decode token and check role
-            socket.join('admin_room');
+        if (user && user.id) {
+            socket.join(`user_${user.id}`);
+            console.log(`User connected: ${socket.id} (User ID: ${user.id})`);
+
+            // Automatically join admin room if user is admin
+            if (user.role === 'ADMIN' || user.role === 'SUPER_ADMIN') {
+                socket.join('admin_room');
+                console.log(`Admin joined admin_room: ${user.id}`);
+            }
+        }
+
+        socket.on('join_conversation', (conversationId: string) => {
+            socket.join(`conversation_${conversationId}`);
+        });
+
+        socket.on('leave_conversation', (conversationId: string) => {
+            socket.leave(`conversation_${conversationId}`);
         });
 
         socket.on('disconnect', () => {

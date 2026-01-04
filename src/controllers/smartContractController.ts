@@ -3,6 +3,8 @@ import { z } from 'zod';
 import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
 import crypto from 'crypto';
+import { getIO } from '../socket.js';
+import { createNotification } from '../services/notificationService.js';
 
 // Zod Schemas
 const createContractSchema = z.object({
@@ -65,6 +67,15 @@ export const createSmartContract = async (req: Request, res: Response) => {
             }
         });
 
+        // Notify the parties
+        await createNotification({
+            userId: buyerId === (req as any).user.id ? sellerId : buyerId,
+            type: 'TRANSACTION',
+            title: 'New Smart Contract Created',
+            body: ` A new contract has been created for ${listing.title}. Please review and sign.`,
+            metadata: { contractId: contract.id, listingId }
+        });
+
         res.status(201).json(contract);
     } catch (error) {
         handleControllerError(res, error, 'CreateSmartContract');
@@ -120,6 +131,19 @@ export const signContract = async (req: Request, res: Response) => {
                 payload: { signature },
                 hash: generateHash({ signature, timestamp: new Date() })
             }
+        });
+
+        // Notify the other party
+        const otherPartyId = userId === contract.buyerId ? contract.sellerId : contract.buyerId;
+
+        getIO().to(`user_${otherPartyId}`).emit('contract_updated', updatedContract);
+
+        await createNotification({
+            userId: otherPartyId,
+            type: 'TRANSACTION',
+            title: 'Contract Signed',
+            body: `The other party has signed the contract for your transaction. Status: ${newStatus}`,
+            metadata: { contractId: contract.id, status: newStatus }
         });
 
         res.json(updatedContract);
@@ -199,6 +223,26 @@ export const releaseFunds = async (req: Request, res: Response) => {
                 payload: { method: isAdmin ? 'ADMIN_OVERRIDE' : 'BUYER_CONFIRMATION' },
                 hash: generateHash({ action: 'RELEASE', timestamp: new Date() })
             }
+        });
+
+        // Notify both parties
+        getIO().to(`user_${contract.buyerId}`).emit('contract_updated', updatedContract);
+        getIO().to(`user_${contract.sellerId}`).emit('contract_updated', updatedContract);
+
+        await createNotification({
+            userId: contract.sellerId,
+            type: 'TRANSACTION',
+            title: 'Funds Released',
+            body: `Funds for contract ${contract.id} have been released to your wallet.`,
+            metadata: { contractId: contract.id, action: 'RELEASED' }
+        });
+
+        await createNotification({
+            userId: contract.buyerId,
+            type: 'TRANSACTION',
+            title: 'Transaction Completed',
+            body: `Transaction for contract ${contract.id} is now complete.`,
+            metadata: { contractId: contract.id, action: 'COMPLETED' }
         });
 
         res.json(updatedContract);

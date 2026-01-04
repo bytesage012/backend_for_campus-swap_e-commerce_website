@@ -15,6 +15,37 @@
             "description": "Local development server"
         }
     ],
+    "x-web-socket": {
+        "description": "Real-time communication via Socket.io",
+        "authentication": "JWT token passed in the 'auth' handshake object: { token: 'JWT_HERE' }",
+        "rooms": [
+            "user_{userId}: Private room for individual user notifications and direct messages.",
+            "admin_room: Room for administrative updates (only authorized for ADMIN roles).",
+            "conversation_{conversationId}: Room for active participants in a specific chat."
+        ],
+        "events": {
+            "new_message": {
+                "description": "Emitted to conversation rooms when a new message is sent.",
+                "payload": "Message object"
+            },
+            "message_notification": {
+                "description": "Emitted to user rooms to notify of new messages in any conversation.",
+                "payload": "{ conversationId, senderId, content, title }"
+            },
+            "new_notification": {
+                "description": "Emitted to user rooms for alerts, transactions, and system updates.",
+                "payload": "Notification object"
+            },
+            "contract_updated": {
+                "description": "Emitted to party user rooms when an escrow contract status changes.",
+                "payload": "SmartContract object"
+            },
+            "users_updated": {
+                "description": "Emitted to admin_room when users are bulk-updated.",
+                "payload": "{ action, count, userIds }"
+            }
+        }
+    },
     "components": {
         "securitySchemes": {
             "BearerAuth": {

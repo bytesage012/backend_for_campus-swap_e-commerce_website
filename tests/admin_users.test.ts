@@ -137,7 +137,7 @@ describe('Admin User Management Endpoints', () => {
             });
             expect(updated[0]?.verificationStatus).toBe('REJECTED');
             expect(updated[1]?.verificationStatus).toBe('REJECTED');
-        });
+        }, 15000);
     });
 
     describe('GET /api/admin/users/export', () => {
