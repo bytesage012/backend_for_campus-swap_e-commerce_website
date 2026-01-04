@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/index.js';
-import prisma from '../src/prisma.js';
+import prisma, { pool } from '../src/prisma.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -71,6 +71,11 @@ describe('Analytics & Reporting Endpoints', () => {
                 directViews: 5,
             },
         });
+    });
+
+    afterAll(async () => {
+        await prisma.$disconnect();
+        await pool.end();
     });
 
     describe('GET /api/analytics/listings/:id', () => {

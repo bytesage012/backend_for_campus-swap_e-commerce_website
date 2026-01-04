@@ -1,12 +1,15 @@
+import { jest } from '@jest/globals';
 import request from 'supertest';
 import app from '../src/index.js';
 import prisma, { pool } from '../src/prisma.js';
+import { closeSocket } from '../src/socket.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 describe('Notification Endpoints', () => {
+    jest.setTimeout(30000);
     let token: string;
     let userId: string;
     let notificationId: string;
@@ -69,12 +72,13 @@ describe('Notification Endpoints', () => {
                 body: 'You have a new message from a buyer.',
             },
         });
-    });
+    }, 30000);
 
     afterAll(async () => {
         await prisma.$disconnect();
         await pool.end();
-    });
+        closeSocket();
+    }, 30000);
 
     describe('GET /api/notifications', () => {
         it('should get all notifications for a user', async () => {

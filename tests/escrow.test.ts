@@ -1,6 +1,8 @@
+import { jest } from '@jest/globals';
 import request from 'supertest';
 import app from '../src/index.js';
 import prisma, { pool } from '../src/prisma.js';
+import { closeSocket } from '../src/socket.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { EscrowStatus } from '@prisma/client';
@@ -10,6 +12,7 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 describe('Escrow Dashboard Endpoints', () => {
+    jest.setTimeout(30000);
     let adminToken: string;
     let userToken: string;
     let adminId: string;
@@ -138,12 +141,13 @@ describe('Escrow Dashboard Endpoints', () => {
                 updatedAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // Updated duration ~24h
             } as any
         });
-    });
+    }, 30000);
 
     afterAll(async () => {
         await prisma.$disconnect();
         await pool.end();
-    });
+        closeSocket();
+    }, 30000);
 
     describe('GET /api/escrow/dashboard', () => {
         it('should prohibit access to non-admins', async () => {

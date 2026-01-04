@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/index.js';
-import prisma from '../src/prisma.js'; // Ensure correct import for singleton instance
+import prisma, { pool } from '../src/prisma.js'; // Ensure correct import for singleton instance
 import jwt from 'jsonwebtoken';
 
 describe('Listing Moderation System', () => {
@@ -78,6 +78,7 @@ describe('Listing Moderation System', () => {
 
     afterAll(async () => {
         await prisma.$disconnect();
+        await pool.end();
     });
 
     it('should allow admin to fetch moderation queue', async () => {

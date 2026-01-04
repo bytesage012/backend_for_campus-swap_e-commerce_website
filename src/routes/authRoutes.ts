@@ -1,9 +1,41 @@
 import express from 'express';
 import { register, login, getProfile, updateProfile } from '../controllers/authController.js';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+
+// Multer config for avatars
+const avatarStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const uploadPath = 'uploads/avatars';
+        if (!fs.existsSync(uploadPath)) {
+            fs.mkdirSync(uploadPath, { recursive: true });
+        }
+        cb(null, uploadPath);
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, 'avatar-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const uploadAvatar = multer({
+    storage: avatarStorage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed') as any, false);
+        }
+    }
+});
+
 
 export const protect = (req: any, res: any, next: any) => {
     const token = req.headers.authorization?.split(' ')[1];
@@ -47,6 +79,7 @@ export const restrictTo = (...roles: string[]) => {
 router.post('/register', register);
 router.post('/login', login);
 router.get('/profile', protect, getProfile);
-router.patch('/profile', protect, updateProfile);
+router.patch('/profile', protect, uploadAvatar.single('avatar'), updateProfile);
+
 
 export default router;

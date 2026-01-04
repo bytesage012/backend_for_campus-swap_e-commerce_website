@@ -9,13 +9,14 @@ import logger from '../utils/logger.js';
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 export const handleControllerError = (res: Response, error: any, context: string) => {
-    logger.error(`${context} Controller Error`, error);
     if (error instanceof ZodError) {
+        logger.warn(`${context} Validation Error`, error.issues);
         return res.status(400).json({
             message: error.issues[0]?.message || 'Validation failed',
             errors: error.issues
         });
     }
+    logger.error(`${context} Controller Error`, error);
     res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
@@ -126,6 +127,10 @@ export const updateProfile = async (req: any, res: Response) => {
         const validatedData = updateProfileSchema.parse(req.body);
 
         const updateData: any = { ...validatedData };
+
+        if (req.file) {
+            updateData.avatarUrl = `/uploads/avatars/${req.file.filename}`;
+        }
 
         const user = await prisma.user.update({
             where: { id: req.user.id },

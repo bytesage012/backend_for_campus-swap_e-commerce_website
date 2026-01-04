@@ -18,6 +18,7 @@ import analyticsRoutes from './routes/analyticsRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import moderationRoutes from './routes/moderationRoutes.js';
 import escrowRoutes from './routes/escrowRoutes.js';
+import bulkRoutes from './routes/bulkRoutes.js';
 import { createServer } from 'http';
 import { initializeSocket } from './socket.js';
 
@@ -53,6 +54,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/admin/listings', moderationRoutes);
 app.use('/api/escrow', escrowRoutes);
+app.use('/api/bulk', bulkRoutes);
 app.use('/api', reviewRoutes); // Review routes handle their own prefix patterns in tests
 
 app.get('/api/health', async (req, res) => {

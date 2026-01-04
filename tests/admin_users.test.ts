@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/index.js';
-import prisma from '../src/prisma.js';
+import prisma, { pool } from '../src/prisma.js';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
@@ -72,6 +72,11 @@ describe('Admin User Management Endpoints', () => {
             },
         });
         user2Id = user2.id;
+    });
+
+    afterAll(async () => {
+        await prisma.$disconnect();
+        await pool.end();
     });
 
     describe('GET /api/admin/users', () => {

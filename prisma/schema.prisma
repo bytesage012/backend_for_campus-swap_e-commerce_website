@@ -65,6 +65,7 @@ model User {
   // Growth Analytics
   marketOffers     MarketOffer[]
   npsSurveys       NPSSurvey[]
+  bulkOperations   BulkOperation[]
 }
 
 model Wallet {
@@ -527,4 +528,17 @@ model NPSSurvey {
   score     Int      // 0-10
   feedback  String?
   createdAt DateTime @default(now())
+}
+
+model BulkOperation {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String   // BULK_CREATE, BULK_RENEW, PRICE_OPTIMIZE, BULK_MESSAGE, EXPORT
+  status    String   // PENDING, PROCESSING, COMPLETED, FAILED
+  metadata  Json?    // Stores filters, template IDs, etc.
+  result    Json?    // Stores success counts, download URLs
+  errors    Json?    // Stores row-level errors
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

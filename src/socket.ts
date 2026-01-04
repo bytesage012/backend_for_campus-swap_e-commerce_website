@@ -47,3 +47,8 @@ export const getIO = () => {
     }
     return io;
 };
+export const closeSocket = () => {
+    if (io) {
+        io.close();
+    }
+};

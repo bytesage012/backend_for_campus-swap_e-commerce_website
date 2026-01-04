@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../src/index.js';
-import prisma from '../src/prisma.js';
+import prisma, { pool } from '../src/prisma.js';
 import jwt from 'jsonwebtoken';
 
 describe('Platform Growth Analytics', () => {
@@ -41,6 +41,7 @@ describe('Platform Growth Analytics', () => {
 
     afterAll(async () => {
         await prisma.$disconnect();
+        await pool.end();
     });
 
     describe('GET /api/analytics/platform/growth', () => {

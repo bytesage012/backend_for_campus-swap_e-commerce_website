@@ -1,12 +1,16 @@
+import { jest } from '@jest/globals';
 import request from 'supertest';
 import app from '../src/index.js';
-import prisma from '../src/prisma.js';
+import prisma, { pool } from '../src/prisma.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { bulkOperationsQueue, worker, redisConnection } from '../src/services/queueService.js';
+import { closeSocket } from '../src/socket.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 describe('Admin Dashboard Endpoint', () => {
+    jest.setTimeout(30000);
     let adminToken: string;
     let adminUserId: string;
     let regularToken: string;
@@ -29,6 +33,8 @@ describe('Admin Dashboard Endpoint', () => {
         await (prisma as any).listingModeration.deleteMany();
         await prisma.listingImage.deleteMany();
         await (prisma as any).listingModeration.deleteMany();
+        await (prisma as any).listingAnalytics.deleteMany();
+        await (prisma as any).report.deleteMany();
         await (prisma as any).contractAudit.deleteMany();
         await (prisma as any).contractEvidence.deleteMany();
         await (prisma as any).smartContract.deleteMany();
@@ -90,7 +96,7 @@ describe('Admin Dashboard Endpoint', () => {
                 sellerId: adminUserId,
             },
         });
-    });
+    }, 30000);
 
     describe('GET /api/admin/dashboard', () => {
         it('should return comprehensive dashboard data for admin', async () => {
@@ -206,4 +212,13 @@ describe('Admin Dashboard Endpoint', () => {
             expect(rateLimited.length).toBeGreaterThanOrEqual(1);
         }, 15000); // Increase timeout for rate limit test
     });
+
+    afterAll(async () => {
+        await prisma.$disconnect();
+        await pool.end();
+        await bulkOperationsQueue.close();
+        await worker.close();
+        await redisConnection.quit();
+        closeSocket();
+    }, 30000);
 });

@@ -2,6 +2,7 @@ import request from 'supertest';
 import app from '../src/index.js';
 import prisma, { pool } from '../src/prisma.js';
 import dotenv from 'dotenv';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -15,6 +16,11 @@ describe('Auth Endpoints', () => {
     };
 
     beforeAll(async () => {
+        // Create mock avatar if it doesn't exist
+        if (!fs.existsSync('tests/mock-avatar.png')) {
+            fs.writeFileSync('tests/mock-avatar.png', 'mock content');
+        }
+
         // Clean up any existing data for the test user and related entities
         await (prisma as any).adminLog.deleteMany();
         await (prisma as any).userDevice.deleteMany();
@@ -137,6 +143,18 @@ describe('Auth Endpoints', () => {
             expect(res.status).toBe(200);
             expect(res.body.user.fullName).toBe('Updated Name');
         });
+
+        it('should upload profile picture', async () => {
+            const res = await request(app)
+                .patch('/api/auth/profile')
+                .set('Authorization', `Bearer ${token}`)
+                .attach('avatar', 'tests/mock-avatar.png');
+
+            expect(res.status).toBe(200);
+            expect(res.body.user).toHaveProperty('avatarUrl');
+            expect(res.body.user.avatarUrl).toContain('avatar-');
+        });
+
 
         it('should fail to get profile without token', async () => {
             const res = await request(app).get('/api/auth/profile');
