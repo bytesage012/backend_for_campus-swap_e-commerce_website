@@ -1346,6 +1346,173 @@
                 }
             }
         },
+        "/admin/verifications/pending": {
+            "get": {
+                "summary": "Get pending verifications",
+                "tags": [
+                    "Admin"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pending verifications",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "verifications": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        },
+                                        "total": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/verifications": {
+            "get": {
+                "summary": "Get all verifications",
+                "tags": [
+                    "Admin"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "NOT_VERIFIED",
+                                "PENDING",
+                                "APPROVED",
+                                "REJECTED"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer",
+                            "default": 20
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Verifications with pagination"
+                    }
+                }
+            }
+        },
+        "/admin/verifications/{id}/approve": {
+            "post": {
+                "summary": "Approve verification",
+                "tags": [
+                    "Admin"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Verification approved"
+                    }
+                }
+            }
+        },
+        "/admin/verifications/{id}/reject": {
+            "post": {
+                "summary": "Reject verification",
+                "tags": [
+                    "Admin"
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "reason"
+                                ],
+                                "properties": {
+                                    "reason": {
+                                        "type": "string",
+                                        "minLength": 10
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Verification rejected"
+                    }
+                }
+            }
+        },
         "/admin/listings/queue": {
             "get": {
                 "summary": "Moderation queue",

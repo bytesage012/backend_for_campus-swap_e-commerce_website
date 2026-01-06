@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { requireAdmin } from '../middleware/adminMiddleware.js';
 import { getDashboard } from '../controllers/adminController.js';
 import { getUsers, bulkUserAction, exportUsers } from '../controllers/adminUserController.js';
+import { getPendingVerifications, getAllVerifications, approveVerification, rejectVerification } from '../controllers/adminVerificationController.js';
 import rateLimit from 'express-rate-limit';
 
 const router = Router();
@@ -26,4 +27,11 @@ router.get('/users', getUsers);
 router.get('/users/export', exportUsers);
 router.post('/users/bulk-action', bulkUserAction);
 
+// Verification Management
+router.get('/verifications/pending', getPendingVerifications);
+router.get('/verifications', getAllVerifications);
+router.post('/verifications/:id/approve', approveVerification);
+router.post('/verifications/:id/reject', rejectVerification);
+
 export default router;
+

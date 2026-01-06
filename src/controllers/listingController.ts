@@ -53,10 +53,19 @@ export const createListing = async (req: any, res: Response) => {
 };
 
 export const getListings = async (req: Request, res: Response) => {
-    const { faculty, category, search } = req.query;
+    const { faculty, category, search, sellerId, status } = req.query;
 
     try {
-        const where: any = { status: 'ACTIVE' };
+        const where: any = {};
+
+        // Default to ACTIVE if no specific status is requested, unless looking for specific seller
+        if (status) {
+            where.status = status as string;
+        } else if (!sellerId) {
+            where.status = 'ACTIVE';
+        }
+
+        if (sellerId) where.sellerId = sellerId as string;
         if (faculty) where.faculty = faculty as string;
         if (category) where.category = category as string;
         if (search) {

@@ -21,13 +21,30 @@ import escrowRoutes from './routes/escrowRoutes.js';
 import bulkRoutes from './routes/bulkRoutes.js';
 import { createServer } from 'http';
 import { initializeSocket } from './socket.js';
+import swaggerUi from 'swagger-ui-express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
 const io = initializeSocket(httpServer);
 const PORT = process.env.PORT || 3001;
+
+// Load and configure Swagger UI
+const specPath = path.join(__dirname, '../ecommerce-backend-spec.json');
+const swaggerDocument = JSON.parse(fs.readFileSync(specPath, 'utf8'));
+
+// Dynamically update server URL based on environment
+const serverUrl = process.env.SERVER_URL || `http://localhost:${PORT}/api`;
+swaggerDocument.servers = [{ url: serverUrl, description: 'Current Environment' }];
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT EXCEPTION:', err);

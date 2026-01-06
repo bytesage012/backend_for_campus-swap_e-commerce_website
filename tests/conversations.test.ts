@@ -35,6 +35,7 @@ describe('Conversations & Messaging Endpoints', () => {
         await (prisma as any).listingModeration.deleteMany();
         await prisma.listing.deleteMany();
         await prisma.wallet.deleteMany();
+        await (prisma as any).notification.deleteMany();
         await (prisma as any).preference.deleteMany();
         await prisma.user.deleteMany();
 

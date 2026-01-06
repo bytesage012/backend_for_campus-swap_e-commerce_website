@@ -11,7 +11,17 @@ export const getBalance = async (req: any, res: Response) => {
         const wallet = await prisma.wallet.findUnique({
             where: { userId: req.user.id },
         });
-        if (!wallet) return res.status(404).json({ message: 'Wallet not found' });
+        if (!wallet) {
+            // Lazy creation for users who registered before wallet module existed
+            const newWallet = await prisma.wallet.create({
+                data: {
+                    userId: req.user.id,
+                    balance: 0,
+                    reservedBalance: 0
+                }
+            });
+            return res.json({ balance: Number(newWallet.balance) });
+        }
 
         res.json({ balance: Number(wallet.balance) });
     } catch (error) {
@@ -21,10 +31,19 @@ export const getBalance = async (req: any, res: Response) => {
 
 export const getTransactions = async (req: any, res: Response) => {
     try {
-        const wallet = await prisma.wallet.findUnique({
+        let wallet = await prisma.wallet.findUnique({
             where: { userId: req.user.id },
         });
-        if (!wallet) return res.status(404).json({ message: 'Wallet not found' });
+
+        if (!wallet) {
+            wallet = await prisma.wallet.create({
+                data: {
+                    userId: req.user.id,
+                    balance: 0,
+                    reservedBalance: 0
+                }
+            });
+        }
 
         const transactions = await prisma.transaction.findMany({
             where: { walletId: wallet.id },

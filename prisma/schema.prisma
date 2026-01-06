@@ -18,7 +18,7 @@ model User {
   residenceArea   String?
   isVerified      Boolean  @default(false)
   verificationLevel VerificationLevel @default(BASIC)
-  verificationStatus VerificationStatus @default(PENDING)
+  verificationStatus VerificationStatus @default(NOT_VERIFIED)
   badge           String?
   avatarUrl       String?
   idDocumentUrl   String?
@@ -204,6 +204,7 @@ enum VerificationLevel {
 }
 
 enum VerificationStatus {
+  NOT_VERIFIED
   PENDING
   APPROVED
   REJECTED
