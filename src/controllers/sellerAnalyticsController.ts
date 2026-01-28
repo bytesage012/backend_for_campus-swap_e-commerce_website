@@ -46,8 +46,8 @@ export const getSellerProfileAnalytics = async (req: Request, res: Response) => 
         let totalResponseTimeMs = 0;
         let respondedCount = 0;
         sellerConversations.forEach(c => {
-            if (c.messages.length > 0) {
-                const replyTime = new Date(c.messages[0].createdAt).getTime();
+            if (c.messages && c.messages.length > 0) {
+                const replyTime = new Date((c.messages[0] as any).createdAt).getTime();
                 const startTime = new Date(c.createdAt).getTime();
                 totalResponseTimeMs += (replyTime - startTime);
                 respondedCount++;

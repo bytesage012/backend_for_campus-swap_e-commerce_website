@@ -11,7 +11,7 @@ export const saveListing = async (req: any, res: Response) => {
         const listing = await prisma.listing.findUnique({ where: { id: listingId } });
         if (!listing) return res.status(404).json({ message: 'Listing not found' });
 
-        await (prisma as any).savedItem.upsert({
+        await prisma.savedItem.upsert({
             where: {
                 userId_listingId: {
                     userId,
@@ -22,6 +22,18 @@ export const saveListing = async (req: any, res: Response) => {
             create: {
                 userId,
                 listingId,
+            },
+        });
+
+        // Increment ListingAnalytics saves
+        await prisma.listingAnalytics.upsert({
+            where: { listingId },
+            create: {
+                listingId,
+                saves: 1,
+            },
+            update: {
+                saves: { increment: 1 },
             },
         });
 
@@ -37,12 +49,20 @@ export const unsaveListing = async (req: any, res: Response) => {
     const userId = req.user.id;
 
     try {
-        await (prisma as any).savedItem.delete({
+        await prisma.savedItem.delete({
             where: {
                 userId_listingId: {
                     userId,
                     listingId,
                 },
+            },
+        });
+
+        // Decrement ListingAnalytics saves
+        await prisma.listingAnalytics.update({
+            where: { listingId },
+            data: {
+                saves: { decrement: 1 },
             },
         });
 
@@ -61,7 +81,7 @@ export const getWatchlist = async (req: any, res: Response) => {
     const userId = req.user.id;
 
     try {
-        const items = await (prisma as any).savedItem.findMany({
+        const items = await prisma.savedItem.findMany({
             where: { userId },
             include: {
                 listing: {

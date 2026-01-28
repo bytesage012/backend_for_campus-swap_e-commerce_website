@@ -65,8 +65,7 @@ describe('Admin Verification Management', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('GET /api/admin/verifications/pending', () => {

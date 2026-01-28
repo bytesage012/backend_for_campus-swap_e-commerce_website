@@ -26,10 +26,11 @@ export const getUsers = async (req: any, res: Response) => {
 
         const where: any = {};
 
-        if (search) {
+        const query = search || req.query.q;
+        if (query) {
             where.OR = [
-                { email: { contains: String(search), mode: 'insensitive' } },
-                { fullName: { contains: String(search), mode: 'insensitive' } },
+                { email: { contains: String(query), mode: 'insensitive' } },
+                { fullName: { contains: String(query), mode: 'insensitive' } },
             ];
         }
 
@@ -45,7 +46,23 @@ export const getUsers = async (req: any, res: Response) => {
                 skip,
                 take,
                 orderBy: { [String(sortBy)]: String(sortOrder) },
-                include: {
+                select: {
+                    id: true,
+                    email: true,
+                    fullName: true,
+                    faculty: true,
+                    department: true,
+                    verificationStatus: true,
+                    isVerified: true,
+                    badge: true,
+                    avatarUrl: true,
+                    isAdmin: true,
+                    role: true,
+                    createdAt: true,
+                    updatedAt: true,
+                    trustScore: true,
+                    riskScore: true,
+                    lastLoginAt: true,
                     _count: {
                         select: {
                             listings: true,

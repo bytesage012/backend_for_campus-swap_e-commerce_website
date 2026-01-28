@@ -99,8 +99,6 @@ describe('WebSocket Integration Tests', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
         httpServer.close();
     });
 

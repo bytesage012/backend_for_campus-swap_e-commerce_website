@@ -37,7 +37,7 @@ router.get('/search', searchListings);
 router.post('/', protect, upload.array('images', 5), createListing);
 router.get('/', getListings);
 router.get('/:id', getListingById);
-router.patch('/:id', protect, updateListing);
+router.patch('/:id', protect, upload.array('images', 10), updateListing);
 router.delete('/:id', protect, deleteListing);
 
 // Marketplace Interaction Routes

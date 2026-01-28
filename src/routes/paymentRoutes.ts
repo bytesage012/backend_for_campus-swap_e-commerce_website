@@ -1,5 +1,5 @@
 import express from 'express';
-import { initializeDeposit, paystackWebhook } from '../controllers/paymentController.js';
+import { initializeDeposit, paystackWebhook, verifyTransaction } from '../controllers/paymentController.js';
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();
@@ -22,5 +22,6 @@ const protect = (req: any, res: any, next: any) => {
 
 router.post('/deposit', protect, initializeDeposit);
 router.post('/webhook', paystackWebhook);
+router.get('/verify/:reference', protect, verifyTransaction);
 
 export default router;

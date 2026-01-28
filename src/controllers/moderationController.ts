@@ -10,7 +10,11 @@ export const getModerationQueue = async (req: Request, res: Response) => {
         const minScore = parseInt(req.query.minScore as string) || 0;
 
         const result = await ModerationService.getQueue(page, limit, minScore);
-        res.json(result);
+        res.json({
+            items: result.items,
+            total: result.total,
+            pages: result.pages
+        });
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch queue' });
     }

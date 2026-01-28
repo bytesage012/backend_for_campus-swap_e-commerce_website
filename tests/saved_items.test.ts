@@ -76,8 +76,7 @@ describe('Saved Items & Search Endpoints', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('POST /api/listings/:id/save', () => {

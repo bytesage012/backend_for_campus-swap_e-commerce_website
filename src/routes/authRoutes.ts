@@ -76,7 +76,7 @@ export const restrictTo = (...roles: string[]) => {
     };
 };
 
-router.post('/register', register);
+router.post('/register', uploadAvatar.single('avatar'), register);
 router.post('/login', login);
 router.get('/profile', protect, getProfile);
 router.patch('/profile', protect, uploadAvatar.single('avatar'), updateProfile);

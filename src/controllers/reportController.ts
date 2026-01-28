@@ -27,7 +27,12 @@ export const createReport = async (req: any, res: Response) => {
         const report = await prisma.report.create({
             data: {
                 reporterId: userId,
-                ...validatedData,
+                reportedUserId: validatedData.reportedUserId || null,
+                reportedListingId: validatedData.reportedListingId || null,
+                reason: validatedData.reason,
+                description: validatedData.description,
+                evidenceUrls: validatedData.evidenceUrls || [],
+                priority: validatedData.priority || 'MEDIUM',
             },
         });
 

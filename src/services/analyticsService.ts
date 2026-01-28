@@ -17,12 +17,28 @@ export const AnalyticsService = {
             // For now, we write directly to Postgres (Hypertable pattern).
             await prisma.analyticsEvent.create({
                 data: {
-                    userId: data.userId,
-                    sessionId: data.sessionId,
+                    userId: data.userId || null,
+                    sessionId: data.sessionId || null,
                     eventType: data.eventType,
                     metadata: data.metadata || {},
                 },
             });
+
+            // If this is a Listing View event, update the aggregated ListingAnalytics
+            if ((data.eventType === 'VIEW' || data.eventType === 'VIEW_LISTING') && data.metadata?.listingId) {
+                await prisma.listingAnalytics.upsert({
+                    where: { listingId: data.metadata.listingId },
+                    create: {
+                        listingId: data.metadata.listingId,
+                        totalViews: 1,
+                        lastViewedAt: new Date(),
+                    },
+                    update: {
+                        totalViews: { increment: 1 },
+                        lastViewedAt: new Date(),
+                    },
+                });
+            }
         } catch (error) {
             // Analytics should generally be "fire and forget" and not block the main flow
             // But we log errors.

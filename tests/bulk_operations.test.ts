@@ -34,8 +34,7 @@ describe('Bulk Operations API', () => {
         await (prisma as any).bulkOperation.deleteMany({ where: { userId: sellerId } });
         await prisma.listing.deleteMany({ where: { sellerId } });
         await prisma.user.delete({ where: { id: sellerId } });
-        await prisma.$disconnect();
-        await pool.end();
+
         await bulkOperationsQueue.close();
         await worker.close();
         await redisConnection.quit();

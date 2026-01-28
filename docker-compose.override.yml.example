@@ -1,0 +1,24 @@
+# docker-compose.override.yml
+# This file is used for development and overrides docker-compose.yml settings
+# It's automatically used by docker-compose when present in the same directory
+
+version: '3.8'
+
+services:
+  backend:
+    environment:
+      NODE_ENV: development
+      DEBUG: campus-swap:*
+    ports:
+      - "5000:5000"
+      - "9229:9229"  # Node debugger
+    command: npm run dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
+
+  postgres:
+    # Expose port 5432 for direct database access during development
+    ports:
+      - "5432:5432"

@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import dotenv from 'dotenv';
 import prisma, { pool } from './prisma.js';
 import authRoutes from './routes/authRoutes.js';
@@ -19,6 +20,8 @@ import reportRoutes from './routes/reportRoutes.js';
 import moderationRoutes from './routes/moderationRoutes.js';
 import escrowRoutes from './routes/escrowRoutes.js';
 import bulkRoutes from './routes/bulkRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import { createServer } from 'http';
 import { initializeSocket } from './socket.js';
 import swaggerUi from 'swagger-ui-express';
@@ -32,12 +35,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+
 const httpServer = createServer(app);
 const io = initializeSocket(httpServer);
 const PORT = process.env.PORT || 3001;
 
 // Load and configure Swagger UI
-const specPath = path.join(__dirname, '../ecommerce-backend-spec.json');
+const specPath = path.join(__dirname, '../swagger-output.json');
 const swaggerDocument = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 
 // Dynamically update server URL based on environment
@@ -53,7 +58,39 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('UNHANDLED REJECTION:', reason);
 });
 
-app.use(cors());
+app.use(morgan('dev'));
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+
+    // List of allowed origins
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:5175',
+    ].filter(Boolean);
+
+    // Check if origin matches allowed origins exactly
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Allow any origin with ports 5173, 5174, or 5175 (for network access)
+    const allowedPorts = ['5173', '5174', '5175', '3002'];
+    const originUrl = new URL(origin);
+    if (allowedPorts.includes(originUrl.port)) {
+      return callback(null, true);
+    }
+
+    // Reject other origins
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
@@ -72,6 +109,8 @@ app.use('/api/reports', reportRoutes);
 app.use('/api/admin/listings', moderationRoutes);
 app.use('/api/escrow', escrowRoutes);
 app.use('/api/bulk', bulkRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 app.use('/api', reviewRoutes); // Review routes handle their own prefix patterns in tests
 
 app.get('/api/health', async (req, res) => {
@@ -95,9 +134,19 @@ app.get('/api/health', async (req, res) => {
 
 
 
+
+
+
+// Platform fee configuration
+const PLATFORM_FEE_ENABLED = process.env.PLATFORM_FEE_ENABLED !== 'false';
+const PLATFORM_FEE_PERCENTAGE = Number(process.env.PLATFORM_FEE_PERCENTAGE || 0.05);
+
 if (process.env.NODE_ENV !== 'test') {
   httpServer.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`\n✅ Server is running on http://localhost:${PORT}`);
+    console.log(`\n💰 Platform Fee Configuration:`);
+    console.log(`   Status: ${PLATFORM_FEE_ENABLED ? '✅ ENABLED' : '❌ DISABLED'}`);
+    console.log(`   Rate: ${PLATFORM_FEE_PERCENTAGE * 100}%\n`);
   });
 }
 

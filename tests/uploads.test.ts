@@ -59,8 +59,7 @@ describe('Upload Endpoints Verification', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('Marketplace Image Upload', () => {

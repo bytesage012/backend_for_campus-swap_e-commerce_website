@@ -275,3 +275,76 @@ export const getDashboard = async (req: any, res: Response) => {
         return handleControllerError(res, error, 'AdminDashboard');
     }
 };
+
+export const getAuditLogs = async (req: any, res: Response) => {
+    try {
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+        const search = req.query.search as string;
+        const type = req.query.type as string; // 'SECURITY', 'TRANSACTION', etc. (not in DB yet, but filter by action)
+
+        const skip = (page - 1) * limit;
+
+        const where: any = {};
+
+        if (search) {
+            where.OR = [
+                { action: { contains: search, mode: 'insensitive' } },
+                { actor: { fullName: { contains: search, mode: 'insensitive' } } },
+                { actor: { email: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
+
+        // Mapping basic filter types to action keywords since we don't have a 'type' column yet
+        if (type && type !== 'ALL') {
+            if (type === 'SECURITY') {
+                where.action = { in: ['LOGIN_ATTEMPT', 'BAN_USER', 'UNBAN_USER', 'PASSWORD_RESET'] };
+            } else if (type === 'TRANSACTION') {
+                where.action = { contains: 'PAY' }; // Broad catch for now
+            } else if (type === 'USER') {
+                where.action = { in: ['UPDATE_PROFILE', 'VERIFICATION_REVIEW'] };
+            }
+        }
+
+        const [total, logs] = await Promise.all([
+            prisma.adminLog.count({ where }),
+            prisma.adminLog.findMany({
+                where,
+                skip,
+                take: limit,
+                orderBy: { createdAt: 'desc' },
+                include: {
+                    actor: { select: { fullName: true, email: true } },
+                    target: { select: { fullName: true, email: true } },
+                }
+            })
+        ]);
+
+        const mappedLogs = logs.map(log => {
+            // Derive severity
+            let severity = 'LOW';
+            const action = log.action.toUpperCase();
+            if (action.includes('BAN') || action.includes('DELETE') || action.includes('FAIL')) severity = 'HIGH';
+            else if (action.includes('UPDATE') || action.includes('EDIT')) severity = 'MEDIUM';
+
+            return {
+                id: log.id,
+                actor: log.actor.fullName || log.actor.email,
+                action: log.action,
+                target: log.target ? (log.target.fullName || log.target.email) : 'System',
+                severity,
+                timestamp: log.createdAt.toISOString(),
+                details: log.details ? JSON.stringify(log.details) : 'Action performed via Admin Panel'
+            };
+        });
+
+        res.json({
+            logs: mappedLogs,
+            total,
+            pages: Math.ceil(total / limit)
+        });
+    } catch (error) {
+        logger.error('Get Audit Logs Error', error);
+        return handleControllerError(res, error, 'getAuditLogs');
+    }
+};

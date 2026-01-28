@@ -26,10 +26,20 @@ export const initializeSocket = (httpServer: HttpServer) => {
         }
     });
 
+    const onlineUsers = new Map<String, Set<String>>();
+
     io.on('connection', (socket) => {
         const user = (socket as any).user;
 
         if (user && user.id) {
+            // Presence Logic
+            if (!onlineUsers.has(user.id)) {
+                onlineUsers.set(user.id, new Set());
+                // First socket for this user -> Broadcast Online
+                socket.broadcast.emit('user_online', user.id);
+            }
+            onlineUsers.get(user.id)?.add(socket.id);
+
             socket.join(`user_${user.id}`);
             console.log(`User connected: ${socket.id} (User ID: ${user.id})`);
 
@@ -38,6 +48,9 @@ export const initializeSocket = (httpServer: HttpServer) => {
                 socket.join('admin_room');
                 console.log(`Admin joined admin_room: ${user.id}`);
             }
+
+            // Send current online users to this socket
+            socket.emit('online_users', Array.from(onlineUsers.keys()));
         }
 
         socket.on('join_conversation', (conversationId: string) => {
@@ -48,8 +61,34 @@ export const initializeSocket = (httpServer: HttpServer) => {
             socket.leave(`conversation_${conversationId}`);
         });
 
+        // Typing indicators
+        socket.on('typing_start', (conversationId) => {
+            socket.to(`conversation_${conversationId}`).emit('typing_start', {
+                conversationId,
+                userId: user.id,
+                name: user.fullName
+            });
+        });
+
+        socket.on('typing_end', (conversationId) => {
+            socket.to(`conversation_${conversationId}`).emit('typing_end', {
+                conversationId,
+                userId: user.id
+            });
+        });
+
         socket.on('disconnect', () => {
             console.log('User disconnected:', socket.id);
+            if (user && user.id) {
+                const userSockets = onlineUsers.get(user.id);
+                if (userSockets) {
+                    userSockets.delete(socket.id);
+                    if (userSockets.size === 0) {
+                        onlineUsers.delete(user.id);
+                        io.emit('user_offline', user.id);
+                    }
+                }
+            }
         });
     });
 

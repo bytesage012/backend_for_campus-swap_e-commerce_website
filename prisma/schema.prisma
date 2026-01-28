@@ -33,6 +33,7 @@ model User {
   reviewsGiven    Review[] @relation("GivenReviews")
   verifications   Verification[]
   conversationsAsBuyer Conversation[] @relation("BuyerConversations")
+  conversationsAsRecipient Conversation[] @relation("RecipientConversations")
   messages        Message[]
   savedItems      SavedItem[]
   notifications   Notification[]
@@ -66,6 +67,7 @@ model User {
   marketOffers     MarketOffer[]
   npsSurveys       NPSSurvey[]
   bulkOperations   BulkOperation[]
+  disputes         Dispute[]
 }
 
 model Wallet {
@@ -101,11 +103,18 @@ model Transaction {
   escrowReleaseDate DateTime?
   disputeLikelihood Float           @default(0.0)
   metadata          Json?           // For flexible risk flags/details
+  
+  // Delivery Tracking
+  deliveredAt       DateTime?
+  deliveredBy       String?
+  receivedAt        DateTime?
+  receivedBy        String?
 
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
 
   smartContract SmartContract?
+  dispute       Dispute?
 }
 
 enum TransactionType {
@@ -114,6 +123,7 @@ enum TransactionType {
   SALE
   WITHDRAWAL
   ESCROW_HOLD
+  ESCROW_RELEASE
 }
 
 model Listing {
@@ -123,11 +133,15 @@ model Listing {
   title       String
   description String
   price       Decimal       @db.Decimal(12, 2)
+  quantity    Int           @default(1)
+  soldCount   Int           @default(0)
   category    String
   condition   ItemCondition
   status      ListingStatus @default(ACTIVE)
   faculty     String?
   department  String?
+  location    String?
+  isNegotiable Boolean       @default(false)
   images      ListingImage[]
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
@@ -140,11 +154,14 @@ model Listing {
   transactions    Transaction[]
   smartContracts  SmartContract[]
   marketOffers    MarketOffer[]
+  messages        Message[]       @relation("MessageListings")
 }
 
 enum EscrowStatus {
   PENDING
   HELD
+  DELIVERED
+  RECEIVED
   RELEASE_SCHEDULED
   RELEASED
   DISPUTED
@@ -202,7 +219,6 @@ enum VerificationLevel {
   VERIFIED
   PREMIUM_VERIFIED
 }
-
 enum VerificationStatus {
   NOT_VERIFIED
   PENDING
@@ -210,17 +226,36 @@ enum VerificationStatus {
   REJECTED
 }
 
-model Conversation {
-  id        String    @id @default(uuid())
-  listingId String
-  listing   Listing   @relation(fields: [listingId], references: [id])
-  buyerId   String
-  buyer     User      @relation("BuyerConversations", fields: [buyerId], references: [id])
-  messages  Message[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+enum ConversationContext {
+  LISTING
+  FORUM
+  DIRECT
+}
 
-  @@unique([listingId, buyerId])
+model Conversation {
+  id          String   @id @default(uuid())
+  contextType ConversationContext @default(LISTING)
+  
+  // Listing Context
+  listingId   String?
+  listing     Listing? @relation(fields: [listingId], references: [id])
+  
+  // Forum Context
+  topicId     String?
+  isPublic    Boolean  @default(false)
+  
+  buyerId     String?
+  buyer       User?    @relation("BuyerConversations", fields: [buyerId], references: [id])
+  
+  // Direct Context / Support
+  recipientId String?
+  recipient   User?    @relation("RecipientConversations", fields: [recipientId], references: [id])
+  
+  metadata    Json?    // For price_at_inquiry, topic_title, etc.
+  
+  messages    Message[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Message {
@@ -231,6 +266,16 @@ model Message {
   sender         User         @relation(fields: [senderId], references: [id])
   content        String
   isRead         Boolean      @default(false)
+  
+  // Listing Context (for messages about specific listings)
+  listingId      String?
+  listing        Listing?     @relation("MessageListings", fields: [listingId], references: [id])
+  
+  // Threaded Replies
+  parentId       String?
+  parent         Message?     @relation("Thread", fields: [parentId], references: [id])
+  replies        Message[]    @relation("Thread")
+  
   createdAt      DateTime     @default(now())
 }
 
@@ -262,6 +307,7 @@ enum NotificationType {
   TRANSACTION
   SYSTEM
   PRICE_ALERT
+  DISPUTE
 }
 
 model Preference {
@@ -542,4 +588,30 @@ model BulkOperation {
   errors    Json?    // Stores row-level errors
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Dispute {
+  id              String        @id @default(uuid())
+  transactionId   String        @unique
+  transaction     Transaction   @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  initiatorId     String
+  initiator       User          @relation(fields: [initiatorId], references: [id])
+  reason          String        // Why the dispute was opened
+  evidence        String?       // Supporting evidence/description
+  status          DisputeStatus @default(OPEN)
+  resolution      String?       // How the dispute was resolved
+  resolutionNotes String?       // Notes from admin resolution
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([transactionId])
+  @@index([initiatorId])
+  @@index([status])
+}
+
+enum DisputeStatus {
+  OPEN
+  UNDER_REVIEW
+  RESOLVED
+  REFUNDED
 }

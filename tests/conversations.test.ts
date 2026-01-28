@@ -73,8 +73,7 @@ describe('Conversations & Messaging Endpoints', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('POST /api/conversations', () => {

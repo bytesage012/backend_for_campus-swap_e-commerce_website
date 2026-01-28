@@ -1,0 +1,337 @@
+[
+  {
+    "method": "POST",
+    "path": "https://api.paystack.co/transaction/initialize",
+    "file": "src/controllers/paymentController.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/api/health",
+    "file": "src/index.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/dashboard",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/users",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/users/export",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/users/bulk-action",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/verifications/pending",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/verifications",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/verifications/:id/approve",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/verifications/:id/reject",
+    "file": "src/routes/adminRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/seller/:userId",
+    "file": "src/routes/analyticsRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/platform/growth",
+    "file": "src/routes/analyticsRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/platform/events",
+    "file": "src/routes/analyticsRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/listings/:id",
+    "file": "src/routes/analyticsRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/seller",
+    "file": "src/routes/analyticsRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/register",
+    "file": "src/routes/authRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/login",
+    "file": "src/routes/authRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/profile",
+    "file": "src/routes/authRoutes.ts"
+  },
+  {
+    "method": "PATCH",
+    "path": "/profile",
+    "file": "src/routes/authRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/listings",
+    "file": "src/routes/bulkRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/listings/renew",
+    "file": "src/routes/bulkRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/listings/price-optimize",
+    "file": "src/routes/bulkRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/messages",
+    "file": "src/routes/bulkRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/export",
+    "file": "src/routes/bulkRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/status/:id",
+    "file": "src/routes/bulkRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/",
+    "file": "src/routes/conversationRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/",
+    "file": "src/routes/conversationRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/messages",
+    "file": "src/routes/conversationRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/:id/messages",
+    "file": "src/routes/conversationRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/smart-contract",
+    "file": "src/routes/escrowRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/smart-contract/:id/sign",
+    "file": "src/routes/escrowRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/smart-contract/:id",
+    "file": "src/routes/escrowRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/smart-contract/:id/release",
+    "file": "src/routes/escrowRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/search",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/:id",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "PATCH",
+    "path": "/:id",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "DELETE",
+    "path": "/:id",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/purchase",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "PATCH",
+    "path": "/:id/status",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/reserve",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/save",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "DELETE",
+    "path": "/:id/save",
+    "file": "src/routes/listingRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/queue",
+    "file": "src/routes/moderationRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/review",
+    "file": "src/routes/moderationRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/removed",
+    "file": "src/routes/moderationRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/read",
+    "file": "src/routes/notificationRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/read-all",
+    "file": "src/routes/notificationRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/deposit",
+    "file": "src/routes/paymentRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/webhook",
+    "file": "src/routes/paymentRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/theme",
+    "file": "src/routes/preferenceRoutes.ts"
+  },
+  {
+    "method": "PATCH",
+    "path": "/theme",
+    "file": "src/routes/preferenceRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/faculties/colors",
+    "file": "src/routes/preferenceRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/user/:id",
+    "file": "src/routes/reportRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/listing/:id",
+    "file": "src/routes/reportRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/transactions/:id/review",
+    "file": "src/routes/reviewRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/users/:id/reviews",
+    "file": "src/routes/reviewRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/users/:id/rating-summary",
+    "file": "src/routes/reviewRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/confirm-receipt",
+    "file": "src/routes/transactionRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/:id/dispute",
+    "file": "src/routes/transactionRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/upload-id",
+    "file": "src/routes/verificationRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/status",
+    "file": "src/routes/verificationRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/balance",
+    "file": "src/routes/walletRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/transactions",
+    "file": "src/routes/walletRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/pin/setup",
+    "file": "src/routes/walletRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/pin/verify",
+    "file": "src/routes/walletRoutes.ts"
+  },
+  {
+    "method": "POST",
+    "path": "/withdraw",
+    "file": "src/routes/walletRoutes.ts"
+  },
+  {
+    "method": "GET",
+    "path": "/withdrawals",
+    "file": "src/routes/walletRoutes.ts"
+  }
+]

@@ -53,8 +53,7 @@ describe('Identity Verification Endpoints', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('POST /api/verification/upload-id', () => {

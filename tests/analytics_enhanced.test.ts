@@ -118,8 +118,7 @@ describe('Enhanced Seller Analytics', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     it('should return enhanced analytics with all 5 pillars', async () => {

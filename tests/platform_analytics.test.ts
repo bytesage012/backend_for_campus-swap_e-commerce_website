@@ -40,8 +40,7 @@ describe('Platform Growth Analytics', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('GET /api/analytics/platform/growth', () => {

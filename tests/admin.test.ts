@@ -214,8 +214,6 @@ describe('Admin Dashboard Endpoint', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
         await bulkOperationsQueue.close();
         await worker.close();
         await redisConnection.quit();

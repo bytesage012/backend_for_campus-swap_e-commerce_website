@@ -41,7 +41,7 @@ export const getPendingVerifications = async (req: any, res: Response) => {
         });
 
         res.json({
-            verifications,
+            data: verifications,
             total: verifications.length
         });
     } catch (error) {
@@ -83,7 +83,7 @@ export const getAllVerifications = async (req: any, res: Response) => {
         ]);
 
         res.json({
-            verifications,
+            data: verifications,
             pagination: {
                 total,
                 page: parseInt(page as string),

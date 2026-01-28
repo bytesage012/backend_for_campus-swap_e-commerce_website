@@ -6,8 +6,11 @@ export const createListingSchema = z.object({
     price: z.string().regex(/^\d+(\.\d{1,2})?$/).transform(val => parseFloat(val)),
     category: z.string().min(2),
     condition: z.enum(['NEW', 'USED', 'FAIR']),
+    quantity: z.coerce.number().int().positive().optional().default(1),
     faculty: z.string().optional(),
     department: z.string().optional(),
+    location: z.string().optional(),
+    isNegotiable: z.preprocess((val) => val === 'true' || val === true, z.boolean()).optional().default(false),
 });
 
 export const updateListingSchema = z.object({
@@ -16,7 +19,10 @@ export const updateListingSchema = z.object({
     price: z.number().positive().optional(),
     category: z.string().optional(),
     condition: z.enum(['NEW', 'USED', 'FAIR']).optional(),
+    quantity: z.number().int().positive().optional(),
     status: z.enum(['DRAFT', 'ACTIVE', 'RESERVED', 'SOLD', 'ARCHIVED']).optional(),
+    location: z.string().optional(),
+    isNegotiable: z.boolean().optional(),
 });
 
 export const purchaseSchema = z.object({

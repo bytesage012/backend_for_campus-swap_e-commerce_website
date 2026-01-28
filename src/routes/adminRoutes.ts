@@ -33,5 +33,9 @@ router.get('/verifications', getAllVerifications);
 router.post('/verifications/:id/approve', approveVerification);
 router.post('/verifications/:id/reject', rejectVerification);
 
+// System Logs
+import { getAuditLogs } from '../controllers/adminController.js';
+router.get('/audit-logs', getAuditLogs);
+
 export default router;
 

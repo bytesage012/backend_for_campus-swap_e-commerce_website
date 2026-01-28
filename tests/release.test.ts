@@ -72,8 +72,7 @@ describe('Smart Contract Release', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     it('should allow buyer to release funds', async () => {

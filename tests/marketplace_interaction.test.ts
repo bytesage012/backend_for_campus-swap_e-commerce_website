@@ -78,8 +78,7 @@ describe('Marketplace Interaction Endpoints', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('POST /api/listings/:id/purchase', () => {

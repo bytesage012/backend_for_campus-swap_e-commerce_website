@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+dist
+coverage
+.env
+.env.local
+.git
+.gitignore
+.DS_Store
+*.md
+.vscode
+.idea
+uploads
+logs
+.prisma
+yarn.lock
+package-lock.json

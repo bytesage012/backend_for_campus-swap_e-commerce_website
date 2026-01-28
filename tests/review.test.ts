@@ -75,8 +75,7 @@ describe('Review & Reputation Endpoints', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('POST /api/transactions/:id/review', () => {

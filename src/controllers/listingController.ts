@@ -18,6 +18,17 @@ const handleControllerError = (res: Response, error: any, context: string) => {
 };
 
 export const createListing = async (req: any, res: Response) => {
+    /*  #swagger.tags = ['Listings']
+        #swagger.description = 'Create a new marketplace listing. Requires multipart/form-data for images.'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Listing details',
+            required: true,
+            schema: { $ref: '#/definitions/CreateListingRequest' }
+        }
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
+
     try {
         const validatedData = createListingSchema.parse(req.body);
         const { title, description, price, category, condition, faculty, department } = validatedData;
@@ -33,8 +44,11 @@ export const createListing = async (req: any, res: Response) => {
                 price: new Prisma.Decimal(price),
                 category,
                 condition,
+                quantity: validatedData.quantity || 1, // Added quantity support
                 faculty: faculty || null,
                 department: department || null,
+                location: validatedData.location || null,
+                isNegotiable: validatedData.isNegotiable || false,
                 sellerId,
                 images: {
                     create: files?.map((file) => ({
@@ -53,7 +67,21 @@ export const createListing = async (req: any, res: Response) => {
 };
 
 export const getListings = async (req: Request, res: Response) => {
-    const { faculty, category, search, sellerId, status } = req.query;
+    /*  #swagger.tags = ['Listings']
+        #swagger.description = 'Retrieve all listings with optional filtering.'
+        #swagger.parameters['faculty'] = { in: 'query', description: 'Filter by faculty' }
+        #swagger.parameters['category'] = { in: 'query', description: 'Filter by category' }
+        #swagger.parameters['condition'] = { in: 'query', description: 'Filter by condition (NEW, USED, FAIR)' }
+        #swagger.parameters['search'] = { in: 'query', description: 'Search title and description' }
+        #swagger.parameters['sellerId'] = { in: 'query', description: 'Filter by seller' }
+        #swagger.parameters['status'] = { in: 'query', description: 'Filter by status (e.g., ACTIVE, SOLD)' }
+        #swagger.responses[200] = {
+            description: 'Successful retrieval',
+            schema: [{ $ref: '#/definitions/Listing' }]
+        }
+    */
+
+    const { faculty, category, condition, search, sellerId, status, sort } = req.query;
 
     try {
         const where: any = {};
@@ -66,8 +94,9 @@ export const getListings = async (req: Request, res: Response) => {
         }
 
         if (sellerId) where.sellerId = sellerId as string;
-        if (faculty) where.faculty = faculty as string;
+        if (faculty && faculty !== 'All') where.faculty = faculty as string;
         if (category) where.category = category as string;
+        if (condition) where.condition = condition as string;
         if (search) {
             where.OR = [
                 { title: { contains: search as string, mode: 'insensitive' } },
@@ -75,10 +104,15 @@ export const getListings = async (req: Request, res: Response) => {
             ];
         }
 
+        let orderBy: any = { createdAt: 'desc' };
+        if (sort === 'price_asc') orderBy = { price: 'asc' };
+        if (sort === 'price_desc') orderBy = { price: 'desc' };
+        if (sort === 'newest') orderBy = { createdAt: 'desc' };
+
         const listings = await prisma.listing.findMany({
             where,
-            include: { images: true, seller: { select: { fullName: true, faculty: true } } },
-            orderBy: { createdAt: 'desc' },
+            include: { images: true, seller: { select: { fullName: true, faculty: true, avatarUrl: true } } },
+            orderBy,
         });
         res.json(listings);
     } catch (error) {
@@ -87,11 +121,20 @@ export const getListings = async (req: Request, res: Response) => {
 };
 
 export const getListingById = async (req: Request, res: Response) => {
+    /*  #swagger.tags = ['Listings']
+        #swagger.description = 'Retrieve full details for a specific listing.'
+        #swagger.parameters['id'] = { in: 'path', description: 'Listing ID' }
+        #swagger.responses[200] = {
+            description: 'Listing details',
+            schema: { $ref: '#/definitions/Listing' }
+        }
+    */
+
     const { id } = req.params;
     try {
         const listing = await prisma.listing.findUnique({
             where: { id: id as string },
-            include: { images: true, seller: { select: { fullName: true, faculty: true } } },
+            include: { images: true, seller: { select: { fullName: true, faculty: true, verificationStatus: true, avatarUrl: true } } },
         });
         if (!listing) return res.status(404).json({ message: 'Listing not found' });
         res.json(listing);
@@ -101,9 +144,31 @@ export const getListingById = async (req: Request, res: Response) => {
 };
 
 export const updateListing = async (req: any, res: Response) => {
+    /*  #swagger.tags = ['Listings']
+        #swagger.description = 'Update an existing listing. Only the seller can update.'
+        #swagger.parameters['id'] = { in: 'path', description: 'Listing ID' }
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Fields to update',
+            schema: { $ref: '#/definitions/Listing' }
+        }
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
+
     const { id } = req.params;
     try {
-        const validatedData = updateListingSchema.parse(req.body);
+        // Parse FormData fields (they come as strings)
+        const bodyData: any = { ...req.body };
+        
+        // Convert string booleans and numbers
+        if (bodyData.negotiable !== undefined) {
+            bodyData.isNegotiable = bodyData.negotiable === 'true' || bodyData.negotiable === true;
+            delete bodyData.negotiable;
+        }
+        if (bodyData.price) bodyData.price = parseFloat(bodyData.price);
+        if (bodyData.quantity) bodyData.quantity = parseInt(bodyData.quantity);
+        
+        const validatedData = updateListingSchema.parse(bodyData);
         const listing = await prisma.listing.findUnique({ where: { id: id as string } });
 
         if (!listing) return res.status(404).json({ message: 'Listing not found' });
@@ -117,9 +182,40 @@ export const updateListing = async (req: any, res: Response) => {
         const newPrice = validatedData.price ? new Prisma.Decimal(validatedData.price) : oldPrice;
         if (validatedData.price) updateData.price = newPrice;
 
+        // Handle image updates
+        if (req.files && req.files.length > 0) {
+            console.log('[Listings] -> updateListing: Processing', req.files.length, 'new images');
+            
+            // Delete images marked for removal
+            const removeImageIds = req.body.removeImageIds 
+                ? JSON.parse(req.body.removeImageIds) 
+                : [];
+            
+            if (removeImageIds.length > 0) {
+                await prisma.listingImage.deleteMany({
+                    where: { id: { in: removeImageIds } }
+                });
+                console.log('[Listings] -> updateListing: Deleted', removeImageIds.length, 'images');
+            }
+
+            // Add new images
+            const newImages = req.files.map((file: any) => ({
+                url: `/uploads/listings/${file.filename}`,
+                listingId: id as string,
+            }));
+
+            await prisma.listingImage.createMany({
+                data: newImages,
+            });
+            console.log('[Listings] -> updateListing: Added', newImages.length, 'new images');
+        }
+
         const updated = await prisma.listing.update({
             where: { id: id as string },
-            data: updateData,
+            data: {
+                ...updateData,
+                price: newPrice
+            },
             include: { images: true },
         });
 
@@ -172,6 +268,20 @@ export const deleteListing = async (req: any, res: Response) => {
 };
 
 export const purchaseListing = async (req: any, res: Response) => {
+    /*  #swagger.tags = ['Transactions']
+        #swagger.description = 'Initiate a purchase for a listing.'
+        #swagger.parameters['id'] = { in: 'path', description: 'Listing ID' }
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Purchase options',
+            schema: {
+                paymentMethod: 'WALLET',
+                useEscrow: true
+            }
+        }
+        #swagger.security = [{ "bearerAuth": [] }]
+    */
+
     const { id } = req.params;
     const buyerId = req.user.id;
 

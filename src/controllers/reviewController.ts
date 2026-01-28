@@ -37,6 +37,17 @@ export const submitReview = async (req: any, res: Response) => {
             },
         });
 
+        // Trigger notification for the user who received the review
+        await prisma.notification.create({
+            data: {
+                userId: targetId,
+                title: 'New Review Received',
+                body: `You received a ${rating}-star review from ${req.user.fullName || 'a student'}.`,
+                type: 'SYSTEM', // Or add a REVIEW type
+                data: { relatedId: review.id }
+            }
+        });
+
         logger.info('Review Submitted', { reviewerId, targetId, rating });
         res.status(201).json({
             message: 'Review submitted successfully',
@@ -76,7 +87,7 @@ export const getRatingSummary = async (req: Request, res: Response) => {
     const { id: userId } = req.params;
     try {
         const aggregations = await prisma.review.aggregate({
-            where: { targetId: userId },
+            where: { targetId: userId as string },
             _avg: { rating: true },
             _count: { _all: true },
         });

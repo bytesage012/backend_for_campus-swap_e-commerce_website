@@ -144,8 +144,6 @@ describe('Escrow Dashboard Endpoints', () => {
     }, 30000);
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
         closeSocket();
     }, 30000);
 

@@ -18,12 +18,12 @@ export const getNotifications = async (req: any, res: Response) => {
             where.type = type as any;
         }
 
-        const notifications = await (prisma as any).notification.findMany({
+        const notifications = await prisma.notification.findMany({
             where,
             orderBy: { createdAt: 'desc' },
         });
 
-        const unreadCount = await (prisma as any).notification.count({
+        const unreadCount = await prisma.notification.count({
             where: { userId, isRead: false },
         });
 
@@ -33,19 +33,37 @@ export const getNotifications = async (req: any, res: Response) => {
     }
 };
 
-export const markRead = async (req: any, res: Response) => {
+export const getNotificationById = async (req: any, res: Response) => {
     const { id } = req.params;
     const userId = req.user.id;
 
     try {
-        const notification = await (prisma as any).notification.findUnique({
+        const notification = await prisma.notification.findUnique({
             where: { id },
         });
 
         if (!notification) return res.status(404).json({ message: 'Notification not found' });
         if (notification.userId !== userId) return res.status(403).json({ message: 'Unauthorized' });
 
-        await (prisma as any).notification.update({
+        res.json(notification);
+    } catch (error) {
+        return handleControllerError(res, error, 'GetNotificationById');
+    }
+};
+
+export const markRead = async (req: any, res: Response) => {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    try {
+        const notification = await prisma.notification.findUnique({
+            where: { id },
+        });
+
+        if (!notification) return res.status(404).json({ message: 'Notification not found' });
+        if (notification.userId !== userId) return res.status(403).json({ message: 'Unauthorized' });
+
+        await prisma.notification.update({
             where: { id },
             data: { isRead: true },
         });
@@ -60,7 +78,7 @@ export const markAllRead = async (req: any, res: Response) => {
     const userId = req.user.id;
 
     try {
-        await (prisma as any).notification.updateMany({
+        await prisma.notification.updateMany({
             where: { userId, isRead: false },
             data: { isRead: true },
         });

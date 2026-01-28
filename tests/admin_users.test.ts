@@ -75,8 +75,7 @@ describe('Admin User Management Endpoints', () => {
     });
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     describe('GET /api/admin/users', () => {

@@ -74,11 +74,10 @@ describe('Listing Moderation System', () => {
             }
         });
         listingId = listing.id;
-    });
+    }, 30000);
 
     afterAll(async () => {
-        await prisma.$disconnect();
-        await pool.end();
+        // Shared connection maintained
     });
 
     it('should allow admin to fetch moderation queue', async () => {

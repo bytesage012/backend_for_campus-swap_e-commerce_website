@@ -12,6 +12,7 @@ export const createReportSchema = z.object({
     ]),
     description: z.string().min(10).max(1000),
     evidenceUrls: z.array(z.string().url()).optional(),
+    priority: z.enum(['LOW', 'MEDIUM', 'HIGH', 'URGENT']).optional(),
 }).refine(data => data.reportedUserId || data.reportedListingId, {
     message: "Either reportedUserId or reportedListingId must be provided",
     path: ["reportedUserId", "reportedListingId"]
