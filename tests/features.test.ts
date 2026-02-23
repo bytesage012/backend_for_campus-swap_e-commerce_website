@@ -7,7 +7,7 @@ import { EscrowStatus } from '@prisma/client';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 describe('Smart Contracts & Seller Analytics', () => {
     let sellerToken: string;

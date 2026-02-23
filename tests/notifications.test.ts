@@ -13,7 +13,7 @@ describe('Notification Endpoints', () => {
     let token: string;
     let userId: string;
     let notificationId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up

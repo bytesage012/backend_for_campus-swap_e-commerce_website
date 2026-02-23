@@ -12,7 +12,7 @@ describe('Admin Verification Management', () => {
     let adminId: string;
     let userId: string;
     let verificationId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up

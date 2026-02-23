@@ -12,7 +12,7 @@ export const initializeSocket = (httpServer: HttpServer) => {
         }
     });
 
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     io.use((socket, next) => {
         const token = socket.handshake.auth.token;

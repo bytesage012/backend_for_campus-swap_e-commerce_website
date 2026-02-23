@@ -11,7 +11,7 @@ dotenv.config();
 describe('Identity Verification Endpoints', () => {
     let token: string;
     let userId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         await (prisma as any).adminLog.deleteMany();

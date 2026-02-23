@@ -12,7 +12,7 @@ describe('Marketplace Interaction Endpoints', () => {
     let sellerId: string;
     let buyerId: string;
     let listingId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up

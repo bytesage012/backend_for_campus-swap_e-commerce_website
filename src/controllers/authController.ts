@@ -7,7 +7,7 @@ import { ZodError } from 'zod';
 import logger from '../utils/logger.js';
 import { getUserProfile, getUserProfileWithTransactions, mapUserProfileResponse } from '../services/userProfileService.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 export const handleControllerError = (res: Response, error: any, context: string) => {
     if (error instanceof ZodError) {

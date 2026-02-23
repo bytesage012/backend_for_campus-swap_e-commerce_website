@@ -9,7 +9,7 @@ dotenv.config();
 describe('Marketplace Endpoints', () => {
     let token: string;
     let userId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     const testUser = {
         email: 'marketplace-test@unn.edu.ng',

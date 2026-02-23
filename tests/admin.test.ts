@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import { bulkOperationsQueue, worker, redisConnection } from '../src/services/queueService.js';
 import { closeSocket } from '../src/socket.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 describe('Admin Dashboard Endpoint', () => {
     jest.setTimeout(30000);

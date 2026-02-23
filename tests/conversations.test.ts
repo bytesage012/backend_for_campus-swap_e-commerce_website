@@ -13,7 +13,7 @@ describe('Conversations & Messaging Endpoints', () => {
     let buyerId: string;
     let listingId: string;
     let conversationId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up everything in the right order

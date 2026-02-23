@@ -10,7 +10,7 @@ dotenv.config();
 describe('Wallet & Payment Endpoints', () => {
     let token: string;
     let userId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up to ensure fresh start
@@ -113,7 +113,7 @@ describe('Wallet & Payment Endpoints', () => {
                 }
             };
 
-            const secret = process.env.PAYSTACK_SECRET_KEY || '';
+            const secret = process.env['PAYSTACK_SECRET_KEY'] || '';
             const hash = crypto
                 .createHmac('sha512', secret)
                 .update(JSON.stringify(payload))

@@ -3,7 +3,7 @@ import app from '../src/index.js';
 import prisma, { pool } from '../src/prisma.js';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 describe('Admin User Management Endpoints', () => {
     let adminToken: string;

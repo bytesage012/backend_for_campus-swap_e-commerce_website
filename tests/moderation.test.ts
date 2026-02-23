@@ -10,7 +10,7 @@ describe('Listing Moderation System', () => {
     let sellerId: string;
     let listingId: string;
 
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Cleanup

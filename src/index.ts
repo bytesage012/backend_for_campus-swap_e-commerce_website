@@ -39,14 +39,14 @@ const app = express();
 
 const httpServer = createServer(app);
 const io = initializeSocket(httpServer);
-const PORT = process.env.PORT || 3001;
+const PORT = process.env['PORT'] || 3001;
 
 // Load and configure Swagger UI
 const specPath = path.join(__dirname, '../swagger-output.json');
 const swaggerDocument = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 
 // Dynamically update server URL based on environment
-const serverUrl = process.env.SERVER_URL || `http://localhost:${PORT}/api`;
+const serverUrl = process.env['SERVER_URL'] || `http://localhost:${PORT}/api`;
 swaggerDocument.servers = [{ url: serverUrl, description: 'Current Environment' }];
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -66,7 +66,7 @@ app.use(cors({
 
     // List of allowed origins
     const allowedOrigins = [
-      process.env.FRONTEND_URL,
+      process.env['FRONTEND_URL'],
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:5175',
@@ -138,10 +138,10 @@ app.get('/api/health', async (req, res) => {
 
 
 // Platform fee configuration
-const PLATFORM_FEE_ENABLED = process.env.PLATFORM_FEE_ENABLED !== 'false';
-const PLATFORM_FEE_PERCENTAGE = Number(process.env.PLATFORM_FEE_PERCENTAGE || 0.05);
+const PLATFORM_FEE_ENABLED = process.env['PLATFORM_FEE_ENABLED'] !== 'false';
+const PLATFORM_FEE_PERCENTAGE = Number(process.env['PLATFORM_FEE_PERCENTAGE'] || 0.05);
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env['NODE_ENV'] !== 'test') {
   httpServer.listen(PORT, () => {
     console.log(`\n✅ Server is running on http://localhost:${PORT}`);
     console.log(`\n💰 Platform Fee Configuration:`);

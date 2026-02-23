@@ -10,7 +10,7 @@ describe('Saved Items & Search Endpoints', () => {
     let token: string;
     let userId: string;
     let listingId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up

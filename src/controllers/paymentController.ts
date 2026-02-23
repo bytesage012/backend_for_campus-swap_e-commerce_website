@@ -4,7 +4,7 @@ import prisma from '../prisma.js';
 import crypto from 'crypto';
 import logger from '../utils/logger.js';
 
-const PAYSTACK_SECRET = process.env.PAYSTACK_SECRET_KEY || '';
+const PAYSTACK_SECRET = process.env['PAYSTACK_SECRET_KEY'] || '';
 
 const handleControllerError = (res: Response, error: any, context: string) => {
     logger.error(`${context} Controller Error`, error);
@@ -26,7 +26,7 @@ export const initializeDeposit = async (req: any, res: Response) => {
         const payload = {
             email: user.email.trim().toLowerCase(),
             amount: Math.round(parseFloat(amount) * 100),
-            callback_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/payment/verify`,
+            callback_url: `${process.env['FRONTEND_URL'] || 'http://localhost:5173'}/payment/verify`,
             metadata: { userId: user.id, type: 'DEPOSIT' },
         };
 

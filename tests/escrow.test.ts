@@ -9,7 +9,7 @@ import { EscrowStatus } from '@prisma/client';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 describe('Escrow Dashboard Endpoints', () => {
     jest.setTimeout(30000);

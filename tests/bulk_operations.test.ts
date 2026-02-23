@@ -26,7 +26,7 @@ describe('Bulk Operations API', () => {
             }
         });
         sellerId = seller.id;
-        sellerToken = jwt.sign({ id: seller.id, role: 'ADMIN' }, process.env.JWT_SECRET as string);
+        sellerToken = jwt.sign({ id: seller.id, role: 'ADMIN' }, process.env['JWT_SECRET'] as string);
     });
 
     afterAll(async () => {

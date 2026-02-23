@@ -2,7 +2,7 @@ import type { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import prisma from '../prisma.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 export const requireAdmin = async (req: any, res: Response, next: NextFunction) => {
     try {

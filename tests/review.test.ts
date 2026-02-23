@@ -11,7 +11,7 @@ describe('Review & Reputation Endpoints', () => {
     let sellerToken: string;
     let sellerId: string;
     let transactionId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         await (prisma as any).adminLog.deleteMany();

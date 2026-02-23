@@ -5,8 +5,8 @@ import logger from '../utils/logger.js';
 import { getIO } from '../socket.js';
 
 // Platform fee configuration (5% default, can be disabled via env)
-const PLATFORM_FEE_ENABLED = process.env.PLATFORM_FEE_ENABLED !== 'false'; // Default: true
-const PLATFORM_FEE_PERCENTAGE = Number(process.env.PLATFORM_FEE_PERCENTAGE || 0.05); // 5% default
+const PLATFORM_FEE_ENABLED = process.env['PLATFORM_FEE_ENABLED'] !== 'false'; // Default: true
+const PLATFORM_FEE_PERCENTAGE = Number(process.env['PLATFORM_FEE_PERCENTAGE'] || 0.05); // 5% default
 
 export const getSellerOrders = async (req: any, res: Response) => {
     const userId = req.user.id;

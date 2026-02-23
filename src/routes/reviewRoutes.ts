@@ -3,7 +3,7 @@ import { submitReview, getUserReviews, getRatingSummary } from '../controllers/r
 import jwt from 'jsonwebtoken';
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 const protect = (req: any, res: any, next: any) => {
     const token = req.headers.authorization?.split(' ')[1];

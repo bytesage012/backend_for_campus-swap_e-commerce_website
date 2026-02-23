@@ -25,7 +25,7 @@ describe('Platform Growth Analytics', () => {
             }
         });
         adminId = admin.id;
-        adminToken = jwt.sign({ id: admin.id, role: 'ADMIN', isAdmin: true }, process.env.JWT_SECRET as string);
+        adminToken = jwt.sign({ id: admin.id, role: 'ADMIN', isAdmin: true }, process.env['JWT_SECRET'] as string);
 
         // User
         const user = await prisma.user.create({
@@ -36,7 +36,7 @@ describe('Platform Growth Analytics', () => {
             }
         });
         userId = user.id;
-        userToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
+        userToken = jwt.sign({ id: user.id }, process.env['JWT_SECRET'] as string);
     });
 
     afterAll(async () => {

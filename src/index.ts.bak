@@ -36,14 +36,14 @@ const app = express();
 
 const httpServer = createServer(app);
 const io = initializeSocket(httpServer);
-const PORT = process.env.PORT || 3001;
+const PORT = process.env['PORT'] || 3001;
 
 // Load and configure Swagger UI
 const specPath = path.join(__dirname, '../swagger-output.json');
 const swaggerDocument = JSON.parse(fs.readFileSync(specPath, 'utf8'));
 
 // Dynamically update server URL based on environment
-const serverUrl = process.env.SERVER_URL || `http://localhost:${PORT}/api`;
+const serverUrl = process.env['SERVER_URL'] || `http://localhost:${PORT}/api`;
 swaggerDocument.servers = [{ url: serverUrl, description: 'Current Environment' }];
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -100,7 +100,7 @@ app.get('/api/health', async (req, res) => {
 
 
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env['NODE_ENV'] !== 'test') {
   httpServer.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });

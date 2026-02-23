@@ -10,7 +10,7 @@ import { getIO } from '../socket.js';
 
 // Redis Connection (Type cast to avoid ESM/CJS signature mismatch)
 const Redis = (IORedis as any).default || IORedis;
-export const redisConnection = new Redis(process.env.REDIS_URL || 'redis://localhost:6379', {
+export const redisConnection = new Redis(process.env['REDIS_URL'] || 'redis://localhost:6379', {
     maxRetriesPerRequest: null,
 });
 

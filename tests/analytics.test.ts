@@ -4,7 +4,7 @@ import prisma, { pool } from '../src/prisma.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 describe('Analytics & Reporting Endpoints', () => {
     let token: string;

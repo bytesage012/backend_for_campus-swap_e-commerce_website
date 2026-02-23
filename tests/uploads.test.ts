@@ -11,7 +11,7 @@ dotenv.config();
 describe('Upload Endpoints Verification', () => {
     let token: string;
     let userId: string;
-    const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+    const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     beforeAll(async () => {
         // Clean up

@@ -7,7 +7,7 @@ import fs from 'fs';
 
 
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
 // Multer config for avatars
 const avatarStorage = multer.diskStorage({

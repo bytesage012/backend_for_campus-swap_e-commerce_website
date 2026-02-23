@@ -7,8 +7,8 @@ import logger from '../utils/logger.js';
 import { z } from 'zod';
 
 // Platform fee configuration (5% default, can be disabled via env)
-const PLATFORM_FEE_ENABLED = process.env.PLATFORM_FEE_ENABLED !== 'false'; // Default: true
-const PLATFORM_FEE_PERCENTAGE = Number(process.env.PLATFORM_FEE_PERCENTAGE || 0.05); // 5% default
+const PLATFORM_FEE_ENABLED = process.env['PLATFORM_FEE_ENABLED'] !== 'false'; // Default: true
+const PLATFORM_FEE_PERCENTAGE = Number(process.env['PLATFORM_FEE_PERCENTAGE'] || 0.05); // 5% default
 
 const initiatePurchaseSchema = z.object({
     listingId: z.string().uuid(),
