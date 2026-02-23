@@ -23,7 +23,7 @@ export const getTheme = async (req: any, res: Response) => {
             });
         }
 
-        res.json({
+        return res.json({
             mode: preference.themeMode,
             facultyThemeEnabled: preference.facultyThemeEnabled,
             accentColor: preference.accentColor,
@@ -51,13 +51,13 @@ export const updateTheme = async (req: any, res: Response) => {
         });
 
         logger.info('Theme Preferences Updated', { userId, themeMode: preference.themeMode });
-        res.json({ message: 'Theme preferences updated' });
+        return res.json({ message: 'Theme preferences updated' });
     } catch (error) {
         return handleControllerError(res, error, 'UpdateTheme');
     }
 };
 
-export const getFacultyColors = async (req: any, res: Response) => {
+export const getFacultyColors = async (_req: any, res: Response) => {
     try {
         // Faculty color palettes - this could be stored in DB or config
         const facultyColors = [
@@ -105,7 +105,7 @@ export const getFacultyColors = async (req: any, res: Response) => {
             },
         ];
 
-        res.json(facultyColors);
+        return res.json(facultyColors);
     } catch (error) {
         return handleControllerError(res, error, 'GetFacultyColors');
     }

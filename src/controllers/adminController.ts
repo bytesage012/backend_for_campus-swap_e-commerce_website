@@ -12,7 +12,7 @@ const dashboardCache = {
 
 export const getDashboard = async (req: any, res: Response) => {
     const userId = req.user.id;
-    const { period = 'last_30_days', startDate, endDate } = req.query;
+    const { period = 'last_30_days', startDate: _, endDate: __ } = req.query;
 
     try {
         // Log admin access for audit trail
@@ -269,7 +269,7 @@ export const getDashboard = async (req: any, res: Response) => {
         dashboardCache.data = dashboardData;
         dashboardCache.timestamp = now;
 
-        res.json(dashboardData);
+        return res.json(dashboardData);
     } catch (error) {
         logger.error('Admin Dashboard Error', error);
         return handleControllerError(res, error, 'AdminDashboard');
@@ -338,7 +338,7 @@ export const getAuditLogs = async (req: any, res: Response) => {
             };
         });
 
-        res.json({
+        return res.json({
             logs: mappedLogs,
             total,
             pages: Math.ceil(total / limit)

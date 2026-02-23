@@ -1,0 +1,23 @@
+src/controllers/adminController.ts(15,38): error TS6133: 'startDate' is declared but its value is never read.
+src/controllers/adminController.ts(15,49): error TS6133: 'endDate' is declared but its value is never read.
+src/controllers/adminUserController.ts(21,13): error TS6133: 'cursor' is declared but its value is never read.
+src/controllers/adminUserController.ts(157,35): error TS6133: 'req' is declared but its value is never read.
+src/controllers/adminVerificationController.ts(1,15): error TS6196: 'Request' is declared but never used.
+src/controllers/conversationController.ts(1,15): error TS6196: 'Request' is declared but never used.
+src/controllers/escrowDashboardController.ts(6,42): error TS6133: 'req' is declared but its value is never read.
+src/controllers/moderationController.ts(8,41): error TS4111: Property 'page' comes from an index signature, so it must be accessed with ['page'].
+src/controllers/moderationController.ts(9,42): error TS4111: Property 'limit' comes from an index signature, so it must be accessed with ['limit'].
+src/controllers/moderationController.ts(10,45): error TS4111: Property 'minScore' comes from an index signature, so it must be accessed with ['minScore'].
+src/controllers/moderationController.ts(63,42): error TS6133: 'req' is declared but its value is never read.
+src/controllers/notificationController.ts(4,1): error TS6133: 'logger' is declared but its value is never read.
+src/controllers/platformAnalyticsController.ts(8,34): error TS4111: Property 'period' comes from an index signature, so it must be accessed with ['period'].
+src/controllers/preferenceController.ts(60,40): error TS6133: 'req' is declared but its value is never read.
+src/controllers/reviewController.ts(19,11): error TS6133: 'transactionId' is declared but its value is never read.
+src/controllers/savedItemController.ts(1,15): error TS6196: 'Request' is declared but never used.
+src/controllers/searchController.ts(80,25): error TS2353: Object literal may only specify known properties, and 'avatar' does not exist in type 'UserSelect<DefaultArgs>'.
+src/controllers/sellerAnalyticsController.ts(7,35): error TS4111: Property 'userId' comes from an index signature, so it must be accessed with ['userId'].
+src/controllers/userController.ts(2,1): error TS6133: 'prisma' is declared but its value is never read.
+src/controllers/verificationController.ts(1,15): error TS6196: 'Request' is declared but never used.
+src/services/queueService.ts(169,25): error TS6133: '_content' is declared but its value is never read.
+src/services/queueService.ts(179,19): error TS6133: '_filters' is declared but its value is never read.
+src/services/queueService.ts(186,32): error TS2552: Cannot find name 'userId'. Did you mean '_userId'?

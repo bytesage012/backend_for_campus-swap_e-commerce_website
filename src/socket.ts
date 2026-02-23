@@ -15,7 +15,7 @@ export const initializeSocket = (httpServer: HttpServer) => {
     const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
     io.use((socket, next) => {
-        const token = socket.handshake.auth.token;
+        const token = socket.handshake.auth['token'];
         if (!token) return next(new Error('Authentication error'));
         try {
             const decoded = jwt.verify(token, JWT_SECRET) as any;

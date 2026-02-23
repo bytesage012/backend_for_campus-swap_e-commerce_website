@@ -76,9 +76,9 @@ export const createSmartContract = async (req: Request, res: Response) => {
             metadata: { contractId: contract.id, listingId }
         });
 
-        res.status(201).json(contract);
+        return res.status(201).json(contract);
     } catch (error) {
-        handleControllerError(res, error, 'CreateSmartContract');
+        return handleControllerError(res, error, 'CreateSmartContract');
     }
 };
 
@@ -146,10 +146,10 @@ export const signContract = async (req: Request, res: Response) => {
             metadata: { contractId: contract.id, status: newStatus }
         });
 
-        res.json(updatedContract);
+        return res.json(updatedContract);
 
     } catch (error) {
-        handleControllerError(res, error, 'SignSmartContract');
+        return handleControllerError(res, error, 'SignSmartContract');
     }
 };
 
@@ -164,9 +164,9 @@ export const getContract = async (req: Request, res: Response) => {
             }
         });
         if (!contract) return res.status(404).json({ message: 'Contract not found' });
-        res.json(contract);
+        return res.json(contract);
     } catch (error) {
-        handleControllerError(res, error, 'GetSmartContract');
+        return handleControllerError(res, error, 'GetSmartContract');
     }
 }
 
@@ -245,9 +245,9 @@ export const releaseFunds = async (req: Request, res: Response) => {
             metadata: { contractId: contract.id, action: 'COMPLETED' }
         });
 
-        res.json(updatedContract);
+        return res.json(updatedContract);
 
     } catch (error) {
-        handleControllerError(res, error, 'ReleaseFunds');
+        return handleControllerError(res, error, 'ReleaseFunds');
     }
 };

@@ -38,7 +38,7 @@ export const getSellerOrders = async (req: any, res: Response) => {
             orderBy: { createdAt: 'desc' }
         });
 
-        res.json({ orders });
+        return res.json({ orders });
     } catch (error) {
         return handleControllerError(res, error, 'GetSellerOrders');
     }
@@ -73,7 +73,7 @@ export const getBuyerOrders = async (req: any, res: Response) => {
             orderBy: { createdAt: 'desc' }
         });
 
-        res.json({ orders });
+        return res.json({ orders });
     } catch (error) {
         return handleControllerError(res, error, 'GetBuyerOrders');
     }
@@ -125,7 +125,7 @@ export const markAsDelivered = async (req: any, res: Response) => {
         });
 
         logger.info('Order marked as delivered', { transactionId, sellerId });
-        res.json(updated);
+        return res.json(updated);
     } catch (error) {
         return handleControllerError(res, error, 'MarkAsDelivered');
     }
@@ -153,7 +153,7 @@ export const confirmReceipt = async (req: any, res: Response) => {
         // Update transaction and release escrow
         let platformFeeDeducted = 0;
         let sellerNetAmount = 0;
-        
+
         const result = await (prisma.$transaction as any)(async (tx: any) => {
             // Mark as received and COMPLETE the transaction
             const txn = await tx.transaction.update({
@@ -177,7 +177,7 @@ export const confirmReceipt = async (req: any, res: Response) => {
             const saleAmount = transaction.amount;
             const platformFee = PLATFORM_FEE_ENABLED ? saleAmount * PLATFORM_FEE_PERCENTAGE : 0;
             const netAmount = saleAmount - platformFee;
-            
+
             // Store for response
             platformFeeDeducted = Number(platformFee.toFixed(2));
             sellerNetAmount = Number(netAmount.toFixed(2));
@@ -274,8 +274,8 @@ export const confirmReceipt = async (req: any, res: Response) => {
             platformFeeDeducted,
             sellerNetAmount
         });
-        
-        res.json({
+
+        return res.json({
             message: 'Receipt confirmed. Funds released to seller.',
             transactionId,
             status: result.status,

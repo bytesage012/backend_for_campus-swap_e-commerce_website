@@ -3,7 +3,7 @@ import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
 import { EscrowStatus } from '@prisma/client';
 
-export const getEscrowDashboard = async (req: any, res: Response) => {
+export const getEscrowDashboard = async (_req: any, res: Response) => {
     try {
         // 1. Real-time Overview
         const heldTransactions = await prisma.transaction.aggregate({
@@ -100,7 +100,7 @@ export const getEscrowDashboard = async (req: any, res: Response) => {
             include: { listing: { select: { title: true } } }
         });
 
-        res.json({
+        return res.json({
             overview: {
                 totalFundsHeld,
                 averageHoldDurationHours: Math.round(averageHoldDurationHours * 100) / 100,
@@ -118,6 +118,6 @@ export const getEscrowDashboard = async (req: any, res: Response) => {
         });
 
     } catch (error) {
-        handleControllerError(res, error, 'GetEscrowDashboard');
+        return handleControllerError(res, error, 'GetEscrowDashboard');
     }
 };

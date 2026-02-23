@@ -89,10 +89,10 @@ export const initiatePurchase = async (req: any, res: Response) => {
             return transaction;
         });
 
-        res.json({ message: 'Purchase initiated successfully', status: 'SUCCESS' });
+        return res.json({ message: 'Purchase initiated successfully', status: 'SUCCESS' });
 
     } catch (error) {
-        handleControllerError(res, error, 'InitiatePurchase');
+        return handleControllerError(res, error, 'InitiatePurchase');
     }
 };
 
@@ -157,7 +157,7 @@ export const checkout = async (req: any, res: Response) => {
                 const itemTotal = Number(listing.price) * item.quantity;
 
                 // Create Transaction
-                const transaction = await tx.transaction.create({
+                await tx.transaction.create({
                     data: {
                         walletId: buyerWallet.id,
                         amount: itemTotal,
@@ -185,10 +185,10 @@ export const checkout = async (req: any, res: Response) => {
             }
         });
 
-        res.json({ message: 'Checkout successful', status: 'SUCCESS' });
+        return res.json({ message: 'Checkout successful', status: 'SUCCESS' });
 
     } catch (error) {
-        handleControllerError(res, error, 'Checkout');
+        return handleControllerError(res, error, 'Checkout');
     }
 };
 
@@ -236,7 +236,7 @@ export const confirmReceipt = async (req: any, res: Response) => {
         try {
             let feeDeducted = 0;
             let sellerNetAmount = 0;
-            
+
             await prisma.$transaction(async (tx) => {
                 // Update transaction status
                 const updatedTransaction = await tx.transaction.update({
@@ -265,7 +265,7 @@ export const confirmReceipt = async (req: any, res: Response) => {
                 const saleAmount = updatedTransaction.amount;
                 const platformFee = PLATFORM_FEE_ENABLED ? saleAmount.mul(PLATFORM_FEE_PERCENTAGE) : new (saleAmount.constructor as any)(0);
                 const netAmount = saleAmount.minus(platformFee);
-                
+
                 // Store for response
                 feeDeducted = Number(platformFee.toFixed(2));
                 sellerNetAmount = Number(netAmount.toFixed(2));
@@ -316,7 +316,7 @@ export const confirmReceipt = async (req: any, res: Response) => {
                 timestamp: new Date().toISOString(),
             });
 
-            res.json({
+            return res.json({
                 message: 'Receipt confirmed successfully. Funds released to seller.',
                 status: 'COMPLETED',
                 transactionId,
@@ -415,7 +415,7 @@ export const disputeTransaction = async (req: any, res: Response) => {
             timestamp: new Date().toISOString(),
         });
 
-        res.status(201).json({
+        return res.status(201).json({
             message: 'Dispute submitted successfully. Admin will review within 3-5 business days.',
             disputeId: dispute.id,
             status: 'UNDER_REVIEW',

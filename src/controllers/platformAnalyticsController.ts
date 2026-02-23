@@ -5,7 +5,7 @@ import { handleControllerError } from './authController.js';
 
 export const getPlatformGrowthMetrics = async (req: Request, res: Response) => {
     try {
-        const period = req.query.period as string || '30d';
+        const period = req.query['period'] as string || '30d';
         let startDate = new Date();
         const endDate = new Date();
 
@@ -45,7 +45,7 @@ export const getPlatformGrowthMetrics = async (req: Request, res: Response) => {
         // 5. Product-Market Fit (NPS)
         const pmf = await AnalyticsService.getPMFMetrics();
 
-        res.json({
+        return res.json({
             period,
             funnel,
             network,
@@ -57,7 +57,7 @@ export const getPlatformGrowthMetrics = async (req: Request, res: Response) => {
             pmf
         });
     } catch (error) {
-        handleControllerError(res, error, 'Failed to fetch platform growth metrics');
+        return handleControllerError(res, error, 'Failed to fetch platform growth metrics');
     }
 };
 
@@ -74,11 +74,11 @@ export const recordAnalyticsEvent = async (req: Request, res: Response) => {
             metadata
         });
 
-        res.status(201).json({ message: 'Event recorded' });
+        return res.status(201).json({ message: 'Event recorded' });
     } catch (error) {
         // Don't fail the request if analytics fails, just log it (handled in Service)
         // But for API response, we send 200/201 to client usually.
         // If critical:
-        handleControllerError(res, error, 'Failed to record event');
+        return handleControllerError(res, error, 'Failed to record event');
     }
 };

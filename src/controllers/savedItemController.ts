@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
 import logger from '../utils/logger.js';
@@ -38,7 +38,7 @@ export const saveListing = async (req: any, res: Response) => {
         });
 
         logger.info('Listing Saved', { userId, listingId });
-        res.json({ message: 'Listing added to watchlist' });
+        return res.json({ message: 'Listing added to watchlist' });
     } catch (error) {
         return handleControllerError(res, error, 'SaveListing');
     }
@@ -67,7 +67,7 @@ export const unsaveListing = async (req: any, res: Response) => {
         });
 
         logger.info('Listing Unsaved', { userId, listingId });
-        res.json({ message: 'Listing removed from watchlist' });
+        return res.json({ message: 'Listing removed from watchlist' });
     } catch (error) {
         // If it doesn't exist, we still count as success or handle gracefully
         if ((error as any).code === 'P2025') {
@@ -99,7 +99,7 @@ export const getWatchlist = async (req: any, res: Response) => {
             orderBy: { createdAt: 'desc' },
         });
 
-        res.json({ items });
+        return res.json({ items });
     } catch (error) {
         return handleControllerError(res, error, 'GetWatchlist');
     }

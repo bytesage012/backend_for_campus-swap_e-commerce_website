@@ -12,12 +12,12 @@ const handleControllerError = (res: Response, error: any, context: string) => {
             errors: error.issues
         });
     }
-    res.status(500).json({ message: 'Server error', error: error.message || error });
+    return res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
 export const submitReview = async (req: any, res: Response) => {
-    const { id: transactionId } = req.params;
     const reviewerId = req.user.id;
+    const { id: _transactionId } = req.params;
 
     try {
         const validatedData = submitReviewSchema.parse(req.body);
@@ -49,7 +49,7 @@ export const submitReview = async (req: any, res: Response) => {
         });
 
         logger.info('Review Submitted', { reviewerId, targetId, rating });
-        res.status(201).json({
+        return res.status(201).json({
             message: 'Review submitted successfully',
             reviewId: review.id,
         });
@@ -73,7 +73,7 @@ export const getUserReviews = async (req: Request, res: Response) => {
             orderBy: { createdAt: 'desc' }
         });
 
-        res.json({
+        return res.json({
             userId,
             totalReviews: reviews.length,
             reviews
@@ -92,7 +92,7 @@ export const getRatingSummary = async (req: Request, res: Response) => {
             _count: { _all: true },
         });
 
-        res.json({
+        return res.json({
             userId,
             overall: {
                 average: (aggregations as any)._avg?.rating || 0,

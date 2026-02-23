@@ -3,16 +3,16 @@ import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (_req, _file, cb) => {
         cb(null, './uploads/listings');
     },
-    filename: (req, file, cb) => {
+    filename: (_req, file, cb) => {
         const ext = path.extname(file.originalname);
         cb(null, `${uuidv4()}${ext}`);
     },
 });
 
-const fileFilter = (req: any, file: any, cb: any) => {
+const fileFilter = (_req: any, file: any, cb: any) => {
     if (file.mimetype.startsWith('image/')) {
         cb(null, true);
     } else {
@@ -28,10 +28,10 @@ export const upload = multer({
 
 // Verification upload configuration
 const verificationStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (_req, _file, cb) => {
         cb(null, './uploads/verifications');
     },
-    filename: (req, file, cb) => {
+    filename: (_req, file, cb) => {
         const ext = path.extname(file.originalname);
         cb(null, `${uuidv4()}${ext}`);
     },

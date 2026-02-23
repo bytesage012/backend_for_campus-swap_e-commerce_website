@@ -77,7 +77,6 @@ export const searchListings = async (req: Request, res: Response) => {
                         id: true,
                         fullName: true,
                         faculty: true,
-                        avatar: true,
                         avatarUrl: true,
                         isVerified: true,
                         verificationStatus: true,
@@ -93,7 +92,7 @@ export const searchListings = async (req: Request, res: Response) => {
 
         const totalPages = Math.ceil(total / limitNum);
 
-        res.json({
+        return res.json({
             results,
             total,
             page: pageNum,

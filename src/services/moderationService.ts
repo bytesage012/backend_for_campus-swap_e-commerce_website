@@ -1,5 +1,4 @@
 import prisma from '../prisma.js';
-import type { Listing, User } from '@prisma/client';
 import { ModerationStatus, ModerationAction } from '@prisma/client';
 import { getIO } from '../socket.js';
 

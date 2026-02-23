@@ -14,7 +14,7 @@ const handleControllerError = (res: Response, error: any, context: string) => {
             errors: error.issues
         });
     }
-    res.status(500).json({ message: 'Server error', error: error.message || error });
+    return res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
 export const createListing = async (req: any, res: Response) => {
@@ -60,7 +60,7 @@ export const createListing = async (req: any, res: Response) => {
         });
 
         logger.info('Listing Created Successfully', { listingId: listing.id });
-        res.status(201).json(listing);
+        return res.status(201).json(listing);
     } catch (error: any) {
         return handleControllerError(res, error, 'CreateListing');
     }
@@ -114,7 +114,7 @@ export const getListings = async (req: Request, res: Response) => {
             include: { images: true, seller: { select: { fullName: true, faculty: true, avatarUrl: true } } },
             orderBy,
         });
-        res.json(listings);
+        return res.json(listings);
     } catch (error) {
         return handleControllerError(res, error, 'GetListings');
     }
@@ -137,7 +137,7 @@ export const getListingById = async (req: Request, res: Response) => {
             include: { images: true, seller: { select: { fullName: true, faculty: true, verificationStatus: true, avatarUrl: true } } },
         });
         if (!listing) return res.status(404).json({ message: 'Listing not found' });
-        res.json(listing);
+        return res.json(listing);
     } catch (error) {
         return handleControllerError(res, error, 'GetListingById');
     }
@@ -159,7 +159,7 @@ export const updateListing = async (req: any, res: Response) => {
     try {
         // Parse FormData fields (they come as strings)
         const bodyData: any = { ...req.body };
-        
+
         // Convert string booleans and numbers
         if (bodyData.negotiable !== undefined) {
             bodyData.isNegotiable = bodyData.negotiable === 'true' || bodyData.negotiable === true;
@@ -167,7 +167,7 @@ export const updateListing = async (req: any, res: Response) => {
         }
         if (bodyData.price) bodyData.price = parseFloat(bodyData.price);
         if (bodyData.quantity) bodyData.quantity = parseInt(bodyData.quantity);
-        
+
         const validatedData = updateListingSchema.parse(bodyData);
         const listing = await prisma.listing.findUnique({ where: { id: id as string } });
 
@@ -185,12 +185,12 @@ export const updateListing = async (req: any, res: Response) => {
         // Handle image updates
         if (req.files && req.files.length > 0) {
             console.log('[Listings] -> updateListing: Processing', req.files.length, 'new images');
-            
+
             // Delete images marked for removal
-            const removeImageIds = req.body.removeImageIds 
-                ? JSON.parse(req.body.removeImageIds) 
+            const removeImageIds = req.body.removeImageIds
+                ? JSON.parse(req.body.removeImageIds)
                 : [];
-            
+
             if (removeImageIds.length > 0) {
                 await prisma.listingImage.deleteMany({
                     where: { id: { in: removeImageIds } }
@@ -238,7 +238,7 @@ export const updateListing = async (req: any, res: Response) => {
         }
 
         logger.info('Listing Updated Successfully', { listingId: id });
-        res.json(updated);
+        return res.json(updated);
     } catch (error) {
         return handleControllerError(res, error, 'UpdateListing');
     }
@@ -261,7 +261,7 @@ export const deleteListing = async (req: any, res: Response) => {
         ]);
 
         logger.info('Listing Deleted Successfully', { listingId: id });
-        res.json({ message: 'Listing deleted successfully' });
+        return res.json({ message: 'Listing deleted successfully' });
     } catch (error) {
         return handleControllerError(res, error, 'DeleteListing');
     }
@@ -375,7 +375,7 @@ export const purchaseListing = async (req: any, res: Response) => {
             });
         }
 
-        res.status(400).json({ message: 'Payment method not yet supported' });
+        return res.status(400).json({ message: 'Payment method not yet supported' });
     } catch (error) {
         return handleControllerError(res, error, 'PurchaseListing');
     }
@@ -400,7 +400,7 @@ export const updateStatus = async (req: any, res: Response) => {
         });
 
         logger.info('Listing Status Updated', { listingId: id, status });
-        res.json({ message: `Listing status updated to ${status}`, listing: updated });
+        return res.json({ message: `Listing status updated to ${status}`, listing: updated });
     } catch (error) {
         return handleControllerError(res, error, 'UpdateStatus');
     }
@@ -423,7 +423,7 @@ export const reserveListing = async (req: any, res: Response) => {
         });
 
         logger.info('Listing Reserved', { listingId: id, reservedBy: req.user.id });
-        res.json({ message: 'Listing reserved successfully' });
+        return res.json({ message: 'Listing reserved successfully' });
     } catch (error) {
         return handleControllerError(res, error, 'ReserveListing');
     }

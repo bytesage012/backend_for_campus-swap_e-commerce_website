@@ -30,7 +30,7 @@ export const getListingAnalytics = async (req: any, res: Response) => {
             });
         }
 
-        res.json(analytics);
+        return res.json(analytics);
     } catch (error) {
         return handleControllerError(res, error, 'GetListingAnalytics');
     }
@@ -62,7 +62,7 @@ export const getSellerAnalytics = async (req: any, res: Response) => {
             direct: acc.direct + (l.analytics?.directViews || 0),
         }), { search: 0, faculty: 0, direct: 0 });
 
-        res.json({
+        return res.json({
             overview: {
                 totalListings,
                 activeListings,

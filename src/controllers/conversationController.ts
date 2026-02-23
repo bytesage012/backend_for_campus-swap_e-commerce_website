@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
 import { startConversationSchema, sendMessageSchema } from '../validations/conversationValidation.js';
@@ -127,7 +127,7 @@ export const startConversation = async (req: any, res: Response) => {
             }
         }
 
-        res.status(200).json({ conversationId: conversation.id });
+        return res.status(200).json({ conversationId: conversation.id });
     } catch (error) {
         return handleControllerError(res, error, 'StartConversation');
     }
@@ -203,7 +203,7 @@ export const listConversations = async (req: any, res: Response) => {
             };
         }));
 
-        res.json({ conversations: conversationsWithMeta });
+        return res.json({ conversations: conversationsWithMeta });
     } catch (error) {
         return handleControllerError(res, error, 'ListConversations');
     }
@@ -281,7 +281,7 @@ export const sendMessage = async (req: any, res: Response) => {
         }
 
         logger.info('Message Sent', { conversationId, senderId, messageId: message.id });
-        res.status(201).json({ messageId: message.id, message });
+        return res.status(201).json({ messageId: message.id, message });
     } catch (error) {
         return handleControllerError(res, error, 'SendMessage');
     }
@@ -327,7 +327,7 @@ export const getMessages = async (req: any, res: Response) => {
             orderBy: { createdAt: 'asc' },
         });
 
-        res.json({ messages });
+        return res.json({ messages });
     } catch (error) {
         return handleControllerError(res, error, 'GetMessages');
     }
@@ -389,7 +389,7 @@ export const getConversationById = async (req: any, res: Response) => {
             }
         }
 
-        res.json(conversation);
+        return res.json(conversation);
     } catch (error) {
         return handleControllerError(res, error, 'GetConversationById');
     }
@@ -416,7 +416,7 @@ export const markConversationAsRead = async (req: any, res: Response) => {
             data: { isRead: true }
         });
 
-        res.json({ message: 'Conversation marked as read' });
+        return res.json({ message: 'Conversation marked as read' });
     } catch (error) {
         return handleControllerError(res, error, 'MarkConversationAsRead');
     }

@@ -5,18 +5,18 @@ import { z } from 'zod';
 
 export const getModerationQueue = async (req: Request, res: Response) => {
     try {
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = parseInt(req.query.limit as string) || 50;
-        const minScore = parseInt(req.query.minScore as string) || 0;
+        const page = parseInt(req.query['page'] as string) || 1;
+        const limit = parseInt(req.query['limit'] as string) || 50;
+        const minScore = parseInt(req.query['minScore'] as string) || 0;
 
         const result = await ModerationService.getQueue(page, limit, minScore);
-        res.json({
+        return res.json({
             items: result.items,
             total: result.total,
             pages: result.pages
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch queue' });
+        return res.status(500).json({ error: 'Failed to fetch queue' });
     }
 };
 
@@ -53,14 +53,14 @@ export const submitReview = async (req: Request, res: Response) => {
             notes || ''
         );
 
-        res.json({ message: 'Review submitted successfully' });
+        return res.json({ message: 'Review submitted successfully' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Failed to submit review' });
+        return res.status(500).json({ error: 'Failed to submit review' });
     }
 };
 
-export const getRemovedListings = async (req: Request, res: Response) => {
+export const getRemovedListings = async (_req: Request, res: Response) => {
     try {
         const removed = await prisma.listingModeration.findMany({
             where: { status: 'REJECTED' },
@@ -70,8 +70,8 @@ export const getRemovedListings = async (req: Request, res: Response) => {
             orderBy: { updatedAt: 'desc' },
             take: 50
         });
-        res.json(removed);
+        return res.json(removed);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch removed listings' });
+        return res.status(500).json({ error: 'Failed to fetch removed listings' });
     }
 };

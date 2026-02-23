@@ -5,7 +5,7 @@ import prisma from '../prisma.js';
 import { registerSchema, loginSchema, updateProfileSchema } from '../validations/authValidation.js';
 import { ZodError } from 'zod';
 import logger from '../utils/logger.js';
-import { getUserProfile, getUserProfileWithTransactions, mapUserProfileResponse } from '../services/userProfileService.js';
+import { getUserProfile, getUserProfileWithTransactions } from '../services/userProfileService.js';
 
 const JWT_SECRET = process.env['JWT_SECRET'] || 'secret';
 
@@ -37,7 +37,7 @@ export const handleControllerError = (res: Response, error: any, context: string
     }
 
     logger.error(`${context} Controller Error`, error);
-    res.status(500).json({ message: 'Server error', error: errorMessage });
+    return res.status(500).json({ message: 'Server error', error: errorMessage });
 };
 
 export const register = async (req: Request, res: Response) => {
@@ -104,7 +104,7 @@ export const register = async (req: Request, res: Response) => {
         });
 
         logger.info('User Registered Successfully', { userId: user.id });
-        res.status(201).json({
+        return res.status(201).json({
             id: user.id,
             email: user.email,
             fullName: user.fullName,
@@ -158,7 +158,7 @@ export const login = async (req: Request, res: Response) => {
         });
 
         logger.info('User Logged In Successfully', { userId: user.id });
-        res.json({
+        return res.json({
             id: user.id,
             email: user.email,
             fullName: user.fullName,
@@ -174,7 +174,7 @@ export const getProfile = async (req: any, res: Response) => {
     try {
         const user = await getUserProfileWithTransactions(req.user.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
-        res.json(user);
+        return res.json(user);
     } catch (error: any) {
         return handleControllerError(res, error, 'GetProfile');
     }
@@ -197,9 +197,9 @@ export const updateProfile = async (req: any, res: Response) => {
 
         // Fetch the updated user with secure selection
         const updatedUser = await getUserProfile(req.user.id);
-        
+
         logger.info('Profile Updated', { userId: req.user.id });
-        res.json({ message: 'Profile updated successfully', user: updatedUser });
+        return res.json({ message: 'Profile updated successfully', user: updatedUser });
     } catch (error: any) {
         return handleControllerError(res, error, 'UpdateProfile');
     }

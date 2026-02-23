@@ -17,7 +17,7 @@ const router = Router();
 
 // Storage Configuration
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (req, _file, cb) => {
         let subfolder = 'misc';
         if (req.originalUrl.includes('/listings')) {
             subfolder = 'bulk-listings';
@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
         }
         cb(null, uploadPath);
     },
-    filename: (req, file, cb) => {
+    filename: (_req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
     }

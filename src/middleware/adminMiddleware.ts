@@ -26,8 +26,8 @@ export const requireAdmin = async (req: any, res: Response, next: NextFunction) 
         }
 
         req.user = user;
-        next();
+        return next();
     } catch (error) {
-        res.status(401).json({ message: 'Not authorized' });
+        return res.status(401).json({ message: 'Not authorized' });
     }
 };

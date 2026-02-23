@@ -1,7 +1,6 @@
 import type { Response } from 'express';
 import prisma from '../prisma.js';
 import { handleControllerError } from './authController.js';
-import logger from '../utils/logger.js';
 
 export const getNotifications = async (req: any, res: Response) => {
     const userId = req.user.id;
@@ -27,7 +26,7 @@ export const getNotifications = async (req: any, res: Response) => {
             where: { userId, isRead: false },
         });
 
-        res.json({ notifications, unreadCount });
+        return res.json({ notifications, unreadCount });
     } catch (error) {
         return handleControllerError(res, error, 'GetNotifications');
     }
@@ -45,7 +44,7 @@ export const getNotificationById = async (req: any, res: Response) => {
         if (!notification) return res.status(404).json({ message: 'Notification not found' });
         if (notification.userId !== userId) return res.status(403).json({ message: 'Unauthorized' });
 
-        res.json(notification);
+        return res.json(notification);
     } catch (error) {
         return handleControllerError(res, error, 'GetNotificationById');
     }
@@ -68,7 +67,7 @@ export const markRead = async (req: any, res: Response) => {
             data: { isRead: true },
         });
 
-        res.json({ message: 'Notification marked as read' });
+        return res.json({ message: 'Notification marked as read' });
     } catch (error) {
         return handleControllerError(res, error, 'MarkNotificationRead');
     }
@@ -83,7 +82,7 @@ export const markAllRead = async (req: any, res: Response) => {
             data: { isRead: true },
         });
 
-        res.json({ message: 'All notifications marked as read' });
+        return res.json({ message: 'All notifications marked as read' });
     } catch (error) {
         return handleControllerError(res, error, 'MarkAllNotificationsRead');
     }

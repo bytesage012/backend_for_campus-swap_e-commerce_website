@@ -8,7 +8,7 @@ const PAYSTACK_SECRET = process.env['PAYSTACK_SECRET_KEY'] || '';
 
 const handleControllerError = (res: Response, error: any, context: string) => {
     logger.error(`${context} Controller Error`, error);
-    res.status(500).json({ message: 'Server error', error: error.message || error });
+    return res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
 export const initializeDeposit = async (req: any, res: Response) => {
@@ -43,12 +43,12 @@ export const initializeDeposit = async (req: any, res: Response) => {
             }
         );
 
-        res.json({
+        return res.json({
             authorization_url: response.data.data.authorization_url,
             reference: response.data.data.reference
         });
     } catch (error: any) {
-        handleControllerError(res, error.response?.data || error, 'PaystackInit');
+        return handleControllerError(res, error.response?.data || error, 'PaystackInit');
     }
 };
 
@@ -102,13 +102,13 @@ export const paystackWebhook = async (req: Request, res: Response) => {
             });
 
             logger.info('Deposit Successful via Webhook', { userId, amount: amount / 100, reference });
-            res.status(200).send('Webhook received');
+            return res.status(200).send('Webhook received');
         } catch (error) {
             logger.error('Webhook processing error', error);
-            res.status(500).send('Error processing webhook');
+            return res.status(500).send('Error processing webhook');
         }
     } else {
-        res.status(200).send('Event not handled');
+        return res.status(200).send('Event not handled');
     }
 };
 
@@ -207,6 +207,6 @@ export const verifyTransaction = async (req: any, res: Response) => {
         return res.json({ status: data.status, message: 'Payment not successful yet' });
 
     } catch (error: any) {
-        handleControllerError(res, error.response?.data || error, 'PaystackVerify');
+        return handleControllerError(res, error.response?.data || error, 'PaystackVerify');
     }
 };

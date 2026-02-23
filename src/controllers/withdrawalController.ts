@@ -46,7 +46,7 @@ export const setupPin = async (req: any, res: Response) => {
         });
 
         logger.info('Transaction PIN Updated', { userId });
-        res.json({ message: 'Transaction PIN updated successfully' });
+        return res.json({ message: 'Transaction PIN updated successfully' });
     } catch (error) {
         return handleControllerError(res, error, 'SetupPin');
     }
@@ -72,7 +72,7 @@ export const verifyPin = async (req: any, res: Response) => {
             return res.status(401).json({ message: 'Invalid PIN' });
         }
 
-        res.json({ message: 'PIN verified successfully', valid: true });
+        return res.json({ message: 'PIN verified successfully', valid: true });
     } catch (error) {
         return handleControllerError(res, error, 'VerifyPin');
     }
@@ -162,7 +162,7 @@ export const initiateWithdrawal = async (req: any, res: Response) => {
             netAmount,
         });
 
-        res.status(202).json({
+        return res.status(202).json({
             withdrawalId: withdrawal.id,
             status: 'PENDING',
             amount,
@@ -193,7 +193,7 @@ export const getWithdrawals = async (req: any, res: Response) => {
             orderBy: { createdAt: 'desc' },
         });
 
-        res.json({ withdrawals });
+        return res.json({ withdrawals });
     } catch (error) {
         return handleControllerError(res, error, 'GetWithdrawals');
     }

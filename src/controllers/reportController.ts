@@ -36,7 +36,7 @@ export const createReport = async (req: any, res: Response) => {
             },
         });
 
-        res.status(201).json({
+        return res.status(201).json({
             message: 'Report submitted successfully',
             reportId: report.id,
         });

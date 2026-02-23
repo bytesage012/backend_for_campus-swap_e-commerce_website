@@ -3,7 +3,6 @@ import IORedis from 'ioredis';
 import prisma from '../prisma.js';
 import logger from '../utils/logger.js';
 import csv from 'csv-parser';
-import { Readable } from 'stream';
 import * as fs from 'fs';
 import path from 'path';
 import { getIO } from '../socket.js';
@@ -154,37 +153,37 @@ async function processBulkCreate(filePath: string, userId: string): Promise<any>
     });
 }
 
-async function processBulkRenew(userId: string, criteria: any): Promise<any> {
+async function processBulkRenew(_userId: string, criteria: any): Promise<any> {
     logger.info('Processing Bulk Renew', criteria);
     // Real implementation would update lastRenewed/updatedAt for multiple listings
     return { renewed: 10, criteria };
 }
 
-async function processPriceOptimize(userId: string, criteria: any): Promise<any> {
+async function processPriceOptimize(_userId: string, criteria: any): Promise<any> {
     logger.info('Processing Price Optimization', criteria);
     return { optimized: 5, suggestions: [] };
 }
 
-async function processBulkMessage(userId: string, payload: any): Promise<any> {
+async function processBulkMessage(_userId: string, payload: any): Promise<any> {
     logger.info('Processing Bulk Message', payload);
-    const { recipients, content } = payload;
+    const { recipients } = payload;
     let count = 0;
-    for (const recipientId of recipients) {
+    for (const _recipientId of recipients) {
         count++;
     }
     return { sent: count, recipients: recipients.length };
 }
 
-async function processExport(userId: string, payload: any): Promise<any> {
+async function processExport(_userId: string, payload: any): Promise<any> {
     logger.info('Processing Export', payload);
-    const { type, filters } = payload;
+    const { type } = payload;
 
     const exportDir = path.join('uploads', 'exports');
     if (!fs.existsSync(exportDir)) {
         fs.mkdirSync(exportDir, { recursive: true });
     }
 
-    const fileName = `export-${userId}-${Date.now()}.${type.toLowerCase()}`;
+    const fileName = `export-${_userId}-${Date.now()}.${type.toLowerCase()}`;
     const filePath = path.join(exportDir, fileName);
 
     fs.writeFileSync(filePath, 'Title,Price\nItem 1,100');

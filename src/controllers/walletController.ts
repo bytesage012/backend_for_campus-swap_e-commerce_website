@@ -5,7 +5,7 @@ import logger from '../utils/logger.js';
 
 const handleControllerError = (res: Response, error: any, context: string) => {
     logger.error(`${context} Error:`, error);
-    res.status(500).json({ message: 'Server error', error: error.message || error });
+    return res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
 export const getBalance = async (req: Request, res: Response) => {
@@ -26,9 +26,9 @@ export const getBalance = async (req: Request, res: Response) => {
             return res.json({ balance: Number(newWallet.balance) });
         }
 
-        res.json({ balance: Number(wallet.balance) });
+        return res.json({ balance: Number(wallet.balance) });
     } catch (error) {
-        handleControllerError(res, error, 'GetBalance');
+        return handleControllerError(res, error, 'GetBalance');
     }
 };
 
@@ -54,12 +54,12 @@ export const getTransactions = async (req: Request, res: Response) => {
             orderBy: { createdAt: 'desc' },
         });
 
-        res.json(transactions.map(t => ({
+        return res.json(transactions.map(t => ({
             ...t,
             amount: Number(t.amount)
         })));
     } catch (error) {
-        handleControllerError(res, error, 'GetTransactions');
+        return handleControllerError(res, error, 'GetTransactions');
     }
 };
 
@@ -108,9 +108,9 @@ export const getTransactionDetail = async (req: Request, res: Response) => {
             platformFee: Number(transaction.platformFee || 0)
         };
 
-        res.json(formattedTransaction);
+        return res.json(formattedTransaction);
     } catch (error) {
-        handleControllerError(res, error, 'GetTransactionDetail');
+        return handleControllerError(res, error, 'GetTransactionDetail');
     }
 };
 
@@ -142,9 +142,9 @@ export const setupPin = async (req: Request, res: Response) => {
             }
         });
 
-        res.json({ message: 'PIN set successfully' });
+        return res.json({ message: 'PIN set successfully' });
     } catch (error) {
-        handleControllerError(res, error, 'SetupPin');
+        return handleControllerError(res, error, 'SetupPin');
     }
 };
 
@@ -202,9 +202,9 @@ export const updatePin = async (req: Request, res: Response) => {
             }
         });
 
-        res.json({ message: 'PIN updated successfully' });
+        return res.json({ message: 'PIN updated successfully' });
     } catch (error) {
-        handleControllerError(res, error, 'UpdatePin');
+        return handleControllerError(res, error, 'UpdatePin');
     }
 };
 
@@ -221,8 +221,8 @@ export const verifyPin = async (req: Request, res: Response) => {
         }
 
         const isValid = await bcrypt.compare(pin, wallet.transactionPin);
-        res.json({ isValid });
+        return res.json({ isValid });
     } catch (error) {
-        handleControllerError(res, error, 'VerifyPin');
+        return handleControllerError(res, error, 'VerifyPin');
     }
 };

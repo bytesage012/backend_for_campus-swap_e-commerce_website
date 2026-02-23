@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import prisma, { pool } from './prisma.js';
+import prisma from './prisma.js';
 import authRoutes from './routes/authRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import marketplaceRoutes from './routes/listingRoutes.js';
@@ -54,7 +54,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 process.on('uncaughtException', (err) => {
   console.error('UNCAUGHT EXCEPTION:', err);
 });
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason, _promise) => {
   console.error('UNHANDLED REJECTION:', reason);
 });
 
@@ -113,7 +113,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', reviewRoutes); // Review routes handle their own prefix patterns in tests
 
-app.get('/api/health', async (req, res) => {
+app.get('/api/health', async (_req, res) => {
   try {
     // Check DB connectivity
     await prisma.$queryRaw`SELECT 1`;

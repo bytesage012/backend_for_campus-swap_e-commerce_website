@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 import prisma from '../prisma.js';
 import { uploadIdSchema } from '../validations/verificationValidation.js';
 import logger from '../utils/logger.js';
@@ -12,7 +12,7 @@ const handleControllerError = (res: Response, error: any, context: string) => {
             errors: error.issues
         });
     }
-    res.status(500).json({ message: 'Server error', error: error.message || error });
+    return res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
 export const uploadId = async (req: any, res: Response) => {
@@ -45,7 +45,7 @@ export const uploadId = async (req: any, res: Response) => {
         });
 
         logger.info('ID Documents Uploaded', { userId, verificationId: verification.id });
-        res.status(202).json({
+        return res.status(202).json({
             message: 'Verification documents submitted and pending review',
             verificationId: verification.id,
             status: 'PENDING',
@@ -69,7 +69,7 @@ export const getVerificationStatus = async (req: any, res: Response) => {
 
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        res.json({
+        return res.json({
             isVerified: user.isVerified,
             status: user.verificationStatus,
             verificationLevel: user.verificationLevel,

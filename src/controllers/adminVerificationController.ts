@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { Response } from 'express';
 import prisma from '../prisma.js';
 import logger from '../utils/logger.js';
 import { ZodError } from 'zod';
@@ -11,7 +11,7 @@ const handleControllerError = (res: Response, error: any, context: string) => {
             errors: error.issues
         });
     }
-    res.status(500).json({ message: 'Server error', error: error.message || error });
+    return res.status(500).json({ message: 'Server error', error: error.message || error });
 };
 
 // Get all pending verifications
@@ -40,7 +40,7 @@ export const getPendingVerifications = async (req: any, res: Response) => {
             count: verifications.length
         });
 
-        res.json({
+        return res.json({
             data: verifications,
             total: verifications.length
         });
@@ -82,7 +82,7 @@ export const getAllVerifications = async (req: any, res: Response) => {
             (prisma.verification as any).count({ where })
         ]);
 
-        res.json({
+        return res.json({
             data: verifications,
             pagination: {
                 total,
@@ -149,7 +149,7 @@ export const approveVerification = async (req: any, res: Response) => {
             userEmail: verification.user.email
         });
 
-        res.json({
+        return res.json({
             message: 'Verification approved successfully',
             verification: result.verification,
             user: {
@@ -223,7 +223,7 @@ export const rejectVerification = async (req: any, res: Response) => {
             reason
         });
 
-        res.json({
+        return res.json({
             message: 'Verification rejected',
             verification: result.verification,
             rejectionReason: reason

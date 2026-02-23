@@ -4,7 +4,7 @@ import { handleControllerError } from './authController.js';
 
 export const getSellerProfileAnalytics = async (req: Request, res: Response) => {
     try {
-        const userId = req.params.userId;
+        const userId = req.params['userId'];
         if (!userId) return res.status(400).json({ message: 'User ID is required' });
 
         // Ensure user exists
@@ -151,7 +151,7 @@ export const getSellerProfileAnalytics = async (req: Request, res: Response) => 
             marketShare = totalCategorySales > 0 ? (myCategorySales / totalCategorySales) * 100 : 0;
         }
 
-        res.json({
+        return res.json({
             performance: {
                 overallRating: parseFloat(averageRating.toFixed(1)),
                 totalReviews: reviews.length,
@@ -188,6 +188,6 @@ export const getSellerProfileAnalytics = async (req: Request, res: Response) => 
         });
 
     } catch (error) {
-        handleControllerError(res, error, 'GetSellerAnalytics');
+        return handleControllerError(res, error, 'GetSellerAnalytics');
     }
 };
