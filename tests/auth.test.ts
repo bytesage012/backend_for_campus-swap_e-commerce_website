@@ -13,6 +13,7 @@ describe('Auth Endpoints', () => {
         fullName: 'Test User',
         phoneNumber: '08012345678',
         faculty: 'Engineering',
+        transactionPin: '1234',
     };
 
     beforeAll(async () => {

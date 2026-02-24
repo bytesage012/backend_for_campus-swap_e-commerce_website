@@ -14,6 +14,13 @@ router.post('/checkout', protect, checkout);
 router.post('/transactions/:id/confirm', protect, confirmReceipt);
 router.post('/transactions/:id/dispute', protect, disputeTransaction);
 
+// Smart Contracts
+import { createSmartContract, signContract, releaseFunds, getContract } from '../controllers/smartContractController.js';
+router.post('/smart-contract', protect, createSmartContract);
+router.post('/smart-contract/:id/sign', protect, signContract);
+router.post('/smart-contract/:id/release', protect, releaseFunds);
+router.get('/smart-contract/:id', protect, getContract);
+
 export default router;
 
 

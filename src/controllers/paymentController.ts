@@ -44,8 +44,11 @@ export const initializeDeposit = async (req: any, res: Response) => {
         );
 
         return res.json({
-            authorization_url: response.data.data.authorization_url,
-            reference: response.data.data.reference
+            status: true,
+            data: {
+                authorization_url: response.data.data.authorization_url,
+                reference: response.data.data.reference
+            }
         });
     } catch (error: any) {
         return handleControllerError(res, error.response?.data || error, 'PaystackInit');
